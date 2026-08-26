@@ -46,7 +46,7 @@
     button.dataset.defaultLabel = defaultLabel;
     button.textContent = defaultLabel;
     button.addEventListener("click", async () => {
-      await CamFromPhone.copyText(await textProvider());
+      await BouCamPhoneServ.copyText(await textProvider());
       setClipboardButtonLabel(button, "Copié");
     });
   }
@@ -94,7 +94,7 @@
       `;
 
       row.querySelector("button").addEventListener("click", async () => {
-        await CamFromPhone.copyText(url);
+        await BouCamPhoneServ.copyText(url);
         setClipboardButtonLabel(row.querySelector("button"), "Copié");
       });
 
@@ -159,18 +159,18 @@
         <div class="session-top">
           <div>
             <h3 class="session-title">${session.label}</h3>
-            <p class="session-id">ID ${session.id} · créé le ${CamFromPhone.formatDateTime(session.createdAt)}</p>
+            <p class="session-id">ID ${session.id} · créé le ${BouCamPhoneServ.formatDateTime(session.createdAt)}</p>
           </div>
           <span class="chip ${statusTone}">${statusLabel}</span>
         </div>
         <div class="stats">
           <div class="key-value">
             <span class="key">Téléphone</span>
-            <span class="value">${session.publisherOnline ? "Connecté" : "Hors ligne"} · ${CamFromPhone.formatRelative(session.publisherSeenAt)}</span>
+            <span class="value">${session.publisherOnline ? "Connecté" : "Hors ligne"} · ${BouCamPhoneServ.formatRelative(session.publisherSeenAt)}</span>
           </div>
           <div class="key-value">
             <span class="key">OBS / viewer</span>
-            <span class="value">${session.viewerOnline ? "Connecté" : "En attente"} · ${CamFromPhone.formatRelative(session.viewerSeenAt)}</span>
+            <span class="value">${session.viewerOnline ? "Connecté" : "En attente"} · ${BouCamPhoneServ.formatRelative(session.viewerSeenAt)}</span>
           </div>
           <div class="key-value">
             <span class="key">Caméra</span>
@@ -203,7 +203,7 @@
 
       const copyButton = card.querySelector('[data-action="copy"]');
       copyButton.addEventListener("click", async () => {
-        await CamFromPhone.copyText(viewUrl);
+        await BouCamPhoneServ.copyText(viewUrl);
         setClipboardButtonLabel(copyButton, "Copié");
       });
 
@@ -213,7 +213,7 @@
           return;
         }
 
-        await CamFromPhone.fetchJson(`/api/sessions/${session.id}/state`, {
+        await BouCamPhoneServ.fetchJson(`/api/sessions/${session.id}/state`, {
           method: "POST",
           body: JSON.stringify({
             role: "dashboard",
@@ -225,7 +225,7 @@
       });
 
       card.querySelector('[data-action="flip"]').addEventListener("click", async () => {
-        await CamFromPhone.fetchJson(`/api/sessions/${session.id}/messages`, {
+        await BouCamPhoneServ.fetchJson(`/api/sessions/${session.id}/messages`, {
           method: "POST",
           body: JSON.stringify({
             from: "viewer",
@@ -241,7 +241,7 @@
       });
 
       card.querySelector('[data-action="mute"]').addEventListener("click", async () => {
-        await CamFromPhone.fetchJson(`/api/sessions/${session.id}/messages`, {
+        await BouCamPhoneServ.fetchJson(`/api/sessions/${session.id}/messages`, {
           method: "POST",
           body: JSON.stringify({
             from: "viewer",
@@ -257,7 +257,7 @@
       });
 
       card.querySelector('[data-action="stop"]').addEventListener("click", async () => {
-        await CamFromPhone.fetchJson(`/api/sessions/${session.id}/messages`, {
+        await BouCamPhoneServ.fetchJson(`/api/sessions/${session.id}/messages`, {
           method: "POST",
           body: JSON.stringify({
             from: "viewer",
@@ -278,8 +278,8 @@
 
   async function refresh() {
     const [bootstrap, sessions] = await Promise.all([
-      CamFromPhone.fetchJson("/api/bootstrap"),
-      CamFromPhone.fetchJson("/api/sessions"),
+      BouCamPhoneServ.fetchJson("/api/bootstrap"),
+      BouCamPhoneServ.fetchJson("/api/sessions"),
     ]);
 
     state.bootstrap = bootstrap;
@@ -302,7 +302,7 @@
     elements.copyCertUrlButton.dataset.defaultLabel = elements.copyCertUrlButton.textContent;
 
     elements.copyPhoneLinkButton.addEventListener("click", async () => {
-      await CamFromPhone.copyText(getPhoneUrl());
+      await BouCamPhoneServ.copyText(getPhoneUrl());
       setClipboardButtonLabel(elements.copyPhoneLinkButton, "Copié");
     });
 
@@ -312,7 +312,7 @@
         setClipboardButtonLabel(elements.copyAllObsButton, "Aucun lien");
         return;
       }
-      await CamFromPhone.copyText(links.join("\n"));
+      await BouCamPhoneServ.copyText(links.join("\n"));
       setClipboardButtonLabel(elements.copyAllObsButton, "Copié");
     });
 
@@ -324,7 +324,7 @@
     });
     elements.copyCertUrlButton.addEventListener("click", async () => {
       const url = state.bootstrap?.urls?.certDownload || `${window.location.origin}/downloads/local.cer`;
-      await CamFromPhone.copyText(url);
+      await BouCamPhoneServ.copyText(url);
       setClipboardButtonLabel(elements.copyCertUrlButton, "Lien copié");
     });
 

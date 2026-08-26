@@ -1,5 +1,11 @@
 # Journal des versions
 
+## 0.1.2 - 2026-08-26
+
+- renommage du projet en BouCamPhoneServ
+- alignement des métadonnées npm sur le nouveau nom technique `boucamphoneserv`
+- mise à jour du certificat local et des références de marque
+
 ## 0.1.1 - 2026-08-26
 
 - ajout d’un QR code local pour accéder rapidement à la page téléphone

@@ -1,6 +1,6 @@
 # Tutoriel d’utilisation
 
-Ce guide explique comment utiliser Cam From Phone du début à la fin.
+Ce guide explique comment utiliser BouCamPhoneServ du début à la fin.
 
 ## 1. Lancer le serveur
 

@@ -1,4 +1,4 @@
-window.CamFromPhone = (() => {
+window.BouCamPhoneServ = (() => {
   async function fetchJson(url, options = {}) {
     const response = await fetch(url, {
       cache: "no-store",

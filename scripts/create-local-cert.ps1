@@ -41,7 +41,7 @@ function Get-LocalIPv4Addresses {
 
 New-Item -ItemType Directory -Force -Path $OutputDir | Out-Null
 
-$subject = "CN=cam-from-phone.local"
+$subject = "CN=boucamphoneserv.local"
 $rsa = [System.Security.Cryptography.RSA]::Create(2048)
 $request = [System.Security.Cryptography.X509Certificates.CertificateRequest]::new(
   $subject,

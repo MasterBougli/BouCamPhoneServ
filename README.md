@@ -1,6 +1,6 @@
-# Cam From Phone
+# BouCamPhoneServ
 
-Cam From Phone est une base locale pour utiliser la caméra et le micro de plusieurs téléphones dans OBS, sans rien installer sur les mobiles.
+BouCamPhoneServ est une base locale pour utiliser la caméra et le micro de plusieurs téléphones dans OBS, sans rien installer sur les mobiles.
 
 Le projet est pensé pour :
 
@@ -62,7 +62,7 @@ Ensuite :
 
 ## Version
 
-Version actuelle du projet : `0.1.1`
+Version actuelle du projet : `0.1.2`
 
 ## Licence
 

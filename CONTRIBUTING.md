@@ -1,6 +1,6 @@
 # Contribuer
 
-Merci de vouloir aider à améliorer Cam From Phone.
+Merci de vouloir aider à améliorer BouCamPhoneServ.
 
 ## Règles simples
 

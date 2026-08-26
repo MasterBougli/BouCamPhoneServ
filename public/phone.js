@@ -32,7 +32,7 @@
     audioEnabled: true,
     active: false,
     connecting: false,
-    deviceType: CamFromPhone.deviceName(),
+    deviceType: BouCamPhoneServ.deviceName(),
   };
 
   function setStatus(text, tone = "warn") {
@@ -71,9 +71,9 @@
     const cached = localStorage.getItem(storageKey);
     if (cached) {
       try {
-        const response = await CamFromPhone.fetchJson(`/api/sessions/${cached}`);
+        const response = await BouCamPhoneServ.fetchJson(`/api/sessions/${cached}`);
         state.session = response.session;
-        labelInput.value = localStorage.getItem(labelKey) || response.session.label || CamFromPhone.deviceName();
+        labelInput.value = localStorage.getItem(labelKey) || response.session.label || BouCamPhoneServ.deviceName();
         updateStaticFields();
         return;
       } catch {
@@ -81,8 +81,8 @@
       }
     }
 
-    const label = localStorage.getItem(labelKey) || CamFromPhone.deviceName();
-    const created = await CamFromPhone.fetchJson("/api/sessions", {
+    const label = localStorage.getItem(labelKey) || BouCamPhoneServ.deviceName();
+    const created = await BouCamPhoneServ.fetchJson("/api/sessions", {
       method: "POST",
       body: JSON.stringify({
         label,
@@ -100,7 +100,7 @@
     if (!state.session) {
       return;
     }
-    await CamFromPhone.fetchJson(`/api/sessions/${state.session.id}/state`, {
+    await BouCamPhoneServ.fetchJson(`/api/sessions/${state.session.id}/state`, {
       method: "POST",
       body: JSON.stringify({
         role: "publisher",
@@ -119,7 +119,7 @@
     if (!state.session) {
       return;
     }
-    await CamFromPhone.fetchJson(`/api/sessions/${state.session.id}/messages`, {
+    await BouCamPhoneServ.fetchJson(`/api/sessions/${state.session.id}/messages`, {
       method: "POST",
       body: JSON.stringify({
         from: "publisher",
@@ -222,7 +222,7 @@
     }
 
     try {
-      const response = await CamFromPhone.fetchJson(
+      const response = await BouCamPhoneServ.fetchJson(
         `/api/sessions/${state.session.id}/messages?role=publisher&after=${state.lastSeq}`
       );
       for (const message of response.items || []) {
@@ -388,7 +388,7 @@
   }
 
   async function saveLabel() {
-    const label = labelInput.value.trim() || CamFromPhone.deviceName();
+    const label = labelInput.value.trim() || BouCamPhoneServ.deviceName();
     labelInput.value = label;
     localStorage.setItem(labelKey, label);
     if (state.session) {
@@ -409,7 +409,7 @@
     setNetwork("En attente", "warn");
     setPermission("Permissions en attente", "warn");
     setStatus("Prêt", "warn");
-    labelInput.value = localStorage.getItem(labelKey) || CamFromPhone.deviceName();
+    labelInput.value = localStorage.getItem(labelKey) || BouCamPhoneServ.deviceName();
 
     try {
       await ensureSession();
@@ -432,7 +432,7 @@
     muteButton.addEventListener("click", () => toggleMicrophone().catch(console.error));
     stopButton.addEventListener("click", () => stopSession().catch(console.error));
     copyLinkButton.addEventListener("click", async () => {
-      await CamFromPhone.copyText(window.location.href);
+      await BouCamPhoneServ.copyText(window.location.href);
       copyLinkButton.textContent = "Lien copié";
       setTimeout(() => {
         copyLinkButton.textContent = "Copier le lien";

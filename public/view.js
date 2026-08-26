@@ -48,7 +48,7 @@
     if (!state.sessionId) {
       return;
     }
-    await CamFromPhone.fetchJson(`/api/sessions/${state.sessionId}/messages`, {
+    await BouCamPhoneServ.fetchJson(`/api/sessions/${state.sessionId}/messages`, {
       method: "POST",
       body: JSON.stringify({
         from: "viewer",
@@ -66,7 +66,7 @@
     if (!state.sessionId) {
       return;
     }
-    await CamFromPhone.fetchJson(`/api/sessions/${state.sessionId}/state`, {
+    await BouCamPhoneServ.fetchJson(`/api/sessions/${state.sessionId}/state`, {
       method: "POST",
       body: JSON.stringify({
         role: "viewer",
@@ -138,7 +138,7 @@
     }
 
     try {
-      const response = await CamFromPhone.fetchJson(
+      const response = await BouCamPhoneServ.fetchJson(
         `/api/sessions/${state.sessionId}/messages?role=viewer&after=${state.lastSeq}`
       );
       for (const message of response.items || []) {
@@ -180,10 +180,10 @@
     }
 
     try {
-      const response = await CamFromPhone.fetchJson(`/api/sessions/${state.sessionId}`);
+      const response = await BouCamPhoneServ.fetchJson(`/api/sessions/${state.sessionId}`);
       state.session = response.session;
       sourceLabel.textContent = state.session.label;
-      document.title = `Cam From Phone - ${state.session.label}`;
+      document.title = `BouCamPhoneServ - ${state.session.label}`;
       showPlaceholder(true);
       setOverlay(state.session.label || `Session ${state.sessionId}`, "warn");
       await sendState("waiting");

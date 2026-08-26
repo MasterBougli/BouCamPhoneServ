@@ -22,7 +22,7 @@ npm start
 
 ## Certificat local
 
-Cam From Phone sert la page téléphone en HTTPS, parce que les navigateurs demandent un contexte sécurisé pour la caméra et le micro.
+BouCamPhoneServ sert la page téléphone en HTTPS, parce que les navigateurs demandent un contexte sécurisé pour la caméra et le micro.
 
 Au premier lancement, un certificat local est généré automatiquement dans `certs/`.
 

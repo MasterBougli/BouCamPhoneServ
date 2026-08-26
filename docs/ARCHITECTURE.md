@@ -2,7 +2,7 @@
 
 ## Vue d’ensemble
 
-Cam From Phone sépare le projet en trois couches :
+BouCamPhoneServ sépare le projet en trois couches :
 
 - le téléphone
 - le serveur local
