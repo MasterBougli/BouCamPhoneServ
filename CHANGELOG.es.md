@@ -6,6 +6,13 @@
 
 Este historial mantiene la versión más reciente arriba para encontrar rápidamente los cambios más importantes.
 
+## 0.1.9 - 2026-08-26
+
+- añadidos badges y una sección wiki en los README
+- añadido un pequeño conjunto NOTICE para explicar la licencia y el flujo DCO
+- añadidas páginas wiki listas para usar sobre instalación y uso en EN, FR y ES
+- actualización de la versión del proyecto a `0.1.9`
+
 ## 0.1.8 - 2026-08-26
 
 - añadidos los badges finales en los README para una portada más limpia

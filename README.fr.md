@@ -2,9 +2,10 @@
 
 [EN](README.md) | [FR](README.fr.md) | [ES](README.es.md)
 
-![Version](https://img.shields.io/badge/version-0.1.8-blue)
+![Version](https://img.shields.io/badge/version-0.1.9-blue)
 ![License](https://img.shields.io/badge/license-AGPL--3.0--only-green)
 ![Docs](https://img.shields.io/badge/docs-EN%2FFR%2FES-orange)
+![Wiki](https://img.shields.io/badge/wiki-ready-purple)
 
 BouCamPhoneServ est une passerelle locale permettant d’utiliser la caméra et le micro d’un ou plusieurs téléphones dans OBS sans rien installer sur les mobiles.
 
@@ -57,6 +58,7 @@ Ensuite :
 - [Notes de développement](docs/DEVELOPMENT.fr.md), [EN](docs/DEVELOPMENT.md), [ES](docs/DEVELOPMENT.es.md)
 - [Contribuer au projet](CONTRIBUTING.fr.md), [EN](CONTRIBUTING.md), [ES](CONTRIBUTING.es.md)
 - [Journal des versions](CHANGELOG.fr.md), [EN](changelog.md), [ES](CHANGELOG.es.md)
+- [Page wiki](wiki/Home.fr.md), [EN](wiki/Home.md), [ES](wiki/Home.es.md)
 
 ## Fichiers importants
 
@@ -71,7 +73,7 @@ Ensuite :
 
 ## Version
 
-Version actuelle du projet : `0.1.8`
+Version actuelle du projet : `0.1.9`
 
 - Notes de version : [changelog.md](changelog.md)
 
@@ -81,4 +83,4 @@ Faire un don : [https://streamlabs.com/bouglitv](https://streamlabs.com/bouglitv
 
 ## Licence
 
-AGPL-3.0-only, voir [LICENSE](LICENSE)
+AGPL-3.0-only, voir [LICENSE](LICENSE) et [NOTICE](NOTICE.fr.md)

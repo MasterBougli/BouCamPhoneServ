@@ -6,6 +6,13 @@
 
 Ce journal garde la version la plus récente en haut pour retrouver rapidement les changements les plus importants.
 
+## 0.1.9 - 2026-08-26
+
+- ajout de badges et d’une section wiki dans les README
+- ajout d’un petit ensemble NOTICE pour expliquer la licence et le flux DCO
+- ajout de pages wiki prêtes à l’emploi pour l’installation et l’utilisation en EN, FR et ES
+- mise à jour de la version du projet à `0.1.9`
+
 ## 0.1.8 - 2026-08-26
 
 - ajout des badges finaux dans les README pour une page d’accueil plus propre

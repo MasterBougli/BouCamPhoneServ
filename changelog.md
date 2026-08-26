@@ -6,6 +6,13 @@
 
 This log keeps the newest release at the top so the most relevant changes are easy to find.
 
+## 0.1.9 - 2026-08-26
+
+- added badges and a wiki section to the README files
+- added a small NOTICE set to explain the license and DCO workflow
+- added wiki-ready installation and usage pages in EN, FR, and ES
+- updated the project version to `0.1.9`
+
 ## 0.1.8 - 2026-08-26
 
 - added the final README badges for a cleaner repository landing page
