@@ -6,6 +6,12 @@
 
 Este historial mantiene la versión más reciente arriba para encontrar rápidamente los cambios más importantes.
 
+## 0.1.10 - 2026-08-26
+
+- movido el contenido del tutorial a la carpeta `wiki/` como páginas Markdown dedicadas
+- enlazadas las secciones de tutorial e instalación del README a las páginas wiki
+- actualización de la versión del proyecto a `0.1.10`
+
 ## 0.1.9 - 2026-08-26
 
 - añadidos badges y una sección wiki en los README

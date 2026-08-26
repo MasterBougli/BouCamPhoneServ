@@ -2,7 +2,7 @@
 
 [EN](README.md) | [FR](README.fr.md) | [ES](README.es.md)
 
-![Version](https://img.shields.io/badge/version-0.1.9-blue)
+![Version](https://img.shields.io/badge/version-0.1.10-blue)
 ![License](https://img.shields.io/badge/license-AGPL--3.0--only-green)
 ![Docs](https://img.shields.io/badge/docs-EN%2FFR%2FES-orange)
 ![Wiki](https://img.shields.io/badge/wiki-ready-purple)
@@ -50,9 +50,9 @@ After that:
 
 ## Documentation
 
-- [Full tutorial](docs/TUTORIAL.md), [FR](docs/TUTORIAL.fr.md), [ES](docs/TUTORIAL.es.md)
-- [Installation and certificate](docs/INSTALLATION.md), [FR](docs/INSTALLATION.fr.md), [ES](docs/INSTALLATION.es.md)
-- [OBS setup](docs/OBS.md), [FR](docs/OBS.fr.md), [ES](docs/OBS.es.md)
+- [Wiki tutorial](wiki/Tutorial.md), [FR](wiki/Tutorial.fr.md), [ES](wiki/Tutorial.es.md)
+- [Wiki installation](wiki/Installation.md), [FR](wiki/Installation.fr.md), [ES](wiki/Installation.es.md)
+- [Wiki usage](wiki/Usage.md), [FR](wiki/Usage.fr.md), [ES](wiki/Usage.es.md)
 - [Technical architecture](docs/ARCHITECTURE.md), [FR](docs/ARCHITECTURE.fr.md), [ES](docs/ARCHITECTURE.es.md)
 - [Troubleshooting](docs/TROUBLESHOOTING.md), [FR](docs/TROUBLESHOOTING.fr.md), [ES](docs/TROUBLESHOOTING.es.md)
 - [Development notes](docs/DEVELOPMENT.md), [FR](docs/DEVELOPMENT.fr.md), [ES](docs/DEVELOPMENT.es.md)
@@ -73,7 +73,7 @@ After that:
 
 ## Version
 
-Current project version: `0.1.9`
+Current project version: `0.1.10`
 
 - Release notes: [changelog.md](changelog.md)
 

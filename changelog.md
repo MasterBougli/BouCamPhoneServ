@@ -6,6 +6,12 @@
 
 This log keeps the newest release at the top so the most relevant changes are easy to find.
 
+## 0.1.10 - 2026-08-26
+
+- moved the tutorial content into the `wiki/` folder as dedicated Markdown pages
+- linked the README tutorial and setup sections to the wiki pages
+- updated the project version to `0.1.10`
+
 ## 0.1.9 - 2026-08-26
 
 - added badges and a wiki section to the README files

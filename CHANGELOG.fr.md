@@ -6,6 +6,12 @@
 
 Ce journal garde la version la plus récente en haut pour retrouver rapidement les changements les plus importants.
 
+## 0.1.10 - 2026-08-26
+
+- déplacement du contenu du tutoriel dans le dossier `wiki/` sous forme de pages Markdown dédiées
+- liaison des sections tutoriel et installation du README vers les pages wiki
+- mise à jour de la version du projet à `0.1.10`
+
 ## 0.1.9 - 2026-08-26
 
 - ajout de badges et d’une section wiki dans les README

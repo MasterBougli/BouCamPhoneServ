@@ -6,6 +6,7 @@ This wiki is the practical entry point for setup and everyday use.
 
 ## Start Here
 
+- [Tutorial](Tutorial.md)
 - [Installation](Installation.md)
 - [Usage](Usage.md)
 - [Main documentation](../README.md)

@@ -6,6 +6,7 @@ Ce wiki est le point d’entrée pratique pour l’installation et l’usage au 
 
 ## Commencer ici
 
+- [Tutoriel](Tutorial.fr.md)
 - [Installation](Installation.fr.md)
 - [Utilisation](Usage.fr.md)
 - [Documentation principale](../README.fr.md)
