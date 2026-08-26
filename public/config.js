@@ -105,22 +105,55 @@
       {
         label: "Tableau de bord",
         description: "Vue principale pour suivre les téléphones et les sources OBS.",
+        display: urls.dashboardLocal || `${window.location.origin}/dashboard`,
         url: urls.dashboardLocal || `${window.location.origin}/dashboard`,
+        kind: "open",
+        openLabel: "Ouvrir",
+        copyLabel: "Copier le lien",
       },
       {
         label: "Page téléphone",
         description: "Lien direct à ouvrir sur chaque mobile du réseau local.",
+        display: urls.phoneUrls?.[0] || `${window.location.origin}/phone`,
         url: urls.phoneUrls?.[0] || `${window.location.origin}/phone`,
+        kind: "open",
+        openLabel: "Ouvrir",
+        copyLabel: "Copier le lien",
       },
       {
         label: "Configuration",
         description: "Page graphique de réglage des options partagées.",
+        display: urls.configLocal || `${window.location.origin}/config`,
         url: urls.configLocal || `${window.location.origin}/config`,
+        kind: "open",
+        openLabel: "Ouvrir",
+        copyLabel: "Copier le lien",
       },
       {
         label: "Certificat public",
         description: "Fichier à installer sur les téléphones pour la connexion HTTPS.",
+        display: urls.certDownload || `${window.location.origin}/downloads/local.cer`,
         url: urls.certDownload || `${window.location.origin}/downloads/local.cer`,
+        kind: "open",
+        openLabel: "Télécharger",
+        copyLabel: "Copier le lien",
+      },
+      {
+        label: "Commande de lancement",
+        description: "Ouvre la configuration graphique depuis le terminal Windows.",
+        display: "npm run config",
+        url: "npm run config",
+        kind: "copy",
+        copyLabel: "Copier la commande",
+      },
+      {
+        label: "Lanceur Windows",
+        description: "Télécharge le fichier .cmd pour un double-clic local.",
+        display: urls.configLauncher || `${window.location.origin}/downloads/open-config.cmd`,
+        url: urls.configLauncher || `${window.location.origin}/downloads/open-config.cmd`,
+        kind: "open",
+        openLabel: "Télécharger",
+        copyLabel: "Copier le lien",
       },
     ];
 
@@ -132,16 +165,16 @@
         <div class="config-link-text">
           <strong>${entry.label}</strong>
           <span>${entry.description}</span>
-          <span>${entry.url}</span>
+          <span class="config-command">${entry.display}</span>
         </div>
         <div class="card-actions">
-          <button class="button-secondary" type="button">Copier</button>
-          <a class="button-ghost" href="${entry.url}" target="_blank" rel="noreferrer">Ouvrir</a>
+          ${entry.kind === "open" ? `<a class="button-ghost" href="${entry.url}" target="_blank" rel="noreferrer">${entry.openLabel || "Ouvrir"}</a>` : ""}
+          <button class="button-secondary" type="button">${entry.copyLabel || "Copier"}</button>
         </div>
       `;
 
       const copyButton = row.querySelector("button");
-      copyButton.dataset.defaultLabel = "Copier";
+      copyButton.dataset.defaultLabel = entry.copyLabel || "Copier";
       copyButton.addEventListener("click", async () => {
         await copyWithFeedback(copyButton, entry.url);
       });
@@ -160,7 +193,7 @@
     setStatus("Synchronisé", "good");
     renderSummary();
     renderLinks();
-    elements.configHint.textContent = "Les réglages sont déjà actifs sur le serveur et prêts à être appliqués.";
+    elements.configHint.textContent = "Les réglages sont déjà actifs sur le serveur. Utilise les raccourcis ci-contre pour ouvrir ou lancer la configuration.";
   }
 
   // Sauvegarde les réglages saisis dans le formulaire.

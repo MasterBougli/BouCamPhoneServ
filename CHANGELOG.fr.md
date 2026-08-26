@@ -6,6 +6,12 @@
 
 Ce journal garde la version la plus récente en haut pour retrouver rapidement les changements les plus importants.
 
+## 0.1.15 - 2026-08-26
+
+- refonte de la page de configuration en sections plus lisibles pour le réseau, la caméra, l’audio, le démarrage et les raccourcis
+- ajout des téléchargements du lanceur et des raccourcis de commande directement dans l’écran de configuration
+- mise à jour de la version du projet à `0.1.15`
+
 ## 0.1.14 - 2026-08-26
 
 - ajout d’un lanceur Windows en un clic et d’un raccourci `npm run config` pour la page de configuration

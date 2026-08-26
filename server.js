@@ -165,6 +165,7 @@ function getUrls(req) {
     dashboardLoopback: `http://127.0.0.1:${HTTP_PORT}`,
     configLocal: `http://localhost:${HTTP_PORT}/config`,
     configLoopback: `http://127.0.0.1:${HTTP_PORT}/config`,
+    configLauncher: `http://localhost:${HTTP_PORT}/downloads/open-config.cmd`,
     certDownload: `http://localhost:${HTTP_PORT}/downloads/local.cer`,
     phoneUrls: lanAddresses.map((ip) => `https://${ip}:${HTTPS_PORT}/phone`),
     viewUrls: lanAddresses.map((ip) => `http://${ip}:${HTTP_PORT}/view/SESSION_ID?clean=1`),
@@ -419,6 +420,11 @@ function handleRequest(req, res) {
 
   if (pathname === "/downloads/local.cer") {
     sendFile(res, path.join(CERT_DIR, "local.cer"), "application/pkix-cert");
+    return;
+  }
+
+  if (pathname === "/downloads/open-config.cmd") {
+    sendFile(res, path.join(ROOT, "open-config.cmd"), "text/plain; charset=utf-8");
     return;
   }
 

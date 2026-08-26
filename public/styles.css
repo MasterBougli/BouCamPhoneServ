@@ -560,6 +560,40 @@ button {
   gap: 14px;
 }
 
+.config-section {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, rgba(13, 20, 37, 0.9), rgba(8, 12, 24, 0.88));
+}
+
+.config-section-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.config-section-title {
+  margin: 0;
+  font-size: 17px;
+  letter-spacing: -0.03em;
+}
+
+.config-section-subtitle {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.config-section-body {
+  display: grid;
+  gap: 14px;
+}
+
 .field-help {
   color: var(--muted-2);
   font-size: 13px;
@@ -668,6 +702,15 @@ button {
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 100%;
+}
+
+.config-command {
+  font-family:
+    "Cascadia Mono",
+    "SFMono-Regular",
+    Consolas,
+    monospace;
+  color: var(--accent);
 }
 
 .config-badge-row {

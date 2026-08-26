@@ -44,71 +44,127 @@
             </div>
 
             <form class="settings-grid" id="settingsForm">
-              <label class="field">
-                <span class="label">Nom par défaut</span>
-                <input class="input" id="defaultLabelInput" maxlength="64" placeholder="Phone" />
-                <span class="field-help">
-                  Utilisé pour les nouvelles sessions quand aucun nom n’a encore été défini sur le
-                  téléphone.
-                </span>
-              </label>
+              <section class="config-section">
+                <div class="config-section-header">
+                  <div>
+                    <h3 class="config-section-title">Réseau et identité</h3>
+                    <p class="config-section-subtitle">
+                      Définit l’identité par défaut utilisée par les nouvelles sessions quand un
+                      téléphone se connecte pour la première fois.
+                    </p>
+                  </div>
+                  <span class="chip">Serveur local</span>
+                </div>
+                <div class="config-section-body">
+                  <label class="field">
+                    <span class="label">Nom par défaut</span>
+                    <input class="input" id="defaultLabelInput" maxlength="64" placeholder="Phone" />
+                    <span class="field-help">
+                      Utilisé pour les nouvelles sessions quand aucun nom n’a encore été défini sur
+                      le téléphone.
+                    </span>
+                  </label>
+                </div>
+              </section>
 
-              <label class="field">
-                <span class="label">Caméra par défaut</span>
-                <select class="input" id="preferredFacingModeInput">
-                  <option value="environment">Caméra arrière</option>
-                  <option value="user">Caméra frontale</option>
-                </select>
-              </label>
+              <section class="config-section">
+                <div class="config-section-header">
+                  <div>
+                    <h3 class="config-section-title">Caméra</h3>
+                    <p class="config-section-subtitle">
+                      Ajuste l’orientation de départ et la qualité vidéo ciblée pour les téléphones.
+                    </p>
+                  </div>
+                  <span class="chip good">Vidéo</span>
+                </div>
+                <div class="config-section-body">
+                  <label class="field">
+                    <span class="label">Caméra par défaut</span>
+                    <select class="input" id="preferredFacingModeInput">
+                      <option value="environment">Caméra arrière</option>
+                      <option value="user">Caméra frontale</option>
+                    </select>
+                  </label>
 
-              <label class="field">
-                <span class="label">Qualité vidéo</span>
-                <select class="input" id="videoPresetInput">
-                  <option value="720p">720p léger</option>
-                  <option value="1080p">1080p équilibré</option>
-                  <option value="1440p">1440p haute qualité</option>
-                </select>
-              </label>
+                  <label class="field">
+                    <span class="label">Qualité vidéo</span>
+                    <select class="input" id="videoPresetInput">
+                      <option value="720p">720p léger</option>
+                      <option value="1080p">1080p équilibré</option>
+                      <option value="1440p">1440p haute qualité</option>
+                    </select>
+                    <span class="field-help">
+                      Un preset plus léger consomme moins de bande passante sur le réseau local.
+                    </span>
+                  </label>
+                </div>
+              </section>
 
-              <label class="switch-row">
-                <span class="switch-copy">
-                  <strong>Démarrage automatique</strong>
-                  <span class="field-help">
-                    Lance la caméra dès l’ouverture de la page téléphone quand c’est possible.
-                  </span>
-                </span>
-                <span class="switch">
-                  <input id="autoStartInput" type="checkbox" />
-                  <span class="switch-track" aria-hidden="true"></span>
-                </span>
-              </label>
+              <section class="config-section">
+                <div class="config-section-header">
+                  <div>
+                    <h3 class="config-section-title">Audio</h3>
+                    <p class="config-section-subtitle">
+                      Choisis comment le micro doit se comporter au lancement de la session.
+                    </p>
+                  </div>
+                  <span class="chip warn">Micro</span>
+                </div>
+                <div class="config-section-body">
+                  <label class="switch-row">
+                    <span class="switch-copy">
+                      <strong>Micro coupé au départ</strong>
+                      <span class="field-help">
+                        Garde le micro désactivé au lancement jusqu’à l’action de l’utilisateur.
+                      </span>
+                    </span>
+                    <span class="switch">
+                      <input id="startMutedInput" type="checkbox" />
+                      <span class="switch-track" aria-hidden="true"></span>
+                    </span>
+                  </label>
+                </div>
+              </section>
 
-              <label class="switch-row">
-                <span class="switch-copy">
-                  <strong>Micro coupé au départ</strong>
-                  <span class="field-help">
-                    Garde le micro désactivé au lancement jusqu’à l’action de l’utilisateur.
-                  </span>
-                </span>
-                <span class="switch">
-                  <input id="startMutedInput" type="checkbox" />
-                  <span class="switch-track" aria-hidden="true"></span>
-                </span>
-              </label>
+              <section class="config-section">
+                <div class="config-section-header">
+                  <div>
+                    <h3 class="config-section-title">Démarrage</h3>
+                    <p class="config-section-subtitle">
+                      Oriente la vue OBS et décide si la caméra doit démarrer automatiquement.
+                    </p>
+                  </div>
+                  <span class="chip">Session</span>
+                </div>
+                <div class="config-section-body">
+                  <label class="switch-row">
+                    <span class="switch-copy">
+                      <strong>Démarrage automatique</strong>
+                      <span class="field-help">
+                        Lance la caméra dès l’ouverture de la page téléphone quand c’est possible.
+                      </span>
+                    </span>
+                    <span class="switch">
+                      <input id="autoStartInput" type="checkbox" />
+                      <span class="switch-track" aria-hidden="true"></span>
+                    </span>
+                  </label>
 
-              <label class="switch-row">
-                <span class="switch-copy">
-                  <strong>Vue OBS épurée</strong>
-                  <span class="field-help">
-                    Réduit les éléments visuels de la source quand la scène a besoin d’un rendu plus
-                    propre.
-                  </span>
-                </span>
-                <span class="switch">
-                  <input id="cleanViewerInput" type="checkbox" />
-                  <span class="switch-track" aria-hidden="true"></span>
-                </span>
-              </label>
+                  <label class="switch-row">
+                    <span class="switch-copy">
+                      <strong>Vue OBS épurée</strong>
+                      <span class="field-help">
+                        Réduit les éléments visuels de la source quand la scène a besoin d’un rendu
+                        plus propre.
+                      </span>
+                    </span>
+                    <span class="switch">
+                      <input id="cleanViewerInput" type="checkbox" />
+                      <span class="switch-track" aria-hidden="true"></span>
+                    </span>
+                  </label>
+                </div>
+              </section>
 
               <div class="card-actions">
                 <button class="button" id="saveButton" type="submit">Appliquer maintenant</button>

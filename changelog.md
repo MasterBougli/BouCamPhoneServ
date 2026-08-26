@@ -6,6 +6,12 @@
 
 This log keeps the newest release at the top so the most relevant changes are easy to find.
 
+## 0.1.15 - 2026-08-26
+
+- redesigned the configuration page into clearer sections for network, camera, audio, startup, and shortcuts
+- added launcher downloads and command shortcuts directly into the configuration screen
+- updated the project version to `0.1.15`
+
 ## 0.1.14 - 2026-08-26
 
 - added a one-click Windows launcher and an `npm run config` shortcut for the configuration page

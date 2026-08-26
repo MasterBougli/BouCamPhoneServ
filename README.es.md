@@ -2,7 +2,7 @@
 
 [EN](README.md) | [FR](README.fr.md) | [ES](README.es.md)
 
-![Version](https://img.shields.io/badge/version-0.1.14-blue)
+![Version](https://img.shields.io/badge/version-0.1.15-blue)
 ![License](https://img.shields.io/badge/license-AGPL--3.0--only-green)
 ![Docs](https://img.shields.io/badge/docs-EN%2FFR%2FES-orange)
 ![Wiki](https://img.shields.io/badge/wiki-ready-purple)
@@ -25,6 +25,7 @@ El proyecto está pensado para:
 - un panel local para el PC
 - una página de configuración gráfica para los ajustes compartidos del servidor
 - un lanzador de Windows y el atajo `npm run config` para abrir la configuración
+- un diseño por secciones para red, cámara, audio, arranque y accesos directos
 - un código QR para acceder rápido a la página del teléfono
 - enlaces OBS separados para cada dispositivo
 - controles simples para renombrar, silenciar, cambiar la cámara y detener una fuente
@@ -82,7 +83,7 @@ Después:
 
 ## Versión
 
-Versión actual del proyecto: `0.1.14`
+Versión actual del proyecto: `0.1.15`
 
 - Notas de la versión: [changelog.md](changelog.md)
 

@@ -6,6 +6,12 @@
 
 Este historial mantiene la versión más reciente arriba para encontrar rápidamente los cambios más importantes.
 
+## 0.1.15 - 2026-08-26
+
+- rediseño de la página de configuración en secciones más claras para red, cámara, audio, arranque y accesos directos
+- añadido el descargable del lanzador y los atajos de comando directamente en la pantalla de configuración
+- se actualizó la versión del proyecto a `0.1.15`
+
 ## 0.1.14 - 2026-08-26
 
 - se añadió un lanzador de Windows con un clic y el atajo `npm run config` para la página de configuración
