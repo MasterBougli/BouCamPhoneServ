@@ -101,6 +101,43 @@ window.BouCamPhoneServ = (() => {
     return "Phone";
   }
 
+  // Décrit l'orientation de caméra retenue dans l'interface.
+  function describeFacingMode(mode) {
+    return mode === "user" ? "Caméra frontale" : "Caméra arrière";
+  }
+
+  // Décrit un preset vidéo en langage humain.
+  function describeVideoPreset(preset) {
+    switch (preset) {
+      case "720p":
+        return "720p léger";
+      case "1440p":
+        return "1440p haute qualité";
+      default:
+        return "1080p équilibré";
+    }
+  }
+
+  // Retourne les contraintes média adaptées aux réglages choisis.
+  function buildCaptureConstraints(settings = {}) {
+    const facingMode = settings.preferredFacingMode === "user" ? "user" : "environment";
+    const preset = settings.videoPreset === "720p" || settings.videoPreset === "1440p" ? settings.videoPreset : "1080p";
+    const video =
+      preset === "720p"
+        ? { width: { ideal: 1280 }, height: { ideal: 720 } }
+        : preset === "1440p"
+          ? { width: { ideal: 2560 }, height: { ideal: 1440 } }
+          : { width: { ideal: 1920 }, height: { ideal: 1080 } };
+
+    return {
+      audio: true,
+      video: {
+        facingMode: { ideal: facingMode },
+        ...video,
+      },
+    };
+  }
+
   return {
     fetchJson,
     formatDateTime,
@@ -109,5 +146,8 @@ window.BouCamPhoneServ = (() => {
     copyText,
     clamp,
     deviceName,
+    describeFacingMode,
+    describeVideoPreset,
+    buildCaptureConstraints,
   };
 })();

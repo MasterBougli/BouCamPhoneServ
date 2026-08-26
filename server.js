@@ -9,6 +9,8 @@ const QRCode = require("qrcode");
 
 const ROOT = __dirname;
 const PUBLIC_DIR = path.join(ROOT, "public");
+const CONFIG_DIR = path.join(ROOT, "config");
+const SETTINGS_FILE = path.join(CONFIG_DIR, "settings.json");
 const CERT_DIR = path.join(ROOT, "certs");
 const CERT_PFX = process.env.CAMFROMPHONE_TLS_PFX || path.join(CERT_DIR, "local.pfx");
 const CERT_PASSWORD = process.env.CAMFROMPHONE_TLS_PASSWORD || "camfromphone";
@@ -17,8 +19,17 @@ const HTTPS_PORT = Number(process.env.HTTPS_PORT || 8443);
 const HOST = process.env.HOST || "0.0.0.0";
 const HEARTBEAT_TTL_MS = 15_000;
 const MESSAGE_LIMIT = 250;
+const DEFAULT_SETTINGS = {
+  defaultLabel: "Phone",
+  preferredFacingMode: "environment",
+  videoPreset: "1080p",
+  startMuted: false,
+  autoStart: false,
+  cleanViewer: true,
+};
 
 const sessions = new Map();
+let settings = loadSettings();
 
 // Prépare le certificat auto-signé utilisé par le serveur HTTPS local.
 function ensureCertificate() {
@@ -53,6 +64,58 @@ function ensureCertificate() {
   if (result.status !== 0 || !fs.existsSync(CERT_PFX)) {
     throw new Error("Unable to create the local TLS certificate.");
   }
+}
+
+// Normalise les réglages de l'application avant de les utiliser.
+function normalizeSettings(input) {
+  const source = input && typeof input === "object" ? input : {};
+  const defaultLabel = typeof source.defaultLabel === "string" && source.defaultLabel.trim()
+    ? source.defaultLabel.trim().slice(0, 64)
+    : DEFAULT_SETTINGS.defaultLabel;
+  const preferredFacingMode = source.preferredFacingMode === "user" ? "user" : "environment";
+  const videoPreset = ["720p", "1080p", "1440p"].includes(source.videoPreset) ? source.videoPreset : DEFAULT_SETTINGS.videoPreset;
+
+  return {
+    defaultLabel,
+    preferredFacingMode,
+    videoPreset,
+    startMuted: Boolean(source.startMuted),
+    autoStart: Boolean(source.autoStart),
+    cleanViewer: source.cleanViewer === undefined ? DEFAULT_SETTINGS.cleanViewer : Boolean(source.cleanViewer),
+  };
+}
+
+// Crée le dossier de configuration si besoin.
+function ensureConfigDir() {
+  fs.mkdirSync(CONFIG_DIR, { recursive: true });
+}
+
+// Charge la configuration persistée ou rétablit les valeurs par défaut.
+function loadSettings() {
+  ensureConfigDir();
+
+  if (!fs.existsSync(SETTINGS_FILE)) {
+    const defaults = normalizeSettings(DEFAULT_SETTINGS);
+    fs.writeFileSync(SETTINGS_FILE, `${JSON.stringify(defaults, null, 2)}\n`);
+    return defaults;
+  }
+
+  try {
+    const raw = JSON.parse(fs.readFileSync(SETTINGS_FILE, "utf8"));
+    return normalizeSettings(raw);
+  } catch (error) {
+    console.warn("[config] Invalid settings file, using defaults:", error.message);
+    return normalizeSettings(DEFAULT_SETTINGS);
+  }
+}
+
+// Enregistre la configuration normalisée sur le disque.
+function saveSettings(nextSettings) {
+  const normalized = normalizeSettings(nextSettings);
+  ensureConfigDir();
+  fs.writeFileSync(SETTINGS_FILE, `${JSON.stringify(normalized, null, 2)}\n`);
+  settings = normalized;
+  return settings;
 }
 
 // Lit un fichier et laisse remonter les erreurs si la lecture échoue.
@@ -100,6 +163,8 @@ function getUrls(req) {
   return {
     dashboardLocal: `http://localhost:${HTTP_PORT}`,
     dashboardLoopback: `http://127.0.0.1:${HTTP_PORT}`,
+    configLocal: `http://localhost:${HTTP_PORT}/config`,
+    configLoopback: `http://127.0.0.1:${HTTP_PORT}/config`,
     certDownload: `http://localhost:${HTTP_PORT}/downloads/local.cer`,
     phoneUrls: lanAddresses.map((ip) => `https://${ip}:${HTTPS_PORT}/phone`),
     viewUrls: lanAddresses.map((ip) => `http://${ip}:${HTTP_PORT}/view/SESSION_ID?clean=1`),
@@ -108,7 +173,7 @@ function getUrls(req) {
 }
 
 // Crée une nouvelle session de diffusion avec ses files de messages.
-function makeSession(label = "Phone") {
+function makeSession(label = settings.defaultLabel || "Phone") {
   const id = randomUUID().split("-")[0].toUpperCase();
   const now = Date.now();
   const session = {
@@ -361,7 +426,23 @@ function handleRequest(req, res) {
     sendJson(res, 200, {
       secure,
       urls: getUrls(req),
+      settings,
     });
+    return;
+  }
+
+  if (pathname === "/api/settings" && req.method === "GET") {
+    sendJson(res, 200, { settings });
+    return;
+  }
+
+  if (pathname === "/api/settings" && req.method === "POST") {
+    parseBody(req)
+      .then((body) => {
+        const next = body && typeof body === "object" ? body : {};
+        sendJson(res, 200, { settings: saveSettings({ ...settings, ...next }) });
+      })
+      .catch((error) => handleError(res, error));
     return;
   }
 
@@ -510,6 +591,11 @@ function handleRequest(req, res) {
     return;
   }
 
+  if (pathname === "/config") {
+    servePublicFile(res, "config.html");
+    return;
+  }
+
   if (pathname === "/phone") {
     if (!secure) {
       redirectToHttps(req, res);
@@ -536,6 +622,11 @@ function handleRequest(req, res) {
 
   if (pathname === "/dashboard.js") {
     servePublicFile(res, "dashboard.js");
+    return;
+  }
+
+  if (pathname === "/config.js") {
+    servePublicFile(res, "config.js");
     return;
   }
 
@@ -593,6 +684,8 @@ function startServers() {
   console.log("");
   console.log("Open the dashboard on this PC:");
   console.log(`  ${urls.dashboardLocal}`);
+  console.log("Open the configuration page on this PC:");
+  console.log(`  ${urls.configLocal}`);
   console.log("");
   console.log("Open the phone page on each mobile device:");
   for (const url of urls.phoneUrls) {

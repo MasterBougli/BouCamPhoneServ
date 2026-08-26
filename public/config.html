@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="theme-color" content="#070b14" />
+    <title>BouCamPhoneServ - Configuration</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/shared.js" defer></script>
+    <script src="/config.js" defer></script>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <div class="hero-grid">
+          <span class="eyebrow">Configuration graphique</span>
+          <div>
+            <h1 class="title">Réglages du serveur</h1>
+            <p class="subtitle">
+              Ajuste le nom par défaut, la caméra, la qualité vidéo et le comportement de la vue
+              OBS depuis une interface claire et locale.
+            </p>
+          </div>
+          <div class="hero-actions">
+            <a class="button" href="/dashboard">Retour au tableau de bord</a>
+            <a class="button-secondary" href="/phone" target="_blank" rel="noreferrer">Ouvrir la page téléphone</a>
+            <button class="button-secondary" id="reloadButton" type="button">Recharger</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid cols-2">
+        <article class="panel">
+          <div class="panel-inner">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Paramètres globaux</h2>
+                <p class="panel-subtitle">
+                  Ces valeurs sont sauvegardées sur le serveur local et partagées avec toutes les
+                  pages du projet.
+                </p>
+              </div>
+              <span class="chip good" id="configState">Synchronisé</span>
+            </div>
+
+            <form class="settings-grid" id="settingsForm">
+              <label class="field">
+                <span class="label">Nom par défaut</span>
+                <input class="input" id="defaultLabelInput" maxlength="64" placeholder="Phone" />
+                <span class="field-help">
+                  Utilisé pour les nouvelles sessions quand aucun nom n’a encore été défini sur le
+                  téléphone.
+                </span>
+              </label>
+
+              <label class="field">
+                <span class="label">Caméra par défaut</span>
+                <select class="input" id="preferredFacingModeInput">
+                  <option value="environment">Caméra arrière</option>
+                  <option value="user">Caméra frontale</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span class="label">Qualité vidéo</span>
+                <select class="input" id="videoPresetInput">
+                  <option value="720p">720p léger</option>
+                  <option value="1080p">1080p équilibré</option>
+                  <option value="1440p">1440p haute qualité</option>
+                </select>
+              </label>
+
+              <label class="switch-row">
+                <span class="switch-copy">
+                  <strong>Démarrage automatique</strong>
+                  <span class="field-help">
+                    Lance la caméra dès l’ouverture de la page téléphone quand c’est possible.
+                  </span>
+                </span>
+                <span class="switch">
+                  <input id="autoStartInput" type="checkbox" />
+                  <span class="switch-track" aria-hidden="true"></span>
+                </span>
+              </label>
+
+              <label class="switch-row">
+                <span class="switch-copy">
+                  <strong>Micro coupé au départ</strong>
+                  <span class="field-help">
+                    Garde le micro désactivé au lancement jusqu’à l’action de l’utilisateur.
+                  </span>
+                </span>
+                <span class="switch">
+                  <input id="startMutedInput" type="checkbox" />
+                  <span class="switch-track" aria-hidden="true"></span>
+                </span>
+              </label>
+
+              <label class="switch-row">
+                <span class="switch-copy">
+                  <strong>Vue OBS épurée</strong>
+                  <span class="field-help">
+                    Réduit les éléments visuels de la source quand la scène a besoin d’un rendu plus
+                    propre.
+                  </span>
+                </span>
+                <span class="switch">
+                  <input id="cleanViewerInput" type="checkbox" />
+                  <span class="switch-track" aria-hidden="true"></span>
+                </span>
+              </label>
+
+              <div class="card-actions">
+                <button class="button" id="saveButton" type="submit">Enregistrer</button>
+                <button class="button-secondary" id="resetButton" type="button">Recharger les valeurs</button>
+              </div>
+
+              <p class="small muted" id="configHint">
+                Les modifications se sauvegardent localement sur le serveur et s’appliquent à
+                toutes les connexions du réseau local.
+              </p>
+            </form>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-inner">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Résumé actif</h2>
+                <p class="panel-subtitle">
+                  Vérifie d’un coup d’œil les réglages réellement chargés par le serveur.
+                </p>
+              </div>
+              <span class="chip warn" id="summaryState">En attente</span>
+            </div>
+
+            <div class="stats" id="settingsSummary"></div>
+
+            <div class="divider"></div>
+
+            <div class="config-link-list" id="linksList"></div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

@@ -555,6 +555,127 @@ button {
   font-size: 18px;
 }
 
+.settings-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.field-help {
+  color: var(--muted-2);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.switch-copy {
+  display: grid;
+  gap: 4px;
+}
+
+.switch-copy strong {
+  font-size: 15px;
+}
+
+.switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.switch input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 52px;
+  height: 32px;
+  margin: 0;
+}
+
+.switch-track {
+  position: relative;
+  width: 52px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: rgba(255, 255, 255, 0.08);
+  transition:
+    background 140ms ease,
+    border-color 140ms ease;
+}
+
+.switch-track::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #ffffff, #dbe7ff);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+  transition: transform 140ms ease;
+}
+
+.switch input:checked + .switch-track {
+  border-color: rgba(63, 225, 168, 0.55);
+  background: rgba(63, 225, 168, 0.18);
+}
+
+.switch input:checked + .switch-track::after {
+  transform: translateX(20px);
+}
+
+.config-link-list {
+  display: grid;
+  gap: 10px;
+}
+
+.config-link-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.config-link-text {
+  display: grid;
+  gap: 4px;
+}
+
+.config-link-text strong {
+  font-size: 14px;
+}
+
+.config-link-text span {
+  color: var(--muted);
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.config-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 @media (max-width: 960px) {
   .grid.cols-2,
   .grid.cols-3 {
@@ -590,5 +711,11 @@ button {
     padding: 12px;
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .switch-row,
+  .config-link-item {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }

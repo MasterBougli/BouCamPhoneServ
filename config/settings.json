@@ -1,0 +1,8 @@
+{
+  "defaultLabel": "Phone",
+  "preferredFacingMode": "environment",
+  "videoPreset": "1080p",
+  "startMuted": false,
+  "autoStart": false,
+  "cleanViewer": true
+}

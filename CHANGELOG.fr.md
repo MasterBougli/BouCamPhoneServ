@@ -6,6 +6,12 @@
 
 Ce journal garde la version la plus récente en haut pour retrouver rapidement les changements les plus importants.
 
+## 0.1.13 - 2026-08-26
+
+- ajout d’une page de configuration graphique reliée aux réglages partagés du serveur
+- liaison du tableau de bord avec l’écran de configuration et affichage des réglages actifs
+- mise à jour de la version du projet à `0.1.13`
+
 ## 0.1.12 - 2026-08-26
 
 - ajout de commentaires en français sur les principales fonctions du code

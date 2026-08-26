@@ -16,6 +16,7 @@
   const sessionStateValue = document.getElementById("sessionStateValue");
   const cameraValue = document.getElementById("cameraValue");
   const audioValue = document.getElementById("audioValue");
+  const qualityValue = document.getElementById("qualityValue");
   const hintText = document.getElementById("hintText");
   const previewTitle = document.getElementById("previewTitle");
   const previewSubtitle = document.getElementById("previewSubtitle");
@@ -23,6 +24,7 @@
   const permissionChip = document.getElementById("permissionChip");
 
   const state = {
+    bootstrap: null,
     session: null,
     pc: null,
     stream: null,
@@ -63,8 +65,9 @@
   function updateStaticFields() {
     sessionIdValue.textContent = state.session?.id || "—";
     sessionStateValue.textContent = state.session?.state || "En attente";
-    cameraValue.textContent = state.facingMode;
+    cameraValue.textContent = BouCamPhoneServ.describeFacingMode(state.facingMode);
     audioValue.textContent = state.audioEnabled ? "Activé" : "Coupé";
+    qualityValue.textContent = BouCamPhoneServ.describeVideoPreset(state.bootstrap?.settings?.videoPreset || "1080p");
     previewTitle.textContent = state.session?.label || "Aperçu local";
     previewSubtitle.textContent = state.active
       ? "Le téléphone envoie la vidéo vers le PC en direct."
@@ -76,11 +79,13 @@
   // Charge la session persistée ou en crée une nouvelle si besoin.
   async function ensureSession() {
     const cached = localStorage.getItem(storageKey);
+    const defaultLabel = state.bootstrap?.settings?.defaultLabel || BouCamPhoneServ.deviceName();
+
     if (cached) {
       try {
         const response = await BouCamPhoneServ.fetchJson(`/api/sessions/${cached}`);
         state.session = response.session;
-        labelInput.value = localStorage.getItem(labelKey) || response.session.label || BouCamPhoneServ.deviceName();
+        labelInput.value = localStorage.getItem(labelKey) || response.session.label || defaultLabel;
         updateStaticFields();
         return;
       } catch {
@@ -88,7 +93,7 @@
       }
     }
 
-    const label = localStorage.getItem(labelKey) || BouCamPhoneServ.deviceName();
+    const label = localStorage.getItem(labelKey) || defaultLabel;
     const created = await BouCamPhoneServ.fetchJson("/api/sessions", {
       method: "POST",
       body: JSON.stringify({
@@ -167,18 +172,17 @@
 
   // Demande l'accès à la caméra et au micro avec les bons réglages.
   async function acquireMedia() {
-    const constraints = {
-      audio: true,
-      video: {
-        facingMode: { ideal: state.facingMode },
-        width: { ideal: 1920 },
-        height: { ideal: 1080 },
-      },
-    };
+    const settings = state.bootstrap?.settings || {};
+    const constraints = BouCamPhoneServ.buildCaptureConstraints(settings);
+    constraints.video.facingMode = { ideal: state.facingMode };
 
     const stream = await navigator.mediaDevices.getUserMedia(constraints);
     state.stream = stream;
-    state.audioEnabled = true;
+    state.audioEnabled = !settings.startMuted;
+    const audioTrack = stream.getAudioTracks()[0];
+    if (audioTrack) {
+      audioTrack.enabled = state.audioEnabled;
+    }
     localVideo.srcObject = stream;
     localVideo.muted = true;
     localVideo.playsInline = true;
@@ -335,21 +339,17 @@
   async function switchCamera() {
     if (!state.stream) {
       state.facingMode = state.facingMode === "environment" ? "user" : "environment";
-      cameraValue.textContent = state.facingMode;
+      cameraValue.textContent = BouCamPhoneServ.describeFacingMode(state.facingMode);
       return;
     }
 
     const nextFacing = state.facingMode === "environment" ? "user" : "environment";
     state.facingMode = nextFacing;
 
-    const nextStream = await navigator.mediaDevices.getUserMedia({
-      audio: true,
-      video: {
-        facingMode: { ideal: nextFacing },
-        width: { ideal: 1920 },
-        height: { ideal: 1080 },
-      },
-    });
+    const settings = state.bootstrap?.settings || {};
+    const constraints = BouCamPhoneServ.buildCaptureConstraints(settings);
+    constraints.video.facingMode = { ideal: nextFacing };
+    const nextStream = await navigator.mediaDevices.getUserMedia(constraints);
 
     const oldVideoTrack = state.stream.getVideoTracks()[0];
     const newVideoTrack = nextStream.getVideoTracks()[0];
@@ -366,6 +366,9 @@
       await audioSender.replaceTrack(newAudioTrack);
     }
 
+    if (newAudioTrack) {
+      newAudioTrack.enabled = state.audioEnabled;
+    }
     if (oldVideoTrack) {
       oldVideoTrack.stop();
     }
@@ -434,7 +437,8 @@
     setNetwork("En attente", "warn");
     setPermission("Permissions en attente", "warn");
     setStatus("Prêt", "warn");
-    labelInput.value = localStorage.getItem(labelKey) || BouCamPhoneServ.deviceName();
+    state.bootstrap = await BouCamPhoneServ.fetchJson("/api/bootstrap");
+    labelInput.value = localStorage.getItem(labelKey) || state.bootstrap?.settings?.defaultLabel || BouCamPhoneServ.deviceName();
 
     try {
       await ensureSession();
@@ -484,6 +488,12 @@
 
     await pollLoop();
     await heartbeatLoop();
+
+    if (state.bootstrap?.settings?.autoStart) {
+      setTimeout(() => {
+        startSession().catch(console.error);
+      }, 300);
+    }
   }
 
   boot().catch((error) => {

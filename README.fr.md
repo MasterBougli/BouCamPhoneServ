@@ -2,7 +2,7 @@
 
 [EN](README.md) | [FR](README.fr.md) | [ES](README.es.md)
 
-![Version](https://img.shields.io/badge/version-0.1.12-blue)
+![Version](https://img.shields.io/badge/version-0.1.13-blue)
 ![License](https://img.shields.io/badge/license-AGPL--3.0--only-green)
 ![Docs](https://img.shields.io/badge/docs-EN%2FFR%2FES-orange)
 ![Wiki](https://img.shields.io/badge/wiki-ready-purple)
@@ -23,6 +23,7 @@ Le projet est pensé pour :
 
 - une page téléphone à ouvrir dans le navigateur
 - un tableau de bord local pour le PC
+- une page de configuration graphique pour les réglages partagés du serveur
 - un QR code pour accéder rapidement à la page téléphone
 - des liens OBS séparés pour chaque appareil
 - des commandes simples pour renommer, couper le micro, changer la caméra et arrêter une source
@@ -43,10 +44,11 @@ npm start
 Ensuite :
 
 1. ouvre `http://localhost:8080` sur le PC
-2. télécharge le certificat public depuis le tableau de bord
-3. ouvre la page téléphone depuis le lien ou le QR code
-4. autorise la caméra et le micro
-5. ajoute la source OBS dans `View` avec l’URL affichée pour chaque session
+2. ouvre la page de configuration si tu veux ajuster les valeurs par défaut
+3. télécharge le certificat public depuis le tableau de bord
+4. ouvre la page téléphone depuis le lien ou le QR code
+5. autorise la caméra et le micro
+6. ajoute la source OBS dans `View` avec l’URL affichée pour chaque session
 
 ## Documentation
 
@@ -64,8 +66,11 @@ Ensuite :
 ## Fichiers importants
 
 - [server.js](server.js)
+- [config/settings.json](config/settings.json)
 - [public/dashboard.html](public/dashboard.html)
 - [public/dashboard.js](public/dashboard.js)
+- [public/config.html](public/config.html)
+- [public/config.js](public/config.js)
 - [public/phone.html](public/phone.html)
 - [public/phone.js](public/phone.js)
 - [public/view.html](public/view.html)
@@ -74,7 +79,7 @@ Ensuite :
 
 ## Version
 
-Version actuelle du projet : `0.1.12`
+Version actuelle du projet : `0.1.13`
 
 - Notes de version : [changelog.md](changelog.md)
 

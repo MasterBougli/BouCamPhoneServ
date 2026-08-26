@@ -6,6 +6,12 @@
 
 Este historial mantiene la versión más reciente arriba para encontrar rápidamente los cambios más importantes.
 
+## 0.1.13 - 2026-08-26
+
+- se añadió una página de configuración gráfica conectada a los ajustes compartidos del servidor
+- se enlazó el panel con la pantalla de configuración y se mostraron los ajustes activos
+- se actualizó la versión del proyecto a `0.1.13`
+
 ## 0.1.12 - 2026-08-26
 
 - se añadieron comentarios en francés en las funciones principales del código

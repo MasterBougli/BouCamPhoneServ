@@ -7,13 +7,14 @@
   const placeholder = document.getElementById("placeholder");
 
   const state = {
+    bootstrap: null,
     sessionId: null,
     session: null,
     pc: null,
     lastSeq: 0,
     active: false,
   };
-  const cleanMode = new URLSearchParams(window.location.search).get("clean") === "1";
+  let cleanMode = new URLSearchParams(window.location.search).get("clean") === "1";
 
   // Déduit l'identifiant de session depuis l'URL courante.
   function sessionIdFromPath() {
@@ -195,10 +196,14 @@
     }
 
     try {
+      state.bootstrap = await BouCamPhoneServ.fetchJson("/api/bootstrap");
       const response = await BouCamPhoneServ.fetchJson(`/api/sessions/${state.sessionId}`);
       state.session = response.session;
       sourceLabel.textContent = state.session.label;
       document.title = `BouCamPhoneServ - ${state.session.label}`;
+      if (!cleanMode && state.bootstrap?.settings?.cleanViewer) {
+        cleanMode = true;
+      }
       showPlaceholder(true);
       setOverlay(state.session.label || `Session ${state.sessionId}`, "warn");
       await sendState("waiting");

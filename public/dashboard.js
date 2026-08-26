@@ -22,6 +22,9 @@
     sessionList: document.getElementById("sessionList"),
     sessionCount: document.getElementById("sessionCount"),
     serverState: document.getElementById("serverState"),
+    configSummary: document.getElementById("configSummary"),
+    configStatus: document.getElementById("configStatus"),
+    configObsLink: document.getElementById("configObsLink"),
   };
 
   // Génère l'URL d'un QR code pour le texte fourni.
@@ -122,6 +125,39 @@
     elements.viewerCountValue.textContent = `${connectedViewers}`;
     elements.networkCountValue.textContent = `${lanCount || 1} LAN`;
     elements.sessionCount.textContent = `${total} appareil${total > 1 ? "s" : ""}`;
+  }
+
+  // Affiche les réglages graphiques actifs du serveur.
+  function renderConfig() {
+    const settings = state.bootstrap?.settings || {};
+    const summary = [
+      ["Nom par défaut", settings.defaultLabel || "Phone"],
+      ["Caméra", BouCamPhoneServ.describeFacingMode(settings.preferredFacingMode || "environment")],
+      ["Qualité", BouCamPhoneServ.describeVideoPreset(settings.videoPreset || "1080p")],
+      ["Auto-démarrage", settings.autoStart ? "Activé" : "Désactivé"],
+      ["Micro au départ", settings.startMuted ? "Muet" : "Ouvert"],
+      ["Vue propre", settings.cleanViewer ? "Oui" : "Non"],
+    ];
+
+    elements.configSummary.replaceChildren();
+    for (const [key, value] of summary) {
+      const item = document.createElement("div");
+      item.className = "key-value";
+      item.innerHTML = `
+        <span class="key">${key}</span>
+        <span class="value">${value}</span>
+      `;
+      elements.configSummary.appendChild(item);
+    }
+
+    if (elements.configStatus) {
+      elements.configStatus.textContent = settings ? "Synchronisé" : "Par défaut";
+    }
+
+    if (elements.configObsLink) {
+      const latestSession = state.sessions[0];
+      elements.configObsLink.href = latestSession ? getObsUrl(latestSession.id) : `${window.location.origin}/view?clean=1`;
+    }
   }
 
   // Reconstruit la liste détaillée des sessions actives.
@@ -303,6 +339,7 @@
 
     renderPhoneAccess();
     renderSummary();
+    renderConfig();
     renderSessions();
   }
 

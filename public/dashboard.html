@@ -22,6 +22,7 @@
           </div>
           <div class="hero-actions">
             <a class="button" href="/phone" target="_blank" rel="noreferrer">Ouvrir la page téléphone</a>
+            <a class="button-secondary" href="/config">Configuration</a>
             <button class="button-secondary" id="refreshButton" type="button">Actualiser</button>
           </div>
         </div>
@@ -141,6 +142,26 @@
             <span class="chip" id="sessionCount">0 appareil</span>
           </div>
           <div id="sessionList" class="session-list"></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-inner">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Configuration graphique</h2>
+              <p class="panel-subtitle">
+                Les réglages partagés pilotent la page téléphone, la vue OBS et le comportement
+                par défaut du serveur.
+              </p>
+            </div>
+            <span class="chip good" id="configStatus">Synchronisé</span>
+          </div>
+          <div class="stats" id="configSummary"></div>
+          <div class="card-actions">
+            <a class="button" href="/config">Ouvrir la configuration</a>
+            <a class="button-secondary" id="configObsLink" href="/view?clean=1" target="_blank" rel="noreferrer">Tester la vue OBS</a>
+          </div>
         </div>
       </section>
     </main>

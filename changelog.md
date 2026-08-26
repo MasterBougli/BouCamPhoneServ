@@ -6,6 +6,12 @@
 
 This log keeps the newest release at the top so the most relevant changes are easy to find.
 
+## 0.1.13 - 2026-08-26
+
+- added a graphical configuration page backed by shared server settings
+- linked the dashboard to the new configuration screen and surfaced the active settings
+- updated the project version to `0.1.13`
+
 ## 0.1.12 - 2026-08-26
 
 - added French comments to the main code functions
