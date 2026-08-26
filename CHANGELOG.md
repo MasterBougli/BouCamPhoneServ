@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.5 - 2026-08-26
+
+- added a Spanish README alongside the English and French versions
+- added language links at the top of the README files
+- updated the package metadata to `0.1.5`
+
 ## 0.1.4 - 2026-08-26
 
 - added donation links to the Markdown documentation

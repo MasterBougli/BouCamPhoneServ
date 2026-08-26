@@ -1,5 +1,11 @@
 # Journal des versions
 
+## 0.1.5 - 2026-08-26
+
+- ajout d’un README espagnol en plus des versions anglaise et française
+- ajout de liens de langue en haut des fichiers README
+- mise à jour des métadonnées du package à `0.1.5`
+
 ## 0.1.4 - 2026-08-26
 
 - ajout du lien de donation dans la documentation Markdown

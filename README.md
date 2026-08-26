@@ -1,5 +1,7 @@
 # BouCamPhoneServ
 
+[FR](README.fr.md) | [ES](README.es.md)
+
 BouCamPhoneServ is a local-first bridge for using the camera and microphone from one or more phones inside OBS without installing anything on the phones.
 
 This project is licensed under `AGPL-3.0-only` and contributions are handled under DCO 1.1.
@@ -65,7 +67,7 @@ After that:
 
 ## Version
 
-Current project version: `0.1.4`
+Current project version: `0.1.5`
 
 ## Support the Project
 
@@ -74,5 +76,3 @@ Donate: [https://streamlabs.com/bouglitv](https://streamlabs.com/bouglitv)
 ## License
 
 AGPL-3.0-only
-
-French version: [README.fr.md](README.fr.md)
