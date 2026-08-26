@@ -1,0 +1,19 @@
+{
+  "name": "cam-from-phone",
+  "version": "0.1.1",
+  "private": true,
+  "description": "Local WebRTC camera bridge for OBS and other tools without installing anything on phones.",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "cert": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/create-local-cert.ps1"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.4"
+  }
+}

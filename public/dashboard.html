@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cam From Phone</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/shared.js" defer></script>
+    <script src="/dashboard.js" defer></script>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <div class="hero-grid">
+          <span class="eyebrow">Local WebRTC control room</span>
+          <div>
+            <h1 class="title">Cam From Phone</h1>
+            <p class="subtitle">
+              Une base locale, propre et rapide pour transformer plusieurs téléphones en sources OBS
+              séparées, sans rien installer sur les mobiles.
+            </p>
+          </div>
+          <div class="hero-actions">
+            <a class="button" href="/phone" target="_blank" rel="noreferrer">Ouvrir la page téléphone</a>
+            <button class="button-secondary" id="refreshButton" type="button">Actualiser</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid cols-3">
+        <article class="panel">
+          <div class="panel-inner">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Ouvrir sur un téléphone</h2>
+                <p class="panel-subtitle">
+                  Scanne ce QR code pour ouvrir la page téléphone sécurisée sur le réseau local.
+                </p>
+              </div>
+              <span class="chip good" id="serverState">En ligne</span>
+            </div>
+            <div class="stack">
+              <div class="qr-feature">
+                <img id="phoneQrImage" class="qr-image qr-image-large" alt="QR code téléphone" />
+                <div class="stack">
+                  <div class="key-value">
+                    <span class="key">Lien principal</span>
+                    <span class="value" id="phoneLinkText">Aucun lien disponible</span>
+                  </div>
+                  <div class="card-actions">
+                    <button class="button" id="copyPhoneLinkButton" type="button">Copier le lien</button>
+                    <a class="button-secondary" id="openPhoneLinkButton" href="/phone" target="_blank" rel="noreferrer">Ouvrir</a>
+                  </div>
+                </div>
+              </div>
+              <div class="stack" id="phoneLinksList"></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-inner">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Certificat local</h2>
+                <p class="panel-subtitle">Télécharge le certificat public à installer une seule fois sur les téléphones.</p>
+              </div>
+            </div>
+            <div class="stack">
+              <div class="session-card">
+                <div class="session-top">
+                  <div>
+                    <h3 class="session-title">Fichier .cer</h3>
+                    <p class="session-id">Sans la clé privée, uniquement le certificat public.</p>
+                  </div>
+                  <span class="chip warn">À approuver une fois</span>
+                </div>
+                <div class="card-actions">
+                  <a class="button" href="/downloads/local.cer">Télécharger le certificat</a>
+                  <button class="button-secondary" id="copyCertUrlButton" type="button">Copier le lien</button>
+                </div>
+                <p class="small muted">
+                  C’est ce qui permet à la caméra et au micro de fonctionner dans le navigateur.
+                </p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-inner">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Actions globales</h2>
+                <p class="panel-subtitle">
+                  Vue d’ensemble des téléphones connectés et des liens OBS disponibles.
+                </p>
+              </div>
+            </div>
+            <div class="stack">
+              <div class="stats">
+                <div class="key-value">
+                  <span class="key">Téléphones</span>
+                  <span class="value" id="phoneCountValue">0</span>
+                </div>
+                <div class="key-value">
+                  <span class="key">Actifs</span>
+                  <span class="value" id="activeCountValue">0</span>
+                </div>
+                <div class="key-value">
+                  <span class="key">OBS connectés</span>
+                  <span class="value" id="viewerCountValue">0</span>
+                </div>
+                <div class="key-value">
+                  <span class="key">Réseau</span>
+                  <span class="value" id="networkCountValue">1 LAN</span>
+                </div>
+              </div>
+              <div class="card-actions">
+                <button class="button" id="copyAllObsButton" type="button">Copier tous les liens OBS</button>
+                <button class="button-secondary" id="refreshButtonSecondary" type="button">Actualiser</button>
+              </div>
+              <p class="small muted">
+                Chaque téléphone garde sa propre carte, sa propre source OBS et ses propres commandes.
+              </p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="panel">
+        <div class="panel-inner">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Téléphones connectés</h2>
+              <p class="panel-subtitle">
+                Chaque carte correspond à une source séparée. Ouvre le lien OBS pour utiliser le
+                flux dans une scène.
+              </p>
+            </div>
+            <span class="chip" id="sessionCount">0 appareil</span>
+          </div>
+          <div id="sessionList" class="session-list"></div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

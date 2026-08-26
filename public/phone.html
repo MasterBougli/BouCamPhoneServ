@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="theme-color" content="#070b14" />
+    <title>Cam From Phone - Téléphone</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/shared.js" defer></script>
+    <script src="/phone.js" defer></script>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <div class="hero-grid">
+          <span class="eyebrow">Phone sender</span>
+          <div>
+            <h1 class="title">Diffusion téléphone</h1>
+            <p class="subtitle">
+              Ouvre cette page, accepte la caméra et le micro, puis lance le flux. Le PC pourra
+              l’utiliser dans OBS comme source séparée.
+            </p>
+          </div>
+          <div class="hero-actions">
+            <button class="button" id="startButton" type="button">Démarrer la caméra</button>
+            <button class="button-secondary" id="switchButton" type="button">Changer caméra</button>
+            <button class="button-secondary" id="muteButton" type="button">Couper le micro</button>
+            <button class="button-secondary" id="stopButton" type="button">Arrêter</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid cols-2">
+        <article class="panel">
+          <div class="panel-inner">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Session</h2>
+                <p class="panel-subtitle">Chaque téléphone garde son propre identifiant local.</p>
+              </div>
+              <span class="chip warn" id="statusChip">Prêt</span>
+            </div>
+
+            <div class="stack">
+              <div class="field">
+                <span class="label">Nom du téléphone</span>
+                <input class="input" id="labelInput" type="text" placeholder="Phone" />
+              </div>
+
+              <div class="stats">
+                <div class="key-value">
+                  <span class="key">ID</span>
+                  <span class="value" id="sessionIdValue">—</span>
+                </div>
+                <div class="key-value">
+                  <span class="key">État</span>
+                  <span class="value" id="sessionStateValue">En attente</span>
+                </div>
+                <div class="key-value">
+                  <span class="key">Caméra</span>
+                  <span class="value" id="cameraValue">environment</span>
+                </div>
+                <div class="key-value">
+                  <span class="key">Audio</span>
+                  <span class="value" id="audioValue">Activé</span>
+                </div>
+              </div>
+
+              <div class="divider"></div>
+
+              <div class="card-actions">
+                <button class="button-secondary" id="copyLinkButton" type="button">Copier le lien</button>
+                <button class="button-secondary" id="saveLabelButton" type="button">Enregistrer le nom</button>
+              </div>
+
+              <p class="small muted" id="hintText">
+                Appuie sur “Démarrer la caméra” pour demander l’accès vidéo et micro.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="camera-frame panel">
+          <video id="localVideo" autoplay playsinline muted></video>
+          <div class="preview-overlay">
+            <div>
+              <strong id="previewTitle">Aperçu local</strong>
+              <div class="muted" id="previewSubtitle">La vidéo ici est celle qui part vers le PC.</div>
+            </div>
+            <div class="chip-row">
+              <span class="chip" id="networkChip">Hors ligne</span>
+              <span class="chip" id="permissionChip">Permissions en attente</span>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
