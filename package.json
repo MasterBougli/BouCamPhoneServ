@@ -1,6 +1,6 @@
 {
   "name": "boucamphoneserv",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "private": true,
   "description": "Local WebRTC camera bridge for OBS and other tools without installing anything on phones.",
   "type": "commonjs",

@@ -40,3 +40,5 @@
 - vérifie que Node.js est installé
 - relance `npm install`
 - puis relance `npm start`
+
+English version: [TROUBLESHOOTING.md](TROUBLESHOOTING.md)

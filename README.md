@@ -1,55 +1,56 @@
 # BouCamPhoneServ
 
-BouCamPhoneServ est une base locale pour utiliser la caméra et le micro de plusieurs téléphones dans OBS, sans rien installer sur les mobiles.
+BouCamPhoneServ is a local-first bridge for using the camera and microphone from one or more phones inside OBS without installing anything on the phones.
 
-Le projet est pensé pour :
+The project is designed for:
 
-- le réseau local
-- iPhone et Android
-- jusqu’à plusieurs téléphones en même temps
-- des sources OBS séparées par téléphone
-- une interface propre dès le départ
+- local network use
+- iPhone and Android
+- multiple phones at the same time
+- separate OBS sources per phone
+- a polished interface from day one
 
-## Ce que contient cette version
+## What this release includes
 
-- une page téléphone à ouvrir dans le navigateur
-- un tableau de bord local pour le PC
-- un QR code pour ouvrir rapidement la page téléphone
-- des liens OBS séparés pour chaque appareil
-- des commandes simples pour renommer, couper le micro, changer la caméra et arrêter une source
-- un certificat local généré au premier lancement
+- a phone page opened in the browser
+- a local dashboard for the PC
+- a QR code for quick access to the phone page
+- separate OBS links for each device
+- simple controls to rename, mute, switch camera, and stop a source
+- a local certificate generated on first launch
 
-## Démarrage rapide
+## Quick Start
 
 ```bash
 npm install
 ```
 
-Puis :
+Then:
 
 ```bash
 npm start
 ```
 
-Ensuite :
+After that:
 
-1. ouvre `http://localhost:8080` sur le PC
-2. télécharge le certificat public depuis le tableau de bord
-3. ouvre la page téléphone depuis le lien ou le QR code
-4. accepte la caméra et le micro
-5. ajoute la source OBS dans `View` avec l’URL affichée pour chaque session
+1. open `http://localhost:8080` on the PC
+2. download the public certificate from the dashboard
+3. open the phone page from the link or QR code
+4. allow camera and microphone access
+5. add the OBS source in `View` with the URL shown for each session
 
 ## Documentation
 
-- [Tutoriel complet](docs/TUTORIEL.md)
-- [Installation et certificat](docs/INSTALLATION.md)
-- [Configuration OBS](docs/OBS.md)
-- [Architecture technique](docs/ARCHITECTURE.md)
-- [Dépannage](docs/DEPANNAGE.md)
-- [Contribuer au projet](CONTRIBUTING.md)
-- [Journal des versions](CHANGELOG.md)
+- [Full tutorial](docs/TUTORIAL.md) and [FR](docs/TUTORIAL.fr.md)
+- [Installation and certificate](docs/INSTALLATION.md) and [FR](docs/INSTALLATION.fr.md)
+- [OBS setup](docs/OBS.md) and [FR](docs/OBS.fr.md)
+- [Technical architecture](docs/ARCHITECTURE.md) and [FR](docs/ARCHITECTURE.fr.md)
+- [Troubleshooting](docs/TROUBLESHOOTING.md) and [FR](docs/TROUBLESHOOTING.fr.md)
+- [Development notes](docs/DEVELOPMENT.md) and [FR](docs/DEVELOPMENT.fr.md)
+- [Contributing](CONTRIBUTING.md) and [FR](CONTRIBUTING.fr.md)
+- [Changelog](CHANGELOG.md) and [FR](CHANGELOG.fr.md)
 
-## Fichiers importants
+## Important Files
 
 - [server.js](server.js)
 - [public/dashboard.html](public/dashboard.html)
@@ -62,8 +63,10 @@ Ensuite :
 
 ## Version
 
-Version actuelle du projet : `0.1.2`
+Current project version: `0.1.3`
 
-## Licence
+## License
 
 MIT
+
+French version: [README.fr.md](README.fr.md)

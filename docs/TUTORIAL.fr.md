@@ -109,3 +109,5 @@ Quand tu as fini :
 ## Astuce pratique
 
 Si tu utilises souvent les mêmes téléphones, garde le certificat installé. Tu n’auras plus à refaire cette étape à chaque fois.
+
+English version: [TUTORIAL.md](TUTORIAL.md)

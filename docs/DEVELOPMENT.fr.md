@@ -25,3 +25,5 @@ Le script PowerShell situé dans `scripts/create-local-cert.ps1` crée :
 - garder le projet sans installation côté téléphone
 - conserver la compatibilité réseau local
 - éviter de lier le fonctionnement à un service externe
+
+English version: [DEVELOPMENT.md](DEVELOPMENT.md)

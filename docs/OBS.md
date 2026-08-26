@@ -1,29 +1,31 @@
-# Utilisation dans OBS
+# Using in OBS
 
-## Objectif
+## Goal
 
-Chaque téléphone doit devenir une source séparée dans OBS.
+Each phone should become a separate source in OBS.
 
-## Ajouter une source
+## Add a Source
 
-1. copie le lien OBS affiché dans la carte du téléphone
-2. dans OBS, ajoute une source de navigateur
-3. colle le lien
-4. ajuste la taille et le cadrage dans ta scène
+1. copy the OBS link shown in the phone card
+2. in OBS, add a browser source
+3. paste the link
+4. adjust the size and framing in your scene
 
-## Bon usage
+## Good Practice
 
-- garde une source par téléphone
-- renomme les sources dans OBS
-- utilise les états du dashboard pour vérifier si le flux est bien vivant
+- keep one source per phone
+- rename the sources in OBS
+- use the dashboard status to confirm the stream is still alive
 
-## Si une source ne s’affiche pas
+## If a Source Does Not Appear
 
-- vérifie que le téléphone est bien connecté
-- vérifie que le micro ou la caméra n’a pas été coupé
-- recharge la source navigateur dans OBS
-- vérifie que le certificat a bien été installé sur le téléphone
+- check that the phone is still connected
+- check that the microphone or camera has not been muted
+- reload the browser source in OBS
+- verify that the certificate was installed on the phone
 
-## Conseil
+## Tip
 
-Pour les scènes à plusieurs téléphones, crée une scène OBS dédiée et ajoute chaque source à la main. C’est la façon la plus simple de garder le contrôle du montage.
+For multi-phone scenes, create a dedicated OBS scene and add each source manually. That is the simplest way to keep control over the edit.
+
+French version: [OBS.fr.md](OBS.fr.md)

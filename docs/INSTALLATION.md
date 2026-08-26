@@ -1,51 +1,53 @@
-# Installation et certificat
+# Installation and Certificate
 
-## Pré-requis
+## Requirements
 
-- Windows pour la version actuelle
-- Node.js 20 ou plus récent
-- un navigateur moderne sur le téléphone
+- Windows for the current version
+- Node.js 20 or newer
+- a modern browser on the phone
 
-## Installation du projet
+## Install the Project
 
-Dans le dossier du projet :
+In the project folder:
 
 ```bash
 npm install
 ```
 
-## Lancer l’application
+## Launch the App
 
 ```bash
 npm start
 ```
 
-## Certificat local
+## Local Certificate
 
-BouCamPhoneServ sert la page téléphone en HTTPS, parce que les navigateurs demandent un contexte sécurisé pour la caméra et le micro.
+BouCamPhoneServ serves the phone page over HTTPS because browsers require a secure context for camera and microphone access.
 
-Au premier lancement, un certificat local est généré automatiquement dans `certs/`.
+On the first launch, a local certificate is generated automatically in `certs/`.
 
-Le certificat public à installer sur les téléphones est disponible depuis :
+The public certificate to install on the phones is available from:
 
-- le tableau de bord
-- ou `http://localhost:8080/downloads/local.cer`
+- the dashboard
+- or `http://localhost:8080/downloads/local.cer`
 
-## Installation sur le téléphone
+## Install on the Phone
 
-1. ouvre le lien du certificat
-2. télécharge le fichier
-3. installe-le comme certificat de confiance
-4. ouvre ensuite la page téléphone
+1. open the certificate link
+2. download the file
+3. install it as a trusted certificate
+4. then open the phone page
 
-## Adresse réseau
+## Network Address
 
-Le tableau de bord affiche les adresses LAN détectées par le PC.
+The dashboard shows the LAN addresses detected by the PC.
 
-Utilise celle qui correspond à ton réseau local actuel.
+Use the one that matches your current local network.
 
-## Remarques
+## Notes
 
-- pas besoin d’installer une application sur le téléphone
-- pas besoin d’un compte en ligne
-- tout reste sur le réseau local
+- no app installation is required on the phone
+- no online account is required
+- everything stays on the local network
+
+French version: [INSTALLATION.fr.md](INSTALLATION.fr.md)

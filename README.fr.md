@@ -1,0 +1,72 @@
+# BouCamPhoneServ
+
+BouCamPhoneServ est une passerelle locale permettant d’utiliser la caméra et le micro d’un ou plusieurs téléphones dans OBS sans rien installer sur les mobiles.
+
+Le projet est pensé pour :
+
+- le réseau local
+- iPhone et Android
+- plusieurs téléphones en même temps
+- des sources OBS séparées par téléphone
+- une interface soignée dès le départ
+
+## Ce que contient cette version
+
+- une page téléphone à ouvrir dans le navigateur
+- un tableau de bord local pour le PC
+- un QR code pour accéder rapidement à la page téléphone
+- des liens OBS séparés pour chaque appareil
+- des commandes simples pour renommer, couper le micro, changer la caméra et arrêter une source
+- un certificat local généré au premier lancement
+
+## Démarrage rapide
+
+```bash
+npm install
+```
+
+Puis :
+
+```bash
+npm start
+```
+
+Ensuite :
+
+1. ouvre `http://localhost:8080` sur le PC
+2. télécharge le certificat public depuis le tableau de bord
+3. ouvre la page téléphone depuis le lien ou le QR code
+4. autorise la caméra et le micro
+5. ajoute la source OBS dans `View` avec l’URL affichée pour chaque session
+
+## Documentation
+
+- [Tutoriel complet](docs/TUTORIAL.fr.md) et [EN](docs/TUTORIAL.md)
+- [Installation et certificat](docs/INSTALLATION.fr.md) et [EN](docs/INSTALLATION.md)
+- [Configuration OBS](docs/OBS.fr.md) et [EN](docs/OBS.md)
+- [Architecture technique](docs/ARCHITECTURE.fr.md) et [EN](docs/ARCHITECTURE.md)
+- [Dépannage](docs/TROUBLESHOOTING.fr.md) et [EN](docs/TROUBLESHOOTING.md)
+- [Notes de développement](docs/DEVELOPMENT.fr.md) et [EN](docs/DEVELOPMENT.md)
+- [Contribuer au projet](CONTRIBUTING.fr.md) et [EN](CONTRIBUTING.md)
+- [Journal des versions](CHANGELOG.fr.md) et [EN](CHANGELOG.md)
+
+## Fichiers importants
+
+- [server.js](server.js)
+- [public/dashboard.html](public/dashboard.html)
+- [public/dashboard.js](public/dashboard.js)
+- [public/phone.html](public/phone.html)
+- [public/phone.js](public/phone.js)
+- [public/view.html](public/view.html)
+- [public/view.js](public/view.js)
+- [scripts/create-local-cert.ps1](scripts/create-local-cert.ps1)
+
+## Version
+
+Version actuelle du projet : `0.1.3`
+
+## Licence
+
+MIT
+
+English version : [README.md](README.md)

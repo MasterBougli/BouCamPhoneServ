@@ -1,36 +1,38 @@
-# Contribuer
+# Contributing
 
-Merci de vouloir aider à améliorer BouCamPhoneServ.
+Thank you for helping improve BouCamPhoneServ.
 
-## Règles simples
+## Simple Rules
 
-- garde le projet simple à lancer
-- évite les dépendances inutiles
-- privilégie les solutions qui restent compatibles avec iPhone et Android
-- documente toujours les changements qui impactent l’usage
+- keep the project easy to launch
+- avoid unnecessary dependencies
+- prefer solutions that stay compatible with iPhone and Android
+- always document changes that affect usage
 
-## Avant de proposer une modification
+## Before You Propose a Change
 
-1. lance le projet localement
-2. vérifie le tableau de bord
-3. teste au moins une page téléphone
-4. vérifie que la source OBS reste séparée
+1. run the project locally
+2. check the dashboard
+3. test at least one phone page
+4. make sure the OBS source still stays separate
 
-## Style de contribution
+## Contribution Style
 
-- code lisible
-- petits fichiers cohérents
-- messages de commit explicites
-- documentation mise à jour quand l’usage change
+- readable code
+- small, coherent files
+- explicit commit messages
+- documentation updated whenever usage changes
 
-## Si tu ajoutes une fonctionnalité
+## If You Add a Feature
 
-- précise le besoin réel
-- montre comment l’utilisateur la découvrira
-- indique si elle touche le téléphone, le dashboard ou OBS
+- explain the real need
+- show how the user will discover it
+- say whether it affects the phone, the dashboard, or OBS
 
-## Ce qu’on évite
+## What We Avoid
 
-- installer une application sur le téléphone
-- casser la compatibilité réseau local
-- ajouter de la complexité sans bénéfice concret
+- installing an app on the phone
+- breaking local network compatibility
+- adding complexity without a concrete benefit
+
+French version: [CONTRIBUTING.fr.md](CONTRIBUTING.fr.md)

@@ -1,60 +1,62 @@
-# Architecture technique
+# Technical Architecture
 
-## Vue d’ensemble
+## Overview
 
-BouCamPhoneServ sépare le projet en trois couches :
+BouCamPhoneServ separates the project into three layers:
 
-- le téléphone
-- le serveur local
-- la sortie OBS
+- the phone
+- the local server
+- the OBS output
 
-## Flux des données
+## Data Flow
 
 ```mermaid
 flowchart LR
-  Phone["Téléphone dans le navigateur"]
-  Server["Serveur local"]
-  Dashboard["Tableau de bord"]
+  Phone["Phone in the browser"]
+  Server["Local server"]
+  Dashboard["Dashboard"]
   OBS["OBS Browser Source"]
 
-  Phone -->|"caméra + micro + signalisation"| Server
-  Dashboard -->|"contrôle local"| Server
-  OBS -->|"affichage séparé"| Server
+  Phone -->|"camera + microphone + signaling"| Server
+  Dashboard -->|"local control"| Server
+  OBS -->|"separate display"| Server
 ```
 
-## Rôle de chaque partie
+## Role of Each Part
 
-### Téléphone
+### Phone
 
-- ouvre une page web
-- demande l’accès caméra et micro
-- envoie le flux vidéo et audio
-- peut changer de caméra ou couper le micro
+- opens a web page
+- requests camera and microphone access
+- sends video and audio
+- can switch camera or mute the microphone
 
-### Serveur local
+### Local Server
 
-- sert les pages HTML
-- gère les sessions
-- transmet les messages entre téléphone et vue OBS
-- fournit le certificat local
+- serves the HTML pages
+- manages sessions
+- forwards messages between the phone and the OBS view
+- provides the local certificate
 
-### Tableau de bord
+### Dashboard
 
-- affiche les téléphones actifs
-- montre les QR codes
-- permet de copier les liens
-- permet d’envoyer des commandes simples
+- shows active phones
+- displays QR codes
+- lets you copy links
+- lets you send simple commands
 
-### Source OBS
+### OBS Source
 
-- récupère la vidéo de la session choisie
-- affiche chaque téléphone comme une source indépendante
+- pulls video from the selected session
+- shows each phone as an independent source
 
-## Pourquoi ce choix
+## Why This Approach
 
-Cette approche garde :
+This approach keeps:
 
-- une installation minimale
-- une compatibilité navigateur large
-- une intégration propre avec OBS
-- une base facile à faire évoluer plus tard vers Linux ou Raspberry Pi
+- the installation footprint minimal
+- broad browser compatibility
+- a clean OBS integration
+- a base that can later evolve toward Linux or Raspberry Pi
+
+French version: [ARCHITECTURE.fr.md](ARCHITECTURE.fr.md)
