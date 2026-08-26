@@ -2,6 +2,17 @@
 
 [EN](changelog.md) | [FR](CHANGELOG.fr.md) | [ES](CHANGELOG.es.md)
 
+## Résumé
+
+Ce journal garde la version la plus récente en haut pour retrouver rapidement les changements les plus importants.
+
+## 0.1.8 - 2026-08-26
+
+- ajout des badges finaux dans les README pour une page d’accueil plus propre
+- ajout d’un fichier de licence AGPLv3 complet
+- journal des versions remis en forme avec un résumé plus clair
+- mise à jour de la version du projet à `0.1.8`
+
 ## 0.1.7 - 2026-08-26
 
 - renommer le journal principal en `changelog.md`

@@ -2,6 +2,17 @@
 
 [EN](changelog.md) | [FR](CHANGELOG.fr.md) | [ES](CHANGELOG.es.md)
 
+## Summary
+
+This log keeps the newest release at the top so the most relevant changes are easy to find.
+
+## 0.1.8 - 2026-08-26
+
+- added the final README badges for a cleaner repository landing page
+- added a dedicated full AGPLv3 license file
+- refined the changelog into a more polished summary-first format
+- updated the project version to `0.1.8`
+
 ## 0.1.7 - 2026-08-26
 
 - added a dedicated lower-case `changelog.md` file and linked the README version section to it

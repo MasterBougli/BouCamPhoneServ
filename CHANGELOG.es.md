@@ -2,6 +2,17 @@
 
 [EN](changelog.md) | [FR](CHANGELOG.fr.md) | [ES](CHANGELOG.es.md)
 
+## Resumen
+
+Este historial mantiene la versión más reciente arriba para encontrar rápidamente los cambios más importantes.
+
+## 0.1.8 - 2026-08-26
+
+- añadidos los badges finales en los README para una portada más limpia
+- añadido un archivo de licencia AGPLv3 completo
+- reformateado el historial con un resumen más claro
+- actualización de la versión del proyecto a `0.1.8`
+
 ## 0.1.7 - 2026-08-26
 
 - renombrado el changelog principal a `changelog.md`
