@@ -557,7 +557,167 @@ button {
 
 .settings-grid {
   display: grid;
+  gap: 16px;
+}
+
+.config-layout {
+  display: grid;
+  grid-template-columns: minmax(290px, 360px) minmax(0, 1fr);
+  gap: 18px;
+  margin-top: 18px;
+  align-items: start;
+}
+
+.config-sidebar {
+  align-self: start;
+}
+
+.config-rail {
+  position: sticky;
+  top: 18px;
+}
+
+.config-rail-inner,
+.config-main {
+  display: grid;
+  gap: 16px;
+}
+
+.rail-top {
+  display: grid;
+  gap: 12px;
+}
+
+.eyebrow-compact {
+  padding: 6px 10px;
+  font-size: 11px;
+}
+
+.rail-summary-card {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(135deg, rgba(126, 227, 255, 0.08), rgba(134, 161, 255, 0.05)),
+    rgba(255, 255, 255, 0.03);
+}
+
+.rail-summary-icon {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--accent);
+  font-size: 18px;
+}
+
+.rail-summary-copy {
+  display: grid;
+  gap: 4px;
+}
+
+.rail-summary-copy strong {
+  font-size: 15px;
+}
+
+.rail-summary-copy span {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.rail-nav {
+  display: grid;
+  gap: 10px;
+}
+
+.rail-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  transition:
+    transform 140ms ease,
+    border-color 140ms ease,
+    background 140ms ease;
+}
+
+.rail-nav-item:hover {
+  transform: translateY(-1px);
+  border-color: var(--line-strong);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.rail-nav-icon {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  border: 1px solid rgba(126, 227, 255, 0.22);
+  background: linear-gradient(180deg, rgba(126, 227, 255, 0.16), rgba(134, 161, 255, 0.12));
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.rail-nav-item span {
+  display: grid;
+  gap: 3px;
+}
+
+.rail-nav-item strong {
+  font-size: 14px;
+}
+
+.rail-nav-item small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.rail-stack {
+  display: grid;
   gap: 14px;
+}
+
+.rail-box {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.summary-stats {
+  grid-template-columns: 1fr;
+}
+
+.panel-header.compact {
+  align-items: flex-start;
+  margin-bottom: 0;
+}
+
+.config-main {
+  min-width: 0;
+}
+
+.config-footer {
+  display: grid;
+  gap: 14px;
+  padding-top: 4px;
 }
 
 .config-section {
@@ -672,18 +832,45 @@ button {
 
 .config-link-list {
   display: grid;
-  gap: 10px;
+  gap: 12px;
 }
 
 .config-link-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   gap: 12px;
+  align-items: center;
   padding: 14px 16px;
   border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(135deg, rgba(126, 227, 255, 0.05), rgba(134, 161, 255, 0.03)),
+    rgba(255, 255, 255, 0.03);
+  transition:
+    transform 140ms ease,
+    border-color 140ms ease,
+    background 140ms ease;
+}
+
+.config-link-item:hover {
+  transform: translateY(-1px);
+  border-color: var(--line-strong);
+  background:
+    linear-gradient(135deg, rgba(126, 227, 255, 0.08), rgba(134, 161, 255, 0.05)),
+    rgba(255, 255, 255, 0.04);
+}
+
+.config-link-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--accent);
+  font-size: 18px;
+  font-weight: 700;
 }
 
 .config-link-text {
@@ -692,7 +879,7 @@ button {
 }
 
 .config-link-text strong {
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .config-link-text span {
@@ -723,6 +910,15 @@ button {
   .grid.cols-2,
   .grid.cols-3 {
     grid-template-columns: 1fr;
+  }
+
+  .config-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .config-rail {
+    position: relative;
+    top: auto;
   }
 
   .qr-feature,
@@ -756,9 +952,12 @@ button {
     align-items: flex-start;
   }
 
-  .switch-row,
-  .config-link-item {
+  .switch-row {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .config-link-item {
+    grid-template-columns: 1fr;
   }
 }

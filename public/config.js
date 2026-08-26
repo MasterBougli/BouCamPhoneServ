@@ -107,6 +107,7 @@
         description: "Vue principale pour suivre les téléphones et les sources OBS.",
         display: urls.dashboardLocal || `${window.location.origin}/dashboard`,
         url: urls.dashboardLocal || `${window.location.origin}/dashboard`,
+        icon: "⌂",
         kind: "open",
         openLabel: "Ouvrir",
         copyLabel: "Copier le lien",
@@ -116,6 +117,7 @@
         description: "Lien direct à ouvrir sur chaque mobile du réseau local.",
         display: urls.phoneUrls?.[0] || `${window.location.origin}/phone`,
         url: urls.phoneUrls?.[0] || `${window.location.origin}/phone`,
+        icon: "◔",
         kind: "open",
         openLabel: "Ouvrir",
         copyLabel: "Copier le lien",
@@ -125,6 +127,7 @@
         description: "Page graphique de réglage des options partagées.",
         display: urls.configLocal || `${window.location.origin}/config`,
         url: urls.configLocal || `${window.location.origin}/config`,
+        icon: "⚙",
         kind: "open",
         openLabel: "Ouvrir",
         copyLabel: "Copier le lien",
@@ -134,6 +137,7 @@
         description: "Fichier à installer sur les téléphones pour la connexion HTTPS.",
         display: urls.certDownload || `${window.location.origin}/downloads/local.cer`,
         url: urls.certDownload || `${window.location.origin}/downloads/local.cer`,
+        icon: "⇩",
         kind: "open",
         openLabel: "Télécharger",
         copyLabel: "Copier le lien",
@@ -143,6 +147,7 @@
         description: "Ouvre la configuration graphique depuis le terminal Windows.",
         display: "npm run config",
         url: "npm run config",
+        icon: "⌘",
         kind: "copy",
         copyLabel: "Copier la commande",
       },
@@ -151,6 +156,7 @@
         description: "Télécharge le fichier .cmd pour un double-clic local.",
         display: urls.configLauncher || `${window.location.origin}/downloads/open-config.cmd`,
         url: urls.configLauncher || `${window.location.origin}/downloads/open-config.cmd`,
+        icon: "▣",
         kind: "open",
         openLabel: "Télécharger",
         copyLabel: "Copier le lien",
@@ -162,6 +168,7 @@
       const row = document.createElement("div");
       row.className = "config-link-item";
       row.innerHTML = `
+        <div class="config-link-icon">${entry.icon}</div>
         <div class="config-link-text">
           <strong>${entry.label}</strong>
           <span>${entry.description}</span>

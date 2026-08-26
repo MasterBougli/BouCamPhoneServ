@@ -29,22 +29,113 @@
         </div>
       </section>
 
-      <section class="grid cols-2">
-        <article class="panel">
-          <div class="panel-inner">
-            <div class="panel-header">
-              <div>
-                <h2 class="panel-title">Paramètres globaux</h2>
-                <p class="panel-subtitle">
-                  Ces valeurs sont sauvegardées sur le serveur local et partagées avec toutes les
-                  pages du projet.
-                </p>
+      <section class="config-layout">
+        <aside class="config-sidebar">
+          <article class="panel config-rail">
+            <div class="panel-inner config-rail-inner">
+              <div class="rail-top">
+                <div>
+                  <span class="eyebrow eyebrow-compact">Studio control</span>
+                  <h2 class="panel-title">Console de réglage</h2>
+                  <p class="panel-subtitle">
+                    Un point d’entrée unique pour piloter les réglages partagés du serveur local.
+                  </p>
+                </div>
+                <span class="chip good" id="configState">Synchronisé</span>
               </div>
-              <span class="chip good" id="configState">Synchronisé</span>
-            </div>
 
-            <form class="settings-grid" id="settingsForm">
-              <section class="config-section">
+              <div class="rail-summary-card">
+                <div class="rail-summary-icon">◆</div>
+                <div class="rail-summary-copy">
+                  <strong>Mode configuration</strong>
+                  <span>Tout ce qui change ici se répercute immédiatement sur le flux local.</span>
+                </div>
+              </div>
+
+              <nav class="rail-nav" aria-label="Navigation de la configuration">
+                <a class="rail-nav-item" href="#network-section">
+                  <span class="rail-nav-icon">01</span>
+                  <span>
+                    <strong>Réseau</strong>
+                    <small>Nom et identité</small>
+                  </span>
+                </a>
+                <a class="rail-nav-item" href="#camera-section">
+                  <span class="rail-nav-icon">02</span>
+                  <span>
+                    <strong>Caméra</strong>
+                    <small>Orientation et qualité</small>
+                  </span>
+                </a>
+                <a class="rail-nav-item" href="#audio-section">
+                  <span class="rail-nav-icon">03</span>
+                  <span>
+                    <strong>Audio</strong>
+                    <small>Micro au démarrage</small>
+                  </span>
+                </a>
+                <a class="rail-nav-item" href="#startup-section">
+                  <span class="rail-nav-icon">04</span>
+                  <span>
+                    <strong>Démarrage</strong>
+                    <small>Comportement à l’ouverture</small>
+                  </span>
+                </a>
+                <a class="rail-nav-item" href="#shortcuts-section">
+                  <span class="rail-nav-icon">05</span>
+                  <span>
+                    <strong>Raccourcis</strong>
+                    <small>Ouvrir et lancer</small>
+                  </span>
+                </a>
+              </nav>
+
+              <div class="rail-stack">
+                <div class="rail-box">
+                  <div class="panel-header compact">
+                    <div>
+                      <h3 class="panel-title">Résumé actif</h3>
+                      <p class="panel-subtitle">
+                        Vérifie en un coup d’œil les réglages réellement chargés par le serveur.
+                      </p>
+                    </div>
+                    <span class="chip warn" id="summaryState">En attente</span>
+                  </div>
+                  <div class="stats summary-stats" id="settingsSummary"></div>
+                </div>
+
+                <div class="rail-box">
+                  <div class="panel-header compact">
+                    <div>
+                      <h3 class="panel-title">Raccourcis studio</h3>
+                      <p class="panel-subtitle">
+                        Liens rapides pour ouvrir, télécharger ou lancer la configuration.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="config-link-list" id="linksList"></div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </aside>
+
+        <section class="config-main">
+          <article class="panel">
+            <div class="panel-inner">
+              <div class="panel-header">
+                <div>
+                  <h2 class="panel-title">Paramètres globaux</h2>
+                  <p class="panel-subtitle">
+                    Ces valeurs sont sauvegardées sur le serveur local et partagées avec toutes les
+                    pages du projet.
+                  </p>
+                </div>
+                <span class="chip good">Actif</span>
+              </div>
+
+              <form class="settings-grid" id="settingsForm">
+              <section class="config-section" id="network-section">
                 <div class="config-section-header">
                   <div>
                     <h3 class="config-section-title">Réseau et identité</h3>
@@ -67,7 +158,7 @@
                 </div>
               </section>
 
-              <section class="config-section">
+              <section class="config-section" id="camera-section">
                 <div class="config-section-header">
                   <div>
                     <h3 class="config-section-title">Caméra</h3>
@@ -100,7 +191,7 @@
                 </div>
               </section>
 
-              <section class="config-section">
+              <section class="config-section" id="audio-section">
                 <div class="config-section-header">
                   <div>
                     <h3 class="config-section-title">Audio</h3>
@@ -126,7 +217,7 @@
                 </div>
               </section>
 
-              <section class="config-section">
+              <section class="config-section" id="startup-section">
                 <div class="config-section-header">
                   <div>
                     <h3 class="config-section-title">Démarrage</h3>
@@ -166,37 +257,19 @@
                 </div>
               </section>
 
-              <div class="card-actions">
-                <button class="button" id="saveButton" type="submit">Appliquer maintenant</button>
-                <button class="button-secondary" id="resetButton" type="button">Recharger les valeurs</button>
-                <a class="button-secondary" href="/dashboard" id="openDashboardButton">Ouvrir le tableau de bord</a>
-              </div>
+              <div class="config-footer" id="shortcuts-section">
+                <div class="card-actions">
+                  <button class="button" id="saveButton" type="submit">Appliquer maintenant</button>
+                  <button class="button-secondary" id="resetButton" type="button">Recharger les valeurs</button>
+                  <a class="button-secondary" href="/dashboard" id="openDashboardButton">Ouvrir le tableau de bord</a>
+                </div>
 
-              <p class="small muted" id="configHint">
-                Les modifications se sauvegardent localement sur le serveur et s’appliquent à
-                toutes les connexions du réseau local.
-              </p>
-            </form>
-          </div>
-        </article>
-
-        <article class="panel">
-          <div class="panel-inner">
-            <div class="panel-header">
-              <div>
-                <h2 class="panel-title">Résumé actif</h2>
-                <p class="panel-subtitle">
-                  Vérifie d’un coup d’œil les réglages réellement chargés par le serveur.
+                <p class="small muted" id="configHint">
+                  Les modifications se sauvegardent localement sur le serveur et s’appliquent à
+                  toutes les connexions du réseau local.
                 </p>
               </div>
-              <span class="chip warn" id="summaryState">En attente</span>
-            </div>
-
-            <div class="stats" id="settingsSummary"></div>
-
-            <div class="divider"></div>
-
-            <div class="config-link-list" id="linksList"></div>
+            </form>
           </div>
         </article>
       </section>

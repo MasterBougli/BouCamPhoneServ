@@ -6,6 +6,12 @@
 
 This log keeps the newest release at the top so the most relevant changes are easy to find.
 
+## 0.1.16 - 2026-08-26
+
+- turned the configuration screen into a studio-style layout with a sidebar, section navigation, and shortcut cards
+- added more visual hierarchy and icon-like markers to the configuration controls
+- updated the project version to `0.1.16`
+
 ## 0.1.15 - 2026-08-26
 
 - redesigned the configuration page into clearer sections for network, camera, audio, startup, and shortcuts

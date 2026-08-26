@@ -2,7 +2,7 @@
 
 [EN](README.md) | [FR](README.fr.md) | [ES](README.es.md)
 
-![Version](https://img.shields.io/badge/version-0.1.15-blue)
+![Version](https://img.shields.io/badge/version-0.1.16-blue)
 ![License](https://img.shields.io/badge/license-AGPL--3.0--only-green)
 ![Docs](https://img.shields.io/badge/docs-EN%2FFR%2FES-orange)
 ![Wiki](https://img.shields.io/badge/wiki-ready-purple)
@@ -26,6 +26,7 @@ The project is designed for:
 - a graphical configuration page for shared server settings
 - a Windows launcher and `npm run config` shortcut for the configuration page
 - a sectioned configuration layout for network, camera, audio, startup, and shortcuts
+- a studio-style sidebar with quick navigation and shortcut cards
 - a QR code for quick access to the phone page
 - separate OBS links for each device
 - simple controls to rename, mute, switch camera, and stop a source
@@ -82,7 +83,7 @@ After that:
 
 ## Version
 
-Current project version: `0.1.15`
+Current project version: `0.1.16`
 
 - Release notes: [changelog.md](changelog.md)
 

@@ -6,6 +6,12 @@
 
 Ce journal garde la version la plus récente en haut pour retrouver rapidement les changements les plus importants.
 
+## 0.1.16 - 2026-08-26
+
+- transformation de l’écran de configuration en une mise en page style studio avec barre latérale, navigation par sections et cartes de raccourcis
+- ajout d’une hiérarchie visuelle plus forte et de repères de type icône dans les contrôles de configuration
+- mise à jour de la version du projet à `0.1.16`
+
 ## 0.1.15 - 2026-08-26
 
 - refonte de la page de configuration en sections plus lisibles pour le réseau, la caméra, l’audio, le démarrage et les raccourcis

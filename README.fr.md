@@ -2,7 +2,7 @@
 
 [EN](README.md) | [FR](README.fr.md) | [ES](README.es.md)
 
-![Version](https://img.shields.io/badge/version-0.1.15-blue)
+![Version](https://img.shields.io/badge/version-0.1.16-blue)
 ![License](https://img.shields.io/badge/license-AGPL--3.0--only-green)
 ![Docs](https://img.shields.io/badge/docs-EN%2FFR%2FES-orange)
 ![Wiki](https://img.shields.io/badge/wiki-ready-purple)
@@ -26,6 +26,7 @@ Le projet est pensé pour :
 - une page de configuration graphique pour les réglages partagés du serveur
 - un lanceur Windows et une commande `npm run config` pour ouvrir la configuration
 - une mise en page en sections pour le réseau, la caméra, l’audio, le démarrage et les raccourcis
+- une barre latérale style studio avec navigation rapide et cartes de raccourcis
 - un QR code pour accéder rapidement à la page téléphone
 - des liens OBS séparés pour chaque appareil
 - des commandes simples pour renommer, couper le micro, changer la caméra et arrêter une source
@@ -83,7 +84,7 @@ Ensuite :
 
 ## Version
 
-Version actuelle du projet : `0.1.15`
+Version actuelle du projet : `0.1.16`
 
 - Notes de version : [changelog.md](changelog.md)
 

@@ -6,6 +6,12 @@
 
 Este historial mantiene la versión más reciente arriba para encontrar rápidamente los cambios más importantes.
 
+## 0.1.16 - 2026-08-26
+
+- la pantalla de configuración pasó a una disposición estilo studio con barra lateral, navegación por secciones y tarjetas de accesos directos
+- se añadió una jerarquía visual más clara y marcadores tipo icono en los controles de configuración
+- se actualizó la versión del proyecto a `0.1.16`
+
 ## 0.1.15 - 2026-08-26
 
 - rediseño de la página de configuración en secciones más claras para red, cámara, audio, arranque y accesos directos
