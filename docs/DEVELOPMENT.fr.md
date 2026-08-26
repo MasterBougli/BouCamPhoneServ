@@ -26,4 +26,13 @@ Le script PowerShell situé dans `scripts/create-local-cert.ps1` crée :
 - conserver la compatibilité réseau local
 - éviter de lier le fonctionnement à un service externe
 
+## Soutenir le projet
+
+Faire un don : [https://streamlabs.com/bouglitv](https://streamlabs.com/bouglitv)
+
+## Licence et contributions
+
+BouCamPhoneServ est sous licence `AGPL-3.0-only`.
+Les contributions doivent être signées avec `Signed-off-by:` pour respecter la DCO 1.1.
+
 English version: [DEVELOPMENT.md](DEVELOPMENT.md)

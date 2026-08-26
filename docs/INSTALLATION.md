@@ -50,4 +50,13 @@ Use the one that matches your current local network.
 - no online account is required
 - everything stays on the local network
 
+## Support the Project
+
+Donate: [https://streamlabs.com/bouglitv](https://streamlabs.com/bouglitv)
+
+## License and Contributions
+
+BouCamPhoneServ is licensed under `AGPL-3.0-only`.
+Contributions must be signed off with `Signed-off-by:` to comply with DCO 1.1.
+
 French version: [INSTALLATION.fr.md](INSTALLATION.fr.md)

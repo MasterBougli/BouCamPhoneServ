@@ -110,4 +110,13 @@ When you are finished:
 
 If you often use the same phones, keep the certificate installed. You will not need to repeat that step every time.
 
+## Support the Project
+
+Donate: [https://streamlabs.com/bouglitv](https://streamlabs.com/bouglitv)
+
+## License and Contributions
+
+BouCamPhoneServ is licensed under `AGPL-3.0-only`.
+Contributions must be signed off with `Signed-off-by:` to comply with DCO 1.1.
+
 French version: [TUTORIAL.fr.md](TUTORIAL.fr.md)

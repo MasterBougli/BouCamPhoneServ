@@ -2,6 +2,11 @@
 
 Thank you for helping improve BouCamPhoneServ.
 
+## License and DCO
+
+This project is licensed under `AGPL-3.0-only`.
+Every contribution must include a `Signed-off-by:` line in the commit message to satisfy DCO 1.1.
+
 ## Simple Rules
 
 - keep the project easy to launch
@@ -34,5 +39,9 @@ Thank you for helping improve BouCamPhoneServ.
 - installing an app on the phone
 - breaking local network compatibility
 - adding complexity without a concrete benefit
+
+## Support the Project
+
+Donate: [https://streamlabs.com/bouglitv](https://streamlabs.com/bouglitv)
 
 French version: [CONTRIBUTING.fr.md](CONTRIBUTING.fr.md)

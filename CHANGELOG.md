@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.4 - 2026-08-26
+
+- added donation links to the Markdown documentation
+- switched the project license notice to AGPLv3 plus DCO
+- updated the package metadata to `0.1.4`
+
 ## 0.1.3 - 2026-08-26
 
 - split the documentation into English primary files with French mirrors
@@ -25,5 +31,14 @@
 - phone, dashboard, and OBS source interface
 - local certificate generation on first launch
 - local network compatibility for video and microphone
+
+## Support the Project
+
+Donate: [https://streamlabs.com/bouglitv](https://streamlabs.com/bouglitv)
+
+## License and Contributions
+
+BouCamPhoneServ is licensed under `AGPL-3.0-only`.
+Contributions must be signed off with `Signed-off-by:` to comply with DCO 1.1.
 
 French version: [CHANGELOG.fr.md](CHANGELOG.fr.md)

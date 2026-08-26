@@ -110,4 +110,13 @@ Quand tu as fini :
 
 Si tu utilises souvent les mêmes téléphones, garde le certificat installé. Tu n’auras plus à refaire cette étape à chaque fois.
 
+## Soutenir le projet
+
+Faire un don : [https://streamlabs.com/bouglitv](https://streamlabs.com/bouglitv)
+
+## Licence et contributions
+
+BouCamPhoneServ est sous licence `AGPL-3.0-only`.
+Les contributions doivent être signées avec `Signed-off-by:` pour respecter la DCO 1.1.
+
 English version: [TUTORIAL.md](TUTORIAL.md)

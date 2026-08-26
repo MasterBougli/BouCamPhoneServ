@@ -1,5 +1,11 @@
 # Journal des versions
 
+## 0.1.4 - 2026-08-26
+
+- ajout du lien de donation dans la documentation Markdown
+- passage de la notice de licence du projet à AGPLv3 plus DCO
+- mise à jour des métadonnées du package à `0.1.4`
+
 ## 0.1.3 - 2026-08-26
 
 - séparation de la documentation en fichiers principaux anglais avec miroirs français
@@ -25,5 +31,14 @@
 - interface téléphone, dashboard et source OBS
 - génération d’un certificat local au premier lancement
 - compatibilité réseau local avec vidéo et micro
+
+## Soutenir le projet
+
+Faire un don : [https://streamlabs.com/bouglitv](https://streamlabs.com/bouglitv)
+
+## Licence et contributions
+
+BouCamPhoneServ est sous licence `AGPL-3.0-only`.
+Les contributions doivent être signées avec `Signed-off-by:` pour respecter la DCO 1.1.
 
 English version: [CHANGELOG.md](CHANGELOG.md)

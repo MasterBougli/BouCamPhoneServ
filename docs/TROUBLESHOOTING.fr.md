@@ -41,4 +41,13 @@
 - relance `npm install`
 - puis relance `npm start`
 
+## Soutenir le projet
+
+Faire un don : [https://streamlabs.com/bouglitv](https://streamlabs.com/bouglitv)
+
+## Licence et contributions
+
+BouCamPhoneServ est sous licence `AGPL-3.0-only`.
+Les contributions doivent être signées avec `Signed-off-by:` pour respecter la DCO 1.1.
+
 English version: [TROUBLESHOOTING.md](TROUBLESHOOTING.md)

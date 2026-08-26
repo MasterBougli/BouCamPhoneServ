@@ -59,4 +59,13 @@ This approach keeps:
 - a clean OBS integration
 - a base that can later evolve toward Linux or Raspberry Pi
 
+## Support the Project
+
+Donate: [https://streamlabs.com/bouglitv](https://streamlabs.com/bouglitv)
+
+## License and Contributions
+
+BouCamPhoneServ is licensed under `AGPL-3.0-only`.
+Contributions must be signed off with `Signed-off-by:` to comply with DCO 1.1.
+
 French version: [ARCHITECTURE.fr.md](ARCHITECTURE.fr.md)
