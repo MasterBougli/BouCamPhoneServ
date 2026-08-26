@@ -2,6 +2,8 @@
 
 [EN](ARCHITECTURE.md) | [FR](ARCHITECTURE.fr.md) | [ES](ARCHITECTURE.es.md)
 
+Wiki principal: [Inicio](../wiki/Home.es.md)
+
 ## Resumen
 
 BouCamPhoneServ divide el proyecto en tres capas:

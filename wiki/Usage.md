@@ -19,7 +19,7 @@
 
 ## Helpful Links
 
-- [Full tutorial](../docs/TUTORIAL.md)
+- [Full tutorial](Tutorial.md)
 - [Installation guide](Installation.md)
 
 ## Support

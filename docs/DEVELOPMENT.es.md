@@ -2,6 +2,8 @@
 
 [EN](DEVELOPMENT.md) | [FR](DEVELOPMENT.fr.md) | [ES](DEVELOPMENT.es.md)
 
+Wiki principal: [Inicio](../wiki/Home.es.md)
+
 ## Ejecutar en local
 
 ```bash

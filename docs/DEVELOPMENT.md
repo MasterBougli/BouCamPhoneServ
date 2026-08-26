@@ -2,6 +2,8 @@
 
 [EN](DEVELOPMENT.md) | [FR](DEVELOPMENT.fr.md) | [ES](DEVELOPMENT.es.md)
 
+Wiki home: [Home](../wiki/Home.md)
+
 ## Run Locally
 
 ```bash

@@ -2,6 +2,8 @@
 
 [EN](ARCHITECTURE.md) | [FR](ARCHITECTURE.fr.md) | [ES](ARCHITECTURE.es.md)
 
+Page wiki: [Accueil](../wiki/Home.fr.md)
+
 ## Vue d’ensemble
 
 BouCamPhoneServ sépare le projet en trois couches :

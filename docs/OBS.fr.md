@@ -2,6 +2,8 @@
 
 [EN](OBS.md) | [FR](OBS.fr.md) | [ES](OBS.es.md)
 
+Page wiki: [Accueil](../wiki/Home.fr.md)
+
 ## Objectif
 
 Chaque téléphone doit devenir une source séparée dans OBS.

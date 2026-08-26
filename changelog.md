@@ -6,6 +6,12 @@
 
 This log keeps the newest release at the top so the most relevant changes are easy to find.
 
+## 0.1.11 - 2026-08-26
+
+- removed the old `docs/TUTORIAL.*` files so the wiki folder is the single tutorial source
+- added wiki home links to the remaining docs for a more practical navigation flow
+- updated the project version to `0.1.11`
+
 ## 0.1.10 - 2026-08-26
 
 - moved the tutorial content into the `wiki/` folder as dedicated Markdown pages

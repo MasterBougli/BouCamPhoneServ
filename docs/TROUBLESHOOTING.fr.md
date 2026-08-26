@@ -2,6 +2,8 @@
 
 [EN](TROUBLESHOOTING.md) | [FR](TROUBLESHOOTING.fr.md) | [ES](TROUBLESHOOTING.es.md)
 
+Page wiki: [Accueil](../wiki/Home.fr.md)
+
 ## La caméra ne démarre pas
 
 - vérifie que le téléphone a bien donné l’autorisation

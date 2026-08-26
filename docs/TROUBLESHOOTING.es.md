@@ -2,6 +2,8 @@
 
 [EN](TROUBLESHOOTING.md) | [FR](TROUBLESHOOTING.fr.md) | [ES](TROUBLESHOOTING.es.md)
 
+Wiki principal: [Inicio](../wiki/Home.es.md)
+
 ## La cámara no arranca
 
 - comprueba que el teléfono haya dado permiso

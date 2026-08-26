@@ -2,6 +2,8 @@
 
 [EN](DEVELOPMENT.md) | [FR](DEVELOPMENT.fr.md) | [ES](DEVELOPMENT.es.md)
 
+Page wiki: [Accueil](../wiki/Home.fr.md)
+
 ## Lancer en local
 
 ```bash

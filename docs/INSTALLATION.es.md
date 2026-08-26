@@ -2,6 +2,8 @@
 
 [EN](INSTALLATION.md) | [FR](INSTALLATION.fr.md) | [ES](INSTALLATION.es.md)
 
+Wiki principal: [Inicio](../wiki/Home.es.md)
+
 ## Requisitos
 
 - Windows para la versión actual

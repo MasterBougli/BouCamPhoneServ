@@ -2,6 +2,8 @@
 
 [EN](ARCHITECTURE.md) | [FR](ARCHITECTURE.fr.md) | [ES](ARCHITECTURE.es.md)
 
+Wiki home: [Home](../wiki/Home.md)
+
 ## Overview
 
 BouCamPhoneServ separates the project into three layers:

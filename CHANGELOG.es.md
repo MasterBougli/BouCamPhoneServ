@@ -6,6 +6,12 @@
 
 Este historial mantiene la versión más reciente arriba para encontrar rápidamente los cambios más importantes.
 
+## 0.1.11 - 2026-08-26
+
+- eliminados los antiguos archivos `docs/TUTORIAL.*` para que la carpeta wiki sea la única fuente del tutorial
+- añadidos enlaces al wiki en las demás guías para una navegación más práctica
+- actualización de la versión del proyecto a `0.1.11`
+
 ## 0.1.10 - 2026-08-26
 
 - movido el contenido del tutorial a la carpeta `wiki/` como páginas Markdown dedicadas

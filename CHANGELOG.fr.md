@@ -6,6 +6,12 @@
 
 Ce journal garde la version la plus récente en haut pour retrouver rapidement les changements les plus importants.
 
+## 0.1.11 - 2026-08-26
+
+- suppression des anciens fichiers `docs/TUTORIAL.*` pour faire du dossier wiki l’unique source du tutoriel
+- ajout de liens vers le wiki dans les autres guides pour une navigation plus pratique
+- mise à jour de la version du projet à `0.1.11`
+
 ## 0.1.10 - 2026-08-26
 
 - déplacement du contenu du tutoriel dans le dossier `wiki/` sous forme de pages Markdown dédiées

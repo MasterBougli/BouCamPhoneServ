@@ -19,7 +19,7 @@
 
 ## Enlaces útiles
 
-- [Tutorial completo](../docs/TUTORIAL.es.md)
+- [Tutorial completo](Tutorial.es.md)
 - [Guía de instalación](Installation.es.md)
 
 ## Apoyo

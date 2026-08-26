@@ -2,6 +2,8 @@
 
 [EN](OBS.md) | [FR](OBS.fr.md) | [ES](OBS.es.md)
 
+Wiki home: [Home](../wiki/Home.md)
+
 ## Goal
 
 Each phone should become a separate source in OBS.

@@ -19,7 +19,7 @@
 
 ## Liens utiles
 
-- [Tutoriel complet](../docs/TUTORIAL.fr.md)
+- [Tutoriel complet](Tutorial.fr.md)
 - [Guide d’installation](Installation.fr.md)
 
 ## Soutien
