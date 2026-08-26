@@ -52,7 +52,7 @@ Ensuite :
 - [Dépannage](docs/TROUBLESHOOTING.fr.md), [EN](docs/TROUBLESHOOTING.md), [ES](docs/TROUBLESHOOTING.es.md)
 - [Notes de développement](docs/DEVELOPMENT.fr.md), [EN](docs/DEVELOPMENT.md), [ES](docs/DEVELOPMENT.es.md)
 - [Contribuer au projet](CONTRIBUTING.fr.md), [EN](CONTRIBUTING.md), [ES](CONTRIBUTING.es.md)
-- [Journal des versions](CHANGELOG.fr.md), [EN](CHANGELOG.md), [ES](CHANGELOG.es.md)
+- [Journal des versions](CHANGELOG.fr.md), [EN](changelog.md), [ES](CHANGELOG.es.md)
 
 ## Fichiers importants
 
@@ -67,7 +67,9 @@ Ensuite :
 
 ## Version
 
-Version actuelle du projet : `0.1.6`
+Version actuelle du projet : `0.1.7`
+
+- Notes de version : [changelog.md](changelog.md)
 
 ## Soutenir le projet
 

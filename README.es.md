@@ -52,7 +52,7 @@ Después:
 - [Solución de problemas](docs/TROUBLESHOOTING.md), [FR](docs/TROUBLESHOOTING.fr.md), [ES](docs/TROUBLESHOOTING.es.md)
 - [Notas de desarrollo](docs/DEVELOPMENT.md), [FR](docs/DEVELOPMENT.fr.md), [ES](docs/DEVELOPMENT.es.md)
 - [Contribuir al proyecto](CONTRIBUTING.md), [FR](CONTRIBUTING.fr.md), [ES](CONTRIBUTING.es.md)
-- [Historial de cambios](CHANGELOG.md), [FR](CHANGELOG.fr.md), [ES](CHANGELOG.es.md)
+- [Historial de cambios](CHANGELOG.es.md), [FR](CHANGELOG.fr.md), [EN](changelog.md)
 
 ## Archivos importantes
 
@@ -67,7 +67,9 @@ Después:
 
 ## Versión
 
-Versión actual del proyecto: `0.1.6`
+Versión actual del proyecto: `0.1.7`
+
+- Notas de la versión: [changelog.md](changelog.md)
 
 ## Apoya el proyecto
 

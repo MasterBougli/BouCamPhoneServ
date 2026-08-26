@@ -1,6 +1,12 @@
 # Historial de cambios
 
-[EN](CHANGELOG.md) | [FR](CHANGELOG.fr.md) | [ES](CHANGELOG.es.md)
+[EN](changelog.md) | [FR](CHANGELOG.fr.md) | [ES](CHANGELOG.es.md)
+
+## 0.1.7 - 2026-08-26
+
+- renombrado el changelog principal a `changelog.md`
+- añadida una sección Versión más visible en el README
+- actualización de la metadata del paquete a `0.1.7`
 
 ## 0.1.6 - 2026-08-26
 

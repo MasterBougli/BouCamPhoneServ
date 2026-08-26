@@ -1,6 +1,11 @@
 # Changelog
 
-[EN](CHANGELOG.md) | [FR](CHANGELOG.fr.md) | [ES](CHANGELOG.es.md)
+[EN](changelog.md) | [FR](CHANGELOG.fr.md) | [ES](CHANGELOG.es.md)
+
+## 0.1.7 - 2026-08-26
+
+- added a dedicated lower-case `changelog.md` file and linked the README version section to it
+- updated the project version to `0.1.7`
 
 ## 0.1.6 - 2026-08-26
 

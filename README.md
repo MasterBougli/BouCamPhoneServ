@@ -52,7 +52,7 @@ After that:
 - [Troubleshooting](docs/TROUBLESHOOTING.md), [FR](docs/TROUBLESHOOTING.fr.md), [ES](docs/TROUBLESHOOTING.es.md)
 - [Development notes](docs/DEVELOPMENT.md), [FR](docs/DEVELOPMENT.fr.md), [ES](docs/DEVELOPMENT.es.md)
 - [Contributing](CONTRIBUTING.md), [FR](CONTRIBUTING.fr.md), [ES](CONTRIBUTING.es.md)
-- [Changelog](CHANGELOG.md), [FR](CHANGELOG.fr.md), [ES](CHANGELOG.es.md)
+- [Changelog](changelog.md), [FR](CHANGELOG.fr.md), [ES](CHANGELOG.es.md)
 
 ## Important Files
 
@@ -67,7 +67,9 @@ After that:
 
 ## Version
 
-Current project version: `0.1.6`
+Current project version: `0.1.7`
+
+- Release notes: [changelog.md](changelog.md)
 
 ## Support the Project
 
