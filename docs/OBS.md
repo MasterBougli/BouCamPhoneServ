@@ -1,5 +1,7 @@
 # Using in OBS
 
+[EN](OBS.md) | [FR](OBS.fr.md) | [ES](OBS.es.md)
+
 ## Goal
 
 Each phone should become a separate source in OBS.

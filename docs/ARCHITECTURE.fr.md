@@ -1,5 +1,7 @@
 # Architecture technique
 
+[EN](ARCHITECTURE.md) | [FR](ARCHITECTURE.fr.md) | [ES](ARCHITECTURE.es.md)
+
 ## Vue d’ensemble
 
 BouCamPhoneServ sépare le projet en trois couches :

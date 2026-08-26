@@ -1,5 +1,13 @@
 # Journal des versions
 
+[EN](CHANGELOG.md) | [FR](CHANGELOG.fr.md) | [ES](CHANGELOG.es.md)
+
+## 0.1.6 - 2026-08-26
+
+- ajout des versions espagnoles pour les autres fichiers Markdown
+- ajout des liens EN/FR/ES complets en haut de la documentation
+- mise à jour des métadonnées du package à `0.1.6`
+
 ## 0.1.5 - 2026-08-26
 
 - ajout d’un README espagnol en plus des versions anglaise et française
@@ -46,5 +54,3 @@ Faire un don : [https://streamlabs.com/bouglitv](https://streamlabs.com/bouglitv
 
 BouCamPhoneServ est sous licence `AGPL-3.0-only`.
 Les contributions doivent être signées avec `Signed-off-by:` pour respecter la DCO 1.1.
-
-English version: [CHANGELOG.md](CHANGELOG.md)

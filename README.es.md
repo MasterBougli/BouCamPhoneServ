@@ -1,6 +1,6 @@
 # BouCamPhoneServ
 
-[EN](README.md) | [FR](README.fr.md)
+[EN](README.md) | [FR](README.fr.md) | [ES](README.es.md)
 
 BouCamPhoneServ es un puente local para usar la cámara y el micrófono de uno o varios teléfonos dentro de OBS sin instalar nada en los móviles.
 
@@ -45,14 +45,14 @@ Después:
 
 ## Documentación
 
-- [Tutorial completo](docs/TUTORIAL.md) y [FR](docs/TUTORIAL.fr.md)
-- [Instalación y certificado](docs/INSTALLATION.md) y [FR](docs/INSTALLATION.fr.md)
-- [Configuración OBS](docs/OBS.md) y [FR](docs/OBS.fr.md)
-- [Arquitectura técnica](docs/ARCHITECTURE.md) y [FR](docs/ARCHITECTURE.fr.md)
-- [Solución de problemas](docs/TROUBLESHOOTING.md) y [FR](docs/TROUBLESHOOTING.fr.md)
-- [Notas de desarrollo](docs/DEVELOPMENT.md) y [FR](docs/DEVELOPMENT.fr.md)
-- [Contribuir al proyecto](CONTRIBUTING.md) y [FR](CONTRIBUTING.fr.md)
-- [Historial de cambios](CHANGELOG.md) y [FR](CHANGELOG.fr.md)
+- [Tutorial completo](docs/TUTORIAL.md), [FR](docs/TUTORIAL.fr.md), [ES](docs/TUTORIAL.es.md)
+- [Instalación y certificado](docs/INSTALLATION.md), [FR](docs/INSTALLATION.fr.md), [ES](docs/INSTALLATION.es.md)
+- [Configuración OBS](docs/OBS.md), [FR](docs/OBS.fr.md), [ES](docs/OBS.es.md)
+- [Arquitectura técnica](docs/ARCHITECTURE.md), [FR](docs/ARCHITECTURE.fr.md), [ES](docs/ARCHITECTURE.es.md)
+- [Solución de problemas](docs/TROUBLESHOOTING.md), [FR](docs/TROUBLESHOOTING.fr.md), [ES](docs/TROUBLESHOOTING.es.md)
+- [Notas de desarrollo](docs/DEVELOPMENT.md), [FR](docs/DEVELOPMENT.fr.md), [ES](docs/DEVELOPMENT.es.md)
+- [Contribuir al proyecto](CONTRIBUTING.md), [FR](CONTRIBUTING.fr.md), [ES](CONTRIBUTING.es.md)
+- [Historial de cambios](CHANGELOG.md), [FR](CHANGELOG.fr.md), [ES](CHANGELOG.es.md)
 
 ## Archivos importantes
 
@@ -67,7 +67,7 @@ Después:
 
 ## Versión
 
-Versión actual del proyecto: `0.1.5`
+Versión actual del proyecto: `0.1.6`
 
 ## Apoya el proyecto
 

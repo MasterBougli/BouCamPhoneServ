@@ -1,5 +1,7 @@
 # Installation et certificat
 
+[EN](INSTALLATION.md) | [FR](INSTALLATION.fr.md) | [ES](INSTALLATION.es.md)
+
 ## Pré-requis
 
 - Windows pour la version actuelle

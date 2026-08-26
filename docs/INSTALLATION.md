@@ -1,5 +1,7 @@
 # Installation and Certificate
 
+[EN](INSTALLATION.md) | [FR](INSTALLATION.fr.md) | [ES](INSTALLATION.es.md)
+
 ## Requirements
 
 - Windows for the current version

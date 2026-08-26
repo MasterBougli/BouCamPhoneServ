@@ -1,0 +1,56 @@
+# Historial de cambios
+
+[EN](CHANGELOG.md) | [FR](CHANGELOG.fr.md) | [ES](CHANGELOG.es.md)
+
+## 0.1.6 - 2026-08-26
+
+- se añadieron las versiones en español para los archivos Markdown restantes
+- se añadieron enlaces de idioma completos EN/FR/ES en la parte superior de la documentación
+- se actualizó la metadata del paquete a `0.1.6`
+
+## 0.1.5 - 2026-08-26
+
+- se añadió un README en español junto a las versiones en inglés y francés
+- se añadieron enlaces de idioma en la parte superior de los archivos README
+- se actualizó la metadata del paquete a `0.1.5`
+
+## 0.1.4 - 2026-08-26
+
+- se añadieron enlaces de donación a la documentación Markdown
+- se cambió la nota de licencia del proyecto a AGPLv3 más DCO
+- se actualizó la metadata del paquete a `0.1.4`
+
+## 0.1.3 - 2026-08-26
+
+- se separó la documentación en archivos principales en inglés con espejos en francés
+- se actualizó la metadata del paquete del repositorio y la versión de entrega a `0.1.3`
+
+## 0.1.2 - 2026-08-26
+
+- se cambió el nombre del proyecto a BouCamPhoneServ
+- se alineó la metadata de npm con el nuevo nombre técnico `boucamphoneserv`
+- se actualizaron el certificado local y las referencias de marca
+
+## 0.1.1 - 2026-08-26
+
+- se añadió un código QR local para acceder rápidamente a la página del teléfono
+- se mejoró el panel multi-teléfono
+- se mostraron códigos QR individuales para las fuentes OBS
+- se añadió documentación completa y un tutorial de uso
+- se alineó la versión del proyecto con `0.1.1`
+
+## 0.1.0 - 2026-08-26
+
+- primera base local WebRTC
+- interfaz de teléfono, panel y fuente OBS
+- generación de un certificado local al primer arranque
+- compatibilidad en red local con vídeo y micrófono
+
+## Apoya el proyecto
+
+Donar: [https://streamlabs.com/bouglitv](https://streamlabs.com/bouglitv)
+
+## Licencia y contribuciones
+
+BouCamPhoneServ tiene licencia `AGPL-3.0-only`.
+Las contribuciones deben firmarse con `Signed-off-by:` para cumplir con DCO 1.1.

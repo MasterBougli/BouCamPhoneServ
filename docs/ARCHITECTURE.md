@@ -1,5 +1,7 @@
 # Technical Architecture
 
+[EN](ARCHITECTURE.md) | [FR](ARCHITECTURE.fr.md) | [ES](ARCHITECTURE.es.md)
+
 ## Overview
 
 BouCamPhoneServ separates the project into three layers:

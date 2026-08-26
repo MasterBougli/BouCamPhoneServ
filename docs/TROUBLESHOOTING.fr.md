@@ -1,5 +1,7 @@
 # Dépannage
 
+[EN](TROUBLESHOOTING.md) | [FR](TROUBLESHOOTING.fr.md) | [ES](TROUBLESHOOTING.es.md)
+
 ## La caméra ne démarre pas
 
 - vérifie que le téléphone a bien donné l’autorisation

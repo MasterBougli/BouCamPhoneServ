@@ -1,5 +1,7 @@
 # Tutoriel d’utilisation
 
+[EN](TUTORIAL.md) | [FR](TUTORIAL.fr.md) | [ES](TUTORIAL.es.md)
+
 Ce guide explique comment utiliser BouCamPhoneServ du début à la fin.
 
 ## 1. Lancer le serveur

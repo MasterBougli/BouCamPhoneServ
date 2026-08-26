@@ -1,5 +1,7 @@
 # Development
 
+[EN](DEVELOPMENT.md) | [FR](DEVELOPMENT.fr.md) | [ES](DEVELOPMENT.es.md)
+
 ## Run Locally
 
 ```bash

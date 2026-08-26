@@ -1,5 +1,7 @@
 # Troubleshooting
 
+[EN](TROUBLESHOOTING.md) | [FR](TROUBLESHOOTING.fr.md) | [ES](TROUBLESHOOTING.es.md)
+
 ## The Camera Does Not Start
 
 - check that the phone granted permission

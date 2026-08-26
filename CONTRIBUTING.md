@@ -1,5 +1,7 @@
 # Contributing
 
+[EN](CONTRIBUTING.md) | [FR](CONTRIBUTING.fr.md) | [ES](CONTRIBUTING.es.md)
+
 Thank you for helping improve BouCamPhoneServ.
 
 ## License and DCO

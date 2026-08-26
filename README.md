@@ -1,6 +1,6 @@
 # BouCamPhoneServ
 
-[FR](README.fr.md) | [ES](README.es.md)
+[EN](README.md) | [FR](README.fr.md) | [ES](README.es.md)
 
 BouCamPhoneServ is a local-first bridge for using the camera and microphone from one or more phones inside OBS without installing anything on the phones.
 
@@ -45,14 +45,14 @@ After that:
 
 ## Documentation
 
-- [Full tutorial](docs/TUTORIAL.md) and [FR](docs/TUTORIAL.fr.md)
-- [Installation and certificate](docs/INSTALLATION.md) and [FR](docs/INSTALLATION.fr.md)
-- [OBS setup](docs/OBS.md) and [FR](docs/OBS.fr.md)
-- [Technical architecture](docs/ARCHITECTURE.md) and [FR](docs/ARCHITECTURE.fr.md)
-- [Troubleshooting](docs/TROUBLESHOOTING.md) and [FR](docs/TROUBLESHOOTING.fr.md)
-- [Development notes](docs/DEVELOPMENT.md) and [FR](docs/DEVELOPMENT.fr.md)
-- [Contributing](CONTRIBUTING.md) and [FR](CONTRIBUTING.fr.md)
-- [Changelog](CHANGELOG.md) and [FR](CHANGELOG.fr.md)
+- [Full tutorial](docs/TUTORIAL.md), [FR](docs/TUTORIAL.fr.md), [ES](docs/TUTORIAL.es.md)
+- [Installation and certificate](docs/INSTALLATION.md), [FR](docs/INSTALLATION.fr.md), [ES](docs/INSTALLATION.es.md)
+- [OBS setup](docs/OBS.md), [FR](docs/OBS.fr.md), [ES](docs/OBS.es.md)
+- [Technical architecture](docs/ARCHITECTURE.md), [FR](docs/ARCHITECTURE.fr.md), [ES](docs/ARCHITECTURE.es.md)
+- [Troubleshooting](docs/TROUBLESHOOTING.md), [FR](docs/TROUBLESHOOTING.fr.md), [ES](docs/TROUBLESHOOTING.es.md)
+- [Development notes](docs/DEVELOPMENT.md), [FR](docs/DEVELOPMENT.fr.md), [ES](docs/DEVELOPMENT.es.md)
+- [Contributing](CONTRIBUTING.md), [FR](CONTRIBUTING.fr.md), [ES](CONTRIBUTING.es.md)
+- [Changelog](CHANGELOG.md), [FR](CHANGELOG.fr.md), [ES](CHANGELOG.es.md)
 
 ## Important Files
 
@@ -67,7 +67,7 @@ After that:
 
 ## Version
 
-Current project version: `0.1.5`
+Current project version: `0.1.6`
 
 ## Support the Project
 
