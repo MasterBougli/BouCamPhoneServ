@@ -6,6 +6,11 @@
 
 This log keeps the newest release at the top so the most relevant changes are easy to find.
 
+## 0.1.12 - 2026-08-26
+
+- added French comments to the main code functions
+- updated the project version to `0.1.12`
+
 ## 0.1.11 - 2026-08-26
 
 - removed the old `docs/TUTORIAL.*` files so the wiki folder is the single tutorial source

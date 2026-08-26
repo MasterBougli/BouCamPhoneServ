@@ -20,6 +20,7 @@ const MESSAGE_LIMIT = 250;
 
 const sessions = new Map();
 
+// Prépare le certificat auto-signé utilisé par le serveur HTTPS local.
 function ensureCertificate() {
   if (fs.existsSync(CERT_PFX)) {
     return;
@@ -54,10 +55,12 @@ function ensureCertificate() {
   }
 }
 
+// Lit un fichier et laisse remonter les erreurs si la lecture échoue.
 function readFileSafe(filePath) {
   return fs.readFileSync(filePath);
 }
 
+// Récupère les adresses IPv4 locales exploitables sur le réseau.
 function getLocalAddresses() {
   const seen = new Set();
   const addresses = [];
@@ -85,11 +88,13 @@ function getLocalAddresses() {
   return addresses;
 }
 
+// Construit l'origine HTTP ou HTTPS à partir de la requête reçue.
 function getRequestOrigin(req, secure) {
   const host = req.headers.host || (secure ? `localhost:${HTTPS_PORT}` : `localhost:${HTTP_PORT}`);
   return `${secure ? "https" : "http"}://${host}`;
 }
 
+// Prépare les URLs utiles pour le tableau de bord et le téléphone.
 function getUrls(req) {
   const lanAddresses = getLocalAddresses();
   return {
@@ -102,6 +107,7 @@ function getUrls(req) {
   };
 }
 
+// Crée une nouvelle session de diffusion avec ses files de messages.
 function makeSession(label = "Phone") {
   const id = randomUUID().split("-")[0].toUpperCase();
   const now = Date.now();
@@ -133,6 +139,7 @@ function makeSession(label = "Phone") {
   return session;
 }
 
+// Récupère une session ou renvoie une erreur explicite si elle manque.
 function getSessionOrThrow(id) {
   const session = sessions.get(id);
   if (!session) {
@@ -143,6 +150,7 @@ function getSessionOrThrow(id) {
   return session;
 }
 
+// Convertit la session interne en objet exposable par l'API.
 function toPublicSession(session) {
   const now = Date.now();
   const publisherOnline = now - session.publisherSeenAt < HEARTBEAT_TTL_MS;
@@ -168,12 +176,14 @@ function toPublicSession(session) {
   };
 }
 
+// Limite la taille d'une file de messages pour éviter l'emballement.
 function trimQueue(queue) {
   if (queue.length > MESSAGE_LIMIT) {
     queue.splice(0, queue.length - MESSAGE_LIMIT);
   }
 }
 
+// Route un message vers le bon rôle et met à jour l'horodatage associé.
 function routeMessage(session, from, kind, payload) {
   const target = from === "publisher" ? "viewer" : "publisher";
   const now = Date.now();
@@ -214,6 +224,7 @@ function routeMessage(session, from, kind, payload) {
   return message;
 }
 
+// Lit le corps JSON d'une requête de manière sécurisée.
 function parseBody(req) {
   return new Promise((resolve, reject) => {
     const chunks = [];
@@ -241,6 +252,7 @@ function parseBody(req) {
   });
 }
 
+// Répond avec du JSON joliment formaté.
 function sendJson(res, statusCode, payload) {
   const body = JSON.stringify(payload, null, 2);
   res.writeHead(statusCode, {
@@ -250,6 +262,7 @@ function sendJson(res, statusCode, payload) {
   res.end(body);
 }
 
+// Répond avec du texte brut et des en-têtes personnalisables.
 function sendText(res, statusCode, text, headers = {}) {
   res.writeHead(statusCode, {
     "Content-Type": "text/plain; charset=utf-8",
@@ -259,6 +272,7 @@ function sendText(res, statusCode, text, headers = {}) {
   res.end(text);
 }
 
+// Répond avec un SVG inline prêt à être affiché par le navigateur.
 function sendSvg(res, statusCode, svg) {
   res.writeHead(statusCode, {
     "Content-Type": "image/svg+xml; charset=utf-8",
@@ -267,6 +281,7 @@ function sendSvg(res, statusCode, svg) {
   res.end(svg);
 }
 
+// Sert un fichier statique en ajoutant les en-têtes de cache adaptés.
 function sendFile(res, filePath, contentType, secure) {
   if (!fs.existsSync(filePath)) {
     res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
@@ -281,6 +296,7 @@ function sendFile(res, filePath, contentType, secure) {
   fs.createReadStream(filePath).pipe(res);
 }
 
+// Déduit le type MIME à partir de l'extension du fichier.
 function contentTypeFor(filePath) {
   switch (path.extname(filePath).toLowerCase()) {
     case ".html":
@@ -302,6 +318,7 @@ function contentTypeFor(filePath) {
   }
 }
 
+// Sert un fichier du dossier public en neutralisant les chemins douteux.
 function servePublicFile(res, relativePath) {
   const normalized = path.normalize(relativePath).replace(/^([.][.][/\\])+/, "");
   const fullPath = path.join(PUBLIC_DIR, normalized);
@@ -312,6 +329,7 @@ function servePublicFile(res, relativePath) {
   sendFile(res, fullPath, contentTypeFor(fullPath));
 }
 
+// Redirige vers HTTPS quand la requête arrive sur le port en clair.
 function redirectToHttps(req, res) {
   const hostHeader = req.headers.host || `localhost:${HTTP_PORT}`;
   const hostname = hostHeader.split(":")[0];
@@ -323,10 +341,12 @@ function redirectToHttps(req, res) {
   res.end();
 }
 
+// Indique si la requête a été reçue sur la pile HTTPS.
 function isHttpsServer(req) {
   return Boolean(req.socket.encrypted);
 }
 
+// Traite les routes HTTP de l'application locale.
 function handleRequest(req, res) {
   const url = new URL(req.url, "http://localhost");
   const secure = isHttpsServer(req);
@@ -537,6 +557,7 @@ function handleRequest(req, res) {
   sendText(res, 404, "Not found");
 }
 
+// Transforme une erreur en réponse HTTP lisible.
 function handleError(res, error) {
   const statusCode = error.statusCode || 500;
   const message = statusCode === 500 ? "Internal server error" : error.message || "Request failed";
@@ -546,6 +567,7 @@ function handleError(res, error) {
   sendJson(res, statusCode, { error: message });
 }
 
+// Démarre les serveurs HTTP et HTTPS utilisés par l'application.
 function startServers() {
   ensureCertificate();
 

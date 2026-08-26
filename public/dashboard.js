@@ -1,3 +1,4 @@
+// Initialise le tableau de bord de supervision et de contrôle.
 (() => {
   const state = {
     bootstrap: null,
@@ -23,18 +24,22 @@
     serverState: document.getElementById("serverState"),
   };
 
+  // Génère l'URL d'un QR code pour le texte fourni.
   function qrSrc(text, size = 240) {
     return `/api/qr?text=${encodeURIComponent(text)}&size=${size}`;
   }
 
+  // Retourne l'URL téléphone à afficher en priorité.
   function getPhoneUrl() {
     return state.bootstrap?.urls?.phoneUrls?.[0] || `${window.location.origin}/phone`;
   }
 
+  // Construit l'URL de vue OBS pour une session donnée.
   function getObsUrl(sessionId) {
     return `${window.location.origin}/view/${sessionId}?clean=1`;
   }
 
+  // Réinitialise le libellé d'un bouton après une copie.
   function setClipboardButtonLabel(button, label = "Copier", defaultLabel = button.dataset.defaultLabel || button.textContent) {
     button.textContent = label;
     setTimeout(() => {
@@ -42,6 +47,7 @@
     }, 1200);
   }
 
+  // Branche un bouton de copie sur un texte fourni à la demande.
   async function bindCopyButton(button, textProvider, defaultLabel = "Copier") {
     button.dataset.defaultLabel = defaultLabel;
     button.textContent = defaultLabel;
@@ -51,6 +57,7 @@
     });
   }
 
+  // Affiche les accès disponibles pour rejoindre le téléphone.
   function renderPhoneAccess() {
     const phoneUrl = getPhoneUrl();
     elements.phoneQrImage.src = qrSrc(phoneUrl, 360);
@@ -93,6 +100,7 @@
         </div>
       `;
 
+      // Copie l'adresse locale choisie dans le presse-papiers.
       row.querySelector("button").addEventListener("click", async () => {
         await BouCamPhoneServ.copyText(url);
         setClipboardButtonLabel(row.querySelector("button"), "Copié");
@@ -102,6 +110,7 @@
     });
   }
 
+  // Met à jour les compteurs globaux affichés en haut de page.
   function renderSummary() {
     const total = state.sessions.length;
     const activePhones = state.sessions.filter((session) => session.publisherOnline).length;
@@ -115,6 +124,7 @@
     elements.sessionCount.textContent = `${total} appareil${total > 1 ? "s" : ""}`;
   }
 
+  // Reconstruit la liste détaillée des sessions actives.
   function renderSessions() {
     elements.sessionList.replaceChildren();
 
@@ -202,11 +212,13 @@
       `;
 
       const copyButton = card.querySelector('[data-action="copy"]');
+      // Copie le lien OBS de la session courante.
       copyButton.addEventListener("click", async () => {
         await BouCamPhoneServ.copyText(viewUrl);
         setClipboardButtonLabel(copyButton, "Copié");
       });
 
+      // Demande un nouveau nom pour la session sélectionnée.
       card.querySelector('[data-action="rename"]').addEventListener("click", async () => {
         const next = prompt("Nouveau nom du téléphone", session.label);
         if (!next || !next.trim()) {
@@ -224,6 +236,7 @@
         await refresh();
       });
 
+      // Envoie la commande pour changer la caméra du téléphone.
       card.querySelector('[data-action="flip"]').addEventListener("click", async () => {
         await BouCamPhoneServ.fetchJson(`/api/sessions/${session.id}/messages`, {
           method: "POST",
@@ -240,6 +253,7 @@
         await refresh();
       });
 
+      // Envoie la commande pour couper ou réactiver le micro.
       card.querySelector('[data-action="mute"]').addEventListener("click", async () => {
         await BouCamPhoneServ.fetchJson(`/api/sessions/${session.id}/messages`, {
           method: "POST",
@@ -256,6 +270,7 @@
         await refresh();
       });
 
+      // Envoie la commande pour arrêter la session en cours.
       card.querySelector('[data-action="stop"]').addEventListener("click", async () => {
         await BouCamPhoneServ.fetchJson(`/api/sessions/${session.id}/messages`, {
           method: "POST",
@@ -276,6 +291,7 @@
     }
   }
 
+  // Recharge les données serveur puis rafraîchit l'interface.
   async function refresh() {
     const [bootstrap, sessions] = await Promise.all([
       BouCamPhoneServ.fetchJson("/api/bootstrap"),
@@ -290,22 +306,26 @@
     renderSessions();
   }
 
+  // Affiche une erreur serveur dans la barre d'état.
   function reportError(error) {
     console.error(error);
     elements.serverState.textContent = "Hors ligne";
     elements.serverState.className = "chip danger";
   }
 
+  // Lance le tableau de bord et branche les actions utilisateur.
   async function boot() {
     elements.copyPhoneLinkButton.dataset.defaultLabel = elements.copyPhoneLinkButton.textContent;
     elements.copyAllObsButton.dataset.defaultLabel = elements.copyAllObsButton.textContent;
     elements.copyCertUrlButton.dataset.defaultLabel = elements.copyCertUrlButton.textContent;
 
+    // Copie le lien téléphone principal.
     elements.copyPhoneLinkButton.addEventListener("click", async () => {
       await BouCamPhoneServ.copyText(getPhoneUrl());
       setClipboardButtonLabel(elements.copyPhoneLinkButton, "Copié");
     });
 
+    // Copie tous les liens OBS visibles dans la liste.
     elements.copyAllObsButton.addEventListener("click", async () => {
       const links = state.sessions.map((session) => getObsUrl(session.id));
       if (!links.length) {
@@ -316,12 +336,15 @@
       setClipboardButtonLabel(elements.copyAllObsButton, "Copié");
     });
 
+    // Rafraîchit le tableau de bord depuis le bouton principal.
     elements.refreshButton.addEventListener("click", () => {
       refresh().catch(reportError);
     });
+    // Rafraîchit le tableau de bord depuis le bouton secondaire.
     elements.refreshButtonSecondary.addEventListener("click", () => {
       refresh().catch(reportError);
     });
+    // Copie l'URL du certificat local pour l'installation manuelle.
     elements.copyCertUrlButton.addEventListener("click", async () => {
       const url = state.bootstrap?.urls?.certDownload || `${window.location.origin}/downloads/local.cer`;
       await BouCamPhoneServ.copyText(url);
@@ -334,6 +357,7 @@
       reportError(error);
     }
 
+    // Rafraîchit automatiquement les données toutes les quelques secondes.
     setInterval(() => {
       refresh().catch(reportError);
     }, 2500);

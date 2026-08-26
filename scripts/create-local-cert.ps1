@@ -6,6 +6,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 
+## Récupère les adresses IPv4 locales actives pour les ajouter au certificat.
 function Get-LocalIPv4Addresses {
   $seen = New-Object System.Collections.Generic.HashSet[string]
   $addresses = New-Object System.Collections.Generic.List[string]

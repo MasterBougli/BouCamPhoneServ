@@ -1,4 +1,6 @@
+// Initialise les utilitaires communs utilisés par toutes les pages.
 window.BouCamPhoneServ = (() => {
+  // Envoie une requête JSON et renvoie la réponse parsée.
   async function fetchJson(url, options = {}) {
     const response = await fetch(url, {
       cache: "no-store",
@@ -25,6 +27,7 @@ window.BouCamPhoneServ = (() => {
     return data;
   }
 
+  // Formate une date pour un affichage lisible par l'utilisateur.
   function formatDateTime(value) {
     if (!value) {
       return "never";
@@ -35,6 +38,7 @@ window.BouCamPhoneServ = (() => {
     }).format(new Date(value));
   }
 
+  // Formate un horodatage en durée relative.
   function formatRelative(value) {
     if (!value) {
       return "never";
@@ -55,6 +59,7 @@ window.BouCamPhoneServ = (() => {
     return `${hours}h ago`;
   }
 
+  // Crée un badge visuel réutilisable dans l'interface.
   function createChip(label, tone = "") {
     const chip = document.createElement("span");
     chip.className = `chip ${tone}`.trim();
@@ -62,6 +67,7 @@ window.BouCamPhoneServ = (() => {
     return chip;
   }
 
+  // Copie du texte dans le presse-papiers en privilégiant l'API moderne.
   async function copyText(text) {
     if (navigator.clipboard && navigator.clipboard.writeText) {
       await navigator.clipboard.writeText(text);
@@ -78,10 +84,12 @@ window.BouCamPhoneServ = (() => {
     textarea.remove();
   }
 
+  // Contraint une valeur dans une plage minimale et maximale.
   function clamp(value, min, max) {
     return Math.max(min, Math.min(max, value));
   }
 
+  // Devine un nom d'appareil simple à partir du navigateur.
   function deviceName() {
     const ua = navigator.userAgent || "";
     if (/iPhone|iPad|iPod/i.test(ua)) {

@@ -1,3 +1,4 @@
+// Initialise l'interface téléphone et sa logique de diffusion.
 (() => {
   const storageKey = "camfromphone.sessionId";
   const labelKey = "camfromphone.label";
@@ -35,25 +36,30 @@
     deviceType: BouCamPhoneServ.deviceName(),
   };
 
+  // Met à jour le badge d'état principal.
   function setStatus(text, tone = "warn") {
     statusChip.className = `chip ${tone}`.trim();
     statusChip.textContent = text;
   }
 
+  // Met à jour le badge lié aux permissions.
   function setPermission(text, tone = "warn") {
     permissionChip.className = `chip ${tone}`.trim();
     permissionChip.textContent = text;
   }
 
+  // Met à jour le badge réseau.
   function setNetwork(text, tone = "warn") {
     networkChip.className = `chip ${tone}`.trim();
     networkChip.textContent = text;
   }
 
+  // Affiche un message d'aide contextuel.
   function setHint(text) {
     hintText.textContent = text;
   }
 
+  // Synchronise les champs statiques avec l'état courant.
   function updateStaticFields() {
     sessionIdValue.textContent = state.session?.id || "—";
     sessionStateValue.textContent = state.session?.state || "En attente";
@@ -67,6 +73,7 @@
     labelInput.value = state.session?.label || labelInput.value || "Phone";
   }
 
+  // Charge la session persistée ou en crée une nouvelle si besoin.
   async function ensureSession() {
     const cached = localStorage.getItem(storageKey);
     if (cached) {
@@ -96,6 +103,7 @@
     updateStaticFields();
   }
 
+  // Envoie l'état courant du téléphone au serveur.
   async function sendState(extra = {}) {
     if (!state.session) {
       return;
@@ -115,6 +123,7 @@
     });
   }
 
+  // Envoie un signal WebRTC au service de signalisation.
   async function sendSignal(kind, payload) {
     if (!state.session) {
       return;
@@ -133,6 +142,7 @@
     });
   }
 
+  // Ferme proprement la connexion WebRTC en cours.
   function closePeerConnection() {
     if (state.pc) {
       state.pc.onicecandidate = null;
@@ -144,6 +154,7 @@
     }
   }
 
+  // Arrête les pistes média et libère l'aperçu local.
   function stopStreamTracks() {
     if (state.stream) {
       for (const track of state.stream.getTracks()) {
@@ -154,6 +165,7 @@
     localVideo.srcObject = null;
   }
 
+  // Demande l'accès à la caméra et au micro avec les bons réglages.
   async function acquireMedia() {
     const constraints = {
       audio: true,
@@ -175,6 +187,7 @@
     return stream;
   }
 
+  // Crée la connexion WebRTC qui relie le téléphone au viewer.
   async function createPeerConnection() {
     closePeerConnection();
     const pc = new RTCPeerConnection({
@@ -186,12 +199,14 @@
       pc.addTrack(track, state.stream);
     }
 
+    // Transmet chaque candidat ICE généré au serveur.
     pc.onicecandidate = (event) => {
       if (event.candidate) {
         sendSignal("ice", event.candidate.toJSON ? event.candidate.toJSON() : event.candidate).catch(console.error);
       }
     };
 
+    // Réagit aux changements d'état de la connexion WebRTC.
     pc.onconnectionstatechange = () => {
       if (pc.connectionState === "connected") {
         setStatus("En direct", "good");
@@ -205,6 +220,7 @@
       }
     };
 
+    // Suit aussi l'état ICE pour maintenir le bon indicateur réseau.
     pc.oniceconnectionstatechange = () => {
       if (pc.iceConnectionState === "connected" || pc.iceConnectionState === "completed") {
         setNetwork("Connecté", "good");
@@ -216,6 +232,7 @@
     await sendSignal("offer", pc.localDescription);
   }
 
+  // Récupère et traite les messages de signalisation en attente.
   async function pollLoop() {
     if (!state.session) {
       return;
@@ -248,6 +265,7 @@
     }
   }
 
+  // Envoie périodiquement un battement de présence au serveur.
   async function heartbeatLoop() {
     if (!state.session) {
       return;
@@ -259,6 +277,7 @@
     }
   }
 
+  // Exécute une commande distante envoyée depuis le viewer.
   async function handleCommand(command) {
     if (command.action === "switchCamera") {
       await switchCamera();
@@ -272,6 +291,7 @@
     }
   }
 
+  // Démarre la session de diffusion si tout est prêt.
   async function startSession() {
     if (state.connecting || state.active) {
       return;
@@ -311,6 +331,7 @@
     }
   }
 
+  // Bascule entre caméra arrière et caméra frontale.
   async function switchCamera() {
     if (!state.stream) {
       state.facingMode = state.facingMode === "environment" ? "user" : "environment";
@@ -358,6 +379,7 @@
     await sendState({ facingMode: state.facingMode });
   }
 
+  // Active ou coupe le micro sans recréer la session.
   async function toggleMicrophone() {
     if (!state.stream) {
       return;
@@ -374,6 +396,7 @@
     await sendState({ hasAudio: state.audioEnabled });
   }
 
+  // Arrête proprement la session en cours.
   async function stopSession() {
     state.active = false;
     state.connecting = false;
@@ -387,6 +410,7 @@
     updateStaticFields();
   }
 
+  // Enregistre le libellé personnalisé du téléphone.
   async function saveLabel() {
     const label = labelInput.value.trim() || BouCamPhoneServ.deviceName();
     labelInput.value = label;
@@ -398,6 +422,7 @@
     updateStaticFields();
   }
 
+  // Prépare la page téléphone et branche les actions utilisateur.
   async function boot() {
     if (!("mediaDevices" in navigator) || !navigator.mediaDevices.getUserMedia) {
       setStatus("Incompatible", "danger");
@@ -422,15 +447,20 @@
       setHint(error.message || "Impossible de préparer la session.");
     }
 
+    // Lance la diffusion depuis le bouton principal.
     startButton.addEventListener("click", () => startSession().catch((error) => {
       console.error(error);
       setStatus("Erreur", "danger");
       setHint(error.message || "Impossible de lancer la caméra.");
     }));
 
+    // Change de caméra depuis le bouton dédié.
     switchButton.addEventListener("click", () => switchCamera().catch(console.error));
+    // Coupe ou réactive le micro depuis l'interface.
     muteButton.addEventListener("click", () => toggleMicrophone().catch(console.error));
+    // Arrête la diffusion depuis l'interface.
     stopButton.addEventListener("click", () => stopSession().catch(console.error));
+    // Copie le lien direct de la session.
     copyLinkButton.addEventListener("click", async () => {
       await BouCamPhoneServ.copyText(window.location.href);
       copyLinkButton.textContent = "Lien copié";
@@ -438,12 +468,16 @@
         copyLinkButton.textContent = "Copier le lien";
       }, 1200);
     });
+    // Enregistre le libellé quand l'utilisateur valide.
     saveLabelButton.addEventListener("click", () => saveLabel().catch(console.error));
+    // Sauvegarde le libellé dès qu'il change.
     labelInput.addEventListener("change", () => saveLabel().catch(console.error));
 
+    // Interroge la signalisation régulièrement pour rester réactif.
     state.pollTimer = setInterval(() => {
       pollLoop().catch(console.error);
     }, 350);
+    // Envoie un battement de présence en arrière-plan.
     state.heartbeatTimer = setInterval(() => {
       heartbeatLoop().catch(console.error);
     }, 5000);

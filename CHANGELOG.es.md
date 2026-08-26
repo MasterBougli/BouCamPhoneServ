@@ -6,6 +6,11 @@
 
 Este historial mantiene la versión más reciente arriba para encontrar rápidamente los cambios más importantes.
 
+## 0.1.12 - 2026-08-26
+
+- se añadieron comentarios en francés en las funciones principales del código
+- se actualizó la versión del proyecto a `0.1.12`
+
 ## 0.1.11 - 2026-08-26
 
 - eliminados los antiguos archivos `docs/TUTORIAL.*` para que la carpeta wiki sea la única fuente del tutorial
