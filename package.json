@@ -1,6 +1,6 @@
 {
   "name": "boucamphoneserv",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "private": true,
   "description": "Local WebRTC camera bridge for OBS and other tools without installing anything on phones.",
   "license": "AGPL-3.0-only",
@@ -9,7 +9,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "cert": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/create-local-cert.ps1"
+    "cert": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/create-local-cert.ps1",
+    "config": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/open-config.ps1"
   },
   "engines": {
     "node": ">=20"

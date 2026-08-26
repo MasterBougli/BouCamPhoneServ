@@ -6,6 +6,13 @@
 
 Este historial mantiene la versión más reciente arriba para encontrar rápidamente los cambios más importantes.
 
+## 0.1.14 - 2026-08-26
+
+- se añadió un lanzador de Windows con un clic y el atajo `npm run config` para la página de configuración
+- la página de configuración aplica los ajustes al instante con un feedback más claro
+- se mantuvo el comportamiento de arranque automático mediante los ajustes compartidos del servidor
+- se actualizó la versión del proyecto a `0.1.14`
+
 ## 0.1.13 - 2026-08-26
 
 - se añadió una página de configuración gráfica conectada a los ajustes compartidos del servidor

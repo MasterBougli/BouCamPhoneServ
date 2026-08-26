@@ -6,6 +6,13 @@
 
 Ce journal garde la version la plus récente en haut pour retrouver rapidement les changements les plus importants.
 
+## 0.1.14 - 2026-08-26
+
+- ajout d’un lanceur Windows en un clic et d’un raccourci `npm run config` pour la page de configuration
+- application immédiate des réglages sur la page de configuration avec un retour plus clair
+- conservation du comportement de démarrage automatique via les réglages partagés du serveur
+- mise à jour de la version du projet à `0.1.14`
+
 ## 0.1.13 - 2026-08-26
 
 - ajout d’une page de configuration graphique reliée aux réglages partagés du serveur

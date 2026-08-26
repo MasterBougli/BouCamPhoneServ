@@ -160,13 +160,13 @@
     setStatus("Synchronisé", "good");
     renderSummary();
     renderLinks();
-    elements.configHint.textContent = "Les réglages sont à jour et prêts à être enregistrés.";
+    elements.configHint.textContent = "Les réglages sont déjà actifs sur le serveur et prêts à être appliqués.";
   }
 
   // Sauvegarde les réglages saisis dans le formulaire.
   async function saveSettings(event) {
     event.preventDefault();
-    setStatus("Sauvegarde...", "warn");
+    setStatus("Application...", "warn");
     const response = await BouCamPhoneServ.fetchJson("/api/settings", {
       method: "POST",
       body: JSON.stringify(readForm()),
@@ -175,10 +175,10 @@
     state.settings = response.settings || readForm();
     fillForm(state.settings);
     state.dirty = false;
-    setStatus("Enregistré", "good");
+    setStatus("Appliqué", "good");
     renderSummary();
     renderLinks();
-    elements.configHint.textContent = "La configuration a été sauvegardée sur le serveur local.";
+    elements.configHint.textContent = "La configuration a été appliquée immédiatement sur le serveur local.";
   }
 
   // Marque l'interface comme modifiée dès qu'un champ change.

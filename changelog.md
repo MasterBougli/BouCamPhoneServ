@@ -6,6 +6,13 @@
 
 This log keeps the newest release at the top so the most relevant changes are easy to find.
 
+## 0.1.14 - 2026-08-26
+
+- added a one-click Windows launcher and an `npm run config` shortcut for the configuration page
+- made the configuration page apply settings immediately with clearer feedback
+- kept automatic startup behavior through the shared server settings
+- updated the project version to `0.1.14`
+
 ## 0.1.13 - 2026-08-26
 
 - added a graphical configuration page backed by shared server settings

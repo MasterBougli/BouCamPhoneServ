@@ -2,7 +2,7 @@
 
 [EN](README.md) | [FR](README.fr.md) | [ES](README.es.md)
 
-![Version](https://img.shields.io/badge/version-0.1.13-blue)
+![Version](https://img.shields.io/badge/version-0.1.14-blue)
 ![License](https://img.shields.io/badge/license-AGPL--3.0--only-green)
 ![Docs](https://img.shields.io/badge/docs-EN%2FFR%2FES-orange)
 ![Wiki](https://img.shields.io/badge/wiki-ready-purple)
@@ -24,6 +24,7 @@ El proyecto está pensado para:
 - una página de teléfono que se abre en el navegador
 - un panel local para el PC
 - una página de configuración gráfica para los ajustes compartidos del servidor
+- un lanzador de Windows y el atajo `npm run config` para abrir la configuración
 - un código QR para acceder rápido a la página del teléfono
 - enlaces OBS separados para cada dispositivo
 - controles simples para renombrar, silenciar, cambiar la cámara y detener una fuente
@@ -44,7 +45,7 @@ npm start
 Después:
 
 1. abre `http://localhost:8080` en el PC
-2. abre la página de configuración si quieres ajustar los valores por defecto
+2. abre la página de configuración si quieres ajustar los valores por defecto, o ejecuta `npm run config` / `open-config.cmd`
 3. descarga el certificado público desde el panel
 4. abre la página del teléfono desde el enlace o el código QR
 5. permite el acceso a la cámara y al micrófono
@@ -71,6 +72,8 @@ Después:
 - [public/dashboard.js](public/dashboard.js)
 - [public/config.html](public/config.html)
 - [public/config.js](public/config.js)
+- [open-config.cmd](open-config.cmd)
+- [scripts/open-config.ps1](scripts/open-config.ps1)
 - [public/phone.html](public/phone.html)
 - [public/phone.js](public/phone.js)
 - [public/view.html](public/view.html)
@@ -79,7 +82,7 @@ Después:
 
 ## Versión
 
-Versión actual del proyecto: `0.1.13`
+Versión actual del proyecto: `0.1.14`
 
 - Notas de la versión: [changelog.md](changelog.md)
 
