@@ -2,7 +2,7 @@
 
 [EN](README.md) | [FR](README.fr.md) | [ES](README.es.md)
 
-![Version](https://img.shields.io/badge/version-0.1.19-blue)
+![Version](https://img.shields.io/badge/version-0.1.20-blue)
 ![License](https://img.shields.io/badge/license-AGPL--3.0--only-green)
 ![Docs](https://img.shields.io/badge/docs-EN%2FFR%2FES-orange)
 ![Wiki](https://img.shields.io/badge/wiki-ready-purple)
@@ -93,7 +93,7 @@ Sous Windows, le serveur apparaît aussi dans la zone de notification près de l
 
 ## Version
 
-Version actuelle du projet : `0.1.19`
+Version actuelle du projet : `0.1.20`
 
 - Notes de version : [changelog.md](changelog.md)
 

@@ -31,6 +31,7 @@
     download: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>',
     terminal: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3M13 15h4"/></svg>',
     windows: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5 10.5 4v7H3zM13 3.6 21 2v9h-8zM3 13h7.5v7L3 18.5zM13 13h8v9l-8-1.6z"/></svg>',
+    mosaic: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>',
   };
 
   // Met à jour les badges d'état de la page.
@@ -122,6 +123,16 @@
         copyLabel: "Copier le lien",
       },
       {
+        label: "Mosaïque",
+        description: "Supervision simultanée de toutes les caméras actives.",
+        display: urls.mosaicLocal || `${window.location.origin}/mosaic`,
+        url: urls.mosaicLocal || `${window.location.origin}/mosaic`,
+        icon: icons.mosaic,
+        kind: "open",
+        openLabel: "Ouvrir",
+        copyLabel: "Copier le lien",
+      },
+      {
         label: "Page téléphone",
         description: "Lien direct à ouvrir sur chaque mobile du réseau local.",
         display: urls.phoneUrls?.[0] || `${window.location.origin}/phone`,
@@ -143,7 +154,7 @@
       },
       {
         label: "Certificat public",
-        description: "Fichier à installer sur les téléphones pour la connexion HTTPS.",
+        description: "Fichier facultatif qui évite l’avertissement HTTPS non reconnu.",
         display: urls.certDownload || `${window.location.origin}/downloads/local.cer`,
         url: urls.certDownload || `${window.location.origin}/downloads/local.cer`,
         icon: icons.download,

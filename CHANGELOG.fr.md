@@ -6,6 +6,15 @@
 
 Ce journal garde la version la plus récente en haut pour retrouver rapidement les changements les plus importants.
 
+## 0.1.20 - 2026-08-27
+
+- refonte de l’en-tête de configuration pour reprendre la présentation compacte du tableau de bord
+- passage plus précoce de la configuration sur une seule colonne aux largeurs intermédiaires
+- correction des badges, URL, boutons et descriptions longues qui sortaient de leurs cartes
+- renforcement du confinement responsive sur le tableau de bord, la mosaïque, le téléphone, la configuration et la vue OBS
+- ajout de la mosaïque dans les raccourcis de configuration
+- mise à jour de la version du projet à `0.1.20`
+
 ## 0.1.19 - 2026-08-27
 
 - placement des sessions et de l’état du serveur avant les cartes d’aide sur le tableau de bord

@@ -6,6 +6,15 @@
 
 This log keeps the newest release at the top so the most relevant changes are easy to find.
 
+## 0.1.20 - 2026-08-27
+
+- redesigned the configuration header to match the compact studio dashboard
+- moved the configuration layout to one column earlier on medium-width screens
+- fixed status badges, URLs, buttons, and long descriptions escaping their cards
+- strengthened responsive containment across the dashboard, mosaic, phone, configuration, and OBS pages
+- added the camera mosaic to the configuration shortcuts
+- updated the project version to `0.1.20`
+
 ## 0.1.19 - 2026-08-27
 
 - moved live sessions and server status ahead of onboarding cards on the dashboard

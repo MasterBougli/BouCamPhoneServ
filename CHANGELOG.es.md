@@ -6,6 +6,15 @@
 
 Este historial mantiene la versión más reciente arriba para encontrar rápidamente los cambios más importantes.
 
+## 0.1.20 - 2026-08-27
+
+- rediseño del encabezado de configuración para seguir la presentación compacta del panel
+- cambio anticipado de la configuración a una sola columna en anchuras intermedias
+- corrección de insignias, URL, botones y descripciones largas que salían de sus tarjetas
+- refuerzo de la contención responsive en el panel, mosaico, teléfono, configuración y vista OBS
+- incorporación del mosaico a los accesos directos de configuración
+- actualización de la versión del proyecto a `0.1.20`
+
 ## 0.1.19 - 2026-08-27
 
 - se colocaron las sesiones y el estado del servidor antes de las tarjetas de ayuda del panel
