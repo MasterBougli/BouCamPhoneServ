@@ -2,18 +2,19 @@
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="theme-color" content="#070b14" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#050506" />
     <title>BouCamPhoneServ - Téléphone</title>
     <link rel="stylesheet" href="/styles.css" />
     <script src="/shared.js" defer></script>
     <script src="/phone.js" defer></script>
   </head>
-  <body>
-    <main class="shell">
+  <body class="page-phone">
+    <a class="skip-link" href="#main-content">Aller au contenu</a>
+    <main class="shell" id="main-content">
       <section class="hero">
         <div class="hero-grid">
-          <span class="eyebrow">Phone sender</span>
+          <span class="eyebrow">Émetteur caméra</span>
           <div>
             <h1 class="title">Diffusion téléphone</h1>
             <p class="subtitle">
@@ -42,10 +43,10 @@
             </div>
 
             <div class="stack">
-              <div class="field">
+              <label class="field" for="labelInput">
                 <span class="label">Nom du téléphone</span>
                 <input class="input" id="labelInput" type="text" placeholder="Phone" />
-              </div>
+              </label>
 
               <div class="stats">
                 <div class="key-value">

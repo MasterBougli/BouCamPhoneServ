@@ -6,6 +6,13 @@
 
 Este historial mantiene la versión más reciente arriba para encontrar rápidamente los cambios más importantes.
 
+## 0.1.17 - 2026-08-27
+
+- rediseño completo de todas las interfaces con un sistema visual de control OLED generado con UI UX Pro Max
+- incorporación de una disposición Bento adaptable, tipografía orientada a producción, colores semánticos e iconos SVG coherentes
+- mejora del foco de teclado, los objetivos táctiles, el zoom móvil, la semántica de formularios y la reducción de movimiento
+- actualización de la versión del proyecto a `0.1.17`
+
 ## 0.1.16 - 2026-08-26
 
 - la pantalla de configuración pasó a una disposición estilo studio con barra lateral, navegación por secciones y tarjetas de accesos directos

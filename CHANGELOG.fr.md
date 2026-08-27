@@ -6,6 +6,13 @@
 
 Ce journal garde la version la plus récente en haut pour retrouver rapidement les changements les plus importants.
 
+## 0.1.17 - 2026-08-27
+
+- refonte complète de toutes les interfaces avec un design system de régie OLED généré avec UI UX Pro Max
+- ajout d’une mise en page Bento adaptative, d’une typographie orientée production, de couleurs sémantiques et d’icônes SVG cohérentes
+- amélioration du focus clavier, des cibles tactiles, du zoom mobile, de la sémantique des formulaires et de la réduction des animations
+- mise à jour de la version du projet à `0.1.17`
+
 ## 0.1.16 - 2026-08-26
 
 - transformation de l’écran de configuration en une mise en page style studio avec barre latérale, navigation par sections et cartes de raccourcis

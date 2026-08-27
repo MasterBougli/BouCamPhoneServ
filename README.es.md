@@ -2,7 +2,7 @@
 
 [EN](README.md) | [FR](README.fr.md) | [ES](README.es.md)
 
-![Version](https://img.shields.io/badge/version-0.1.16-blue)
+![Version](https://img.shields.io/badge/version-0.1.17-blue)
 ![License](https://img.shields.io/badge/license-AGPL--3.0--only-green)
 ![Docs](https://img.shields.io/badge/docs-EN%2FFR%2FES-orange)
 ![Wiki](https://img.shields.io/badge/wiki-ready-purple)
@@ -84,7 +84,7 @@ Después:
 
 ## Versión
 
-Versión actual del proyecto: `0.1.16`
+Versión actual del proyecto: `0.1.17`
 
 - Notas de la versión: [changelog.md](changelog.md)
 

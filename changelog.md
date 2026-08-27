@@ -6,6 +6,13 @@
 
 This log keeps the newest release at the top so the most relevant changes are easy to find.
 
+## 0.1.17 - 2026-08-27
+
+- rebuilt every interface around an OLED broadcast-control design system generated with UI UX Pro Max
+- introduced a responsive Bento layout, production-focused typography, semantic colors, and consistent SVG icons
+- improved keyboard focus, touch targets, mobile zoom, form semantics, and reduced-motion support
+- updated the project version to `0.1.17`
+
 ## 0.1.16 - 2026-08-26
 
 - turned the configuration screen into a studio-style layout with a sidebar, section navigation, and shortcut cards

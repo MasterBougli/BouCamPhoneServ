@@ -2,18 +2,19 @@
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="theme-color" content="#070b14" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#050506" />
     <title>BouCamPhoneServ - Configuration</title>
     <link rel="stylesheet" href="/styles.css" />
     <script src="/shared.js" defer></script>
     <script src="/config.js" defer></script>
   </head>
-  <body>
-    <main class="shell">
+  <body class="page-config">
+    <a class="skip-link" href="#main-content">Aller au contenu</a>
+    <main class="shell" id="main-content">
       <section class="hero">
         <div class="hero-grid">
-          <span class="eyebrow">Configuration graphique</span>
+          <span class="eyebrow">Console de production</span>
           <div>
             <h1 class="title">Réglages du serveur</h1>
             <p class="subtitle">
@@ -35,7 +36,7 @@
             <div class="panel-inner config-rail-inner">
               <div class="rail-top">
                 <div>
-                  <span class="eyebrow eyebrow-compact">Studio control</span>
+                  <span class="eyebrow eyebrow-compact">Contrôle studio</span>
                   <h2 class="panel-title">Console de réglage</h2>
                   <p class="panel-subtitle">
                     Un point d’entrée unique pour piloter les réglages partagés du serveur local.
@@ -45,7 +46,9 @@
               </div>
 
               <div class="rail-summary-card">
-                <div class="rail-summary-icon">◆</div>
+                <div class="rail-summary-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M15 10l4.6-4.6M17 3h4v4M9 14l-4.6 4.6M7 21H3v-4M14 9l4.6 4.6M21 17v4h-4M10 15l-4.6-4.6M3 7V3h4" /></svg>
+                </div>
                 <div class="rail-summary-copy">
                   <strong>Mode configuration</strong>
                   <span>Tout ce qui change ici se répercute immédiatement sur le flux local.</span>

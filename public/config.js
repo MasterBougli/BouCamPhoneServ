@@ -24,6 +24,15 @@
     configHint: document.getElementById("configHint"),
   };
 
+  const icons = {
+    dashboard: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>',
+    phone: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M10 5h4M11 18h2"/></svg>',
+    settings: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1a1.7 1.7 0 0 0 1.9.3A1.7 1.7 0 0 0 10 3V2.8h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1Z"/></svg>',
+    download: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>',
+    terminal: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3M13 15h4"/></svg>',
+    windows: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5 10.5 4v7H3zM13 3.6 21 2v9h-8zM3 13h7.5v7L3 18.5zM13 13h8v9l-8-1.6z"/></svg>',
+  };
+
   // Met à jour les badges d'état de la page.
   function setStatus(text, tone = "warn") {
     elements.configState.className = `chip ${tone}`.trim();
@@ -107,7 +116,7 @@
         description: "Vue principale pour suivre les téléphones et les sources OBS.",
         display: urls.dashboardLocal || `${window.location.origin}/dashboard`,
         url: urls.dashboardLocal || `${window.location.origin}/dashboard`,
-        icon: "⌂",
+        icon: icons.dashboard,
         kind: "open",
         openLabel: "Ouvrir",
         copyLabel: "Copier le lien",
@@ -117,7 +126,7 @@
         description: "Lien direct à ouvrir sur chaque mobile du réseau local.",
         display: urls.phoneUrls?.[0] || `${window.location.origin}/phone`,
         url: urls.phoneUrls?.[0] || `${window.location.origin}/phone`,
-        icon: "◔",
+        icon: icons.phone,
         kind: "open",
         openLabel: "Ouvrir",
         copyLabel: "Copier le lien",
@@ -127,7 +136,7 @@
         description: "Page graphique de réglage des options partagées.",
         display: urls.configLocal || `${window.location.origin}/config`,
         url: urls.configLocal || `${window.location.origin}/config`,
-        icon: "⚙",
+        icon: icons.settings,
         kind: "open",
         openLabel: "Ouvrir",
         copyLabel: "Copier le lien",
@@ -137,7 +146,7 @@
         description: "Fichier à installer sur les téléphones pour la connexion HTTPS.",
         display: urls.certDownload || `${window.location.origin}/downloads/local.cer`,
         url: urls.certDownload || `${window.location.origin}/downloads/local.cer`,
-        icon: "⇩",
+        icon: icons.download,
         kind: "open",
         openLabel: "Télécharger",
         copyLabel: "Copier le lien",
@@ -147,7 +156,7 @@
         description: "Ouvre la configuration graphique depuis le terminal Windows.",
         display: "npm run config",
         url: "npm run config",
-        icon: "⌘",
+        icon: icons.terminal,
         kind: "copy",
         copyLabel: "Copier la commande",
       },
@@ -156,7 +165,7 @@
         description: "Télécharge le fichier .cmd pour un double-clic local.",
         display: urls.configLauncher || `${window.location.origin}/downloads/open-config.cmd`,
         url: urls.configLauncher || `${window.location.origin}/downloads/open-config.cmd`,
-        icon: "▣",
+        icon: icons.windows,
         kind: "open",
         openLabel: "Télécharger",
         copyLabel: "Copier le lien",
@@ -168,7 +177,7 @@
       const row = document.createElement("div");
       row.className = "config-link-item";
       row.innerHTML = `
-        <div class="config-link-icon">${entry.icon}</div>
+        <div class="config-link-icon" aria-hidden="true">${entry.icon}</div>
         <div class="config-link-text">
           <strong>${entry.label}</strong>
           <span>${entry.description}</span>
