@@ -110,30 +110,66 @@ window.BouCamPhoneServ = (() => {
   function describeVideoPreset(preset) {
     switch (preset) {
       case "720p":
-        return "720p léger";
+      case "720p-low":
+        return "720p basse qualité";
+      case "720p-balanced":
+        return "720p équilibré";
+      case "720p-high":
+        return "720p haute qualité";
+      case "1080p-low":
+        return "1080p basse qualité";
+      case "1080p-high":
+        return "1080p haute qualité";
       case "1440p":
+      case "1440p-high":
         return "1440p haute qualité";
       default:
         return "1080p équilibré";
     }
   }
 
+  // Retourne la résolution et le débit vidéo ciblés par un profil de qualité.
+  function getVideoProfile(preset) {
+    const profiles = {
+      "720p-low": { width: 1280, height: 720, bitrateKbps: 1000 },
+      "720p-balanced": { width: 1280, height: 720, bitrateKbps: 2500 },
+      "720p-high": { width: 1280, height: 720, bitrateKbps: 4000 },
+      "1080p-low": { width: 1920, height: 1080, bitrateKbps: 2500 },
+      "1080p-balanced": { width: 1920, height: 1080, bitrateKbps: 5000 },
+      "1080p-high": { width: 1920, height: 1080, bitrateKbps: 8000 },
+      "1440p-high": { width: 2560, height: 1440, bitrateKbps: 12000 },
+    };
+    const legacy = { "720p": "720p-low", "1080p": "1080p-balanced", "1440p": "1440p-high" };
+    return profiles[legacy[preset] || preset] || profiles["1080p-balanced"];
+  }
+
+  // Retourne les plafonds de débit WebRTC exprimés en bits par seconde.
+  function getSenderBitrates(settings = {}) {
+    const audioKbps = [32, 48, 64].includes(Number(settings.audioBitrateKbps))
+      ? Number(settings.audioBitrateKbps)
+      : 48;
+    return {
+      video: getVideoProfile(settings.videoPreset).bitrateKbps * 1000,
+      audio: audioKbps * 1000,
+    };
+  }
+
   // Retourne les contraintes média adaptées aux réglages choisis.
   function buildCaptureConstraints(settings = {}) {
     const facingMode = settings.preferredFacingMode === "user" ? "user" : "environment";
-    const preset = settings.videoPreset === "720p" || settings.videoPreset === "1440p" ? settings.videoPreset : "1080p";
-    const video =
-      preset === "720p"
-        ? { width: { ideal: 1280 }, height: { ideal: 720 } }
-        : preset === "1440p"
-          ? { width: { ideal: 2560 }, height: { ideal: 1440 } }
-          : { width: { ideal: 1920 }, height: { ideal: 1080 } };
+    const profile = getVideoProfile(settings.videoPreset);
 
     return {
-      audio: true,
+      audio: {
+        echoCancellation: true,
+        noiseSuppression: true,
+        autoGainControl: true,
+      },
       video: {
         facingMode: { ideal: facingMode },
-        ...video,
+        width: { ideal: profile.width },
+        height: { ideal: profile.height },
+        frameRate: { ideal: 30, max: 30 },
       },
     };
   }
@@ -148,6 +184,8 @@ window.BouCamPhoneServ = (() => {
     deviceName,
     describeFacingMode,
     describeVideoPreset,
+    getVideoProfile,
+    getSenderBitrates,
     buildCaptureConstraints,
   };
 })();

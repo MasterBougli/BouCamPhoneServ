@@ -40,7 +40,7 @@
                     Un point d’entrée unique pour piloter les réglages partagés du serveur local.
                   </p>
                 </div>
-                <span class="chip good" id="configState">Synchronisé</span>
+                <span class="chip good" id="configState">Ok</span>
               </div>
 
               <div class="rail-summary-card">
@@ -181,9 +181,13 @@
                   <label class="field">
                     <span class="label">Qualité vidéo</span>
                     <select class="input" id="videoPresetInput">
-                      <option value="720p">720p léger</option>
-                      <option value="1080p">1080p équilibré</option>
-                      <option value="1440p">1440p haute qualité</option>
+                      <option value="720p-low">720p basse qualité · 1 Mbps</option>
+                      <option value="720p-balanced">720p équilibré · 2,5 Mbps</option>
+                      <option value="720p-high">720p haute qualité · 4 Mbps</option>
+                      <option value="1080p-low">1080p basse qualité · 2,5 Mbps</option>
+                      <option value="1080p-balanced">1080p équilibré · 5 Mbps</option>
+                      <option value="1080p-high">1080p haute qualité · 8 Mbps</option>
+                      <option value="1440p-high">1440p haute qualité · 12 Mbps</option>
                     </select>
                     <span class="field-help">
                       Un preset plus léger consomme moins de bande passante sur le réseau local.
@@ -203,6 +207,18 @@
                   <span class="chip warn">Micro</span>
                 </div>
                 <div class="config-section-body">
+                  <label class="field">
+                    <span class="label">Qualité audio</span>
+                    <select class="input" id="audioBitrateInput">
+                      <option value="32">Basse qualité · 32 kbps</option>
+                      <option value="48">Qualité normale · 48 kbps</option>
+                      <option value="64">Haute qualité · 64 kbps</option>
+                    </select>
+                    <span class="field-help">
+                      Définit le plafond du débit audio envoyé par WebRTC pour chaque viewer.
+                    </span>
+                  </label>
+
                   <label class="switch-row">
                     <span class="switch-copy">
                       <strong>Micro coupé au départ</strong>

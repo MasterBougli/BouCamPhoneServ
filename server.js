@@ -22,7 +22,8 @@ const MESSAGE_LIMIT = 250;
 const DEFAULT_SETTINGS = {
   defaultLabel: "Phone",
   preferredFacingMode: "environment",
-  videoPreset: "1080p",
+  videoPreset: "1080p-balanced",
+  audioBitrateKbps: 48,
   startMuted: false,
   autoStart: false,
   cleanViewer: true,
@@ -73,12 +74,30 @@ function normalizeSettings(input) {
     ? source.defaultLabel.trim().slice(0, 64)
     : DEFAULT_SETTINGS.defaultLabel;
   const preferredFacingMode = source.preferredFacingMode === "user" ? "user" : "environment";
-  const videoPreset = ["720p", "1080p", "1440p"].includes(source.videoPreset) ? source.videoPreset : DEFAULT_SETTINGS.videoPreset;
+  const legacyVideoPresets = {
+    "720p": "720p-low",
+    "1080p": "1080p-balanced",
+    "1440p": "1440p-high",
+  };
+  const requestedVideoPreset = legacyVideoPresets[source.videoPreset] || source.videoPreset;
+  const videoPreset = [
+    "720p-low",
+    "720p-balanced",
+    "720p-high",
+    "1080p-low",
+    "1080p-balanced",
+    "1080p-high",
+    "1440p-high",
+  ].includes(requestedVideoPreset) ? requestedVideoPreset : DEFAULT_SETTINGS.videoPreset;
+  const audioBitrateKbps = [32, 48, 64].includes(Number(source.audioBitrateKbps))
+    ? Number(source.audioBitrateKbps)
+    : DEFAULT_SETTINGS.audioBitrateKbps;
 
   return {
     defaultLabel,
     preferredFacingMode,
     videoPreset,
+    audioBitrateKbps,
     startMuted: Boolean(source.startMuted),
     autoStart: Boolean(source.autoStart),
     cleanViewer: source.cleanViewer === undefined ? DEFAULT_SETTINGS.cleanViewer : Boolean(source.cleanViewer),

@@ -6,6 +6,16 @@
 
 This log keeps the newest release at the top so the most relevant changes are easy to find.
 
+## 0.1.21 - 2026-08-27
+
+- reduced internal card spacing by about 50 percent while preserving control touch targets
+- converted the configuration navigation into active side tabs
+- replaced the synchronized status label with `Ok`
+- added low, balanced, and high bitrate profiles for 720p and 1080p, while retaining 1440p high quality
+- added configurable 32, 48, and 64 kbps audio bitrate profiles
+- applied selected bitrate ceilings to WebRTC audio and video senders when supported by the browser
+- updated the project version to `0.1.21`
+
 ## 0.1.20 - 2026-08-27
 
 - redesigned the configuration header to match the compact studio dashboard

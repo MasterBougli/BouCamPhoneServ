@@ -1,7 +1,8 @@
 {
   "defaultLabel": "Phone",
   "preferredFacingMode": "environment",
-  "videoPreset": "1080p",
+  "videoPreset": "1080p-balanced",
+  "audioBitrateKbps": 48,
   "startMuted": false,
   "autoStart": false,
   "cleanViewer": true

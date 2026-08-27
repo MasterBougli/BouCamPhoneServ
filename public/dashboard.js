@@ -139,6 +139,7 @@
       ["Nom par défaut", settings.defaultLabel || "Phone"],
       ["Caméra", BouCamPhoneServ.describeFacingMode(settings.preferredFacingMode || "environment")],
       ["Qualité", BouCamPhoneServ.describeVideoPreset(settings.videoPreset || "1080p")],
+      ["Audio", `${settings.audioBitrateKbps || 48} kbps`],
       ["Auto-démarrage", settings.autoStart ? "Activé" : "Désactivé"],
       ["Micro au départ", settings.startMuted ? "Muet" : "Ouvert"],
       ["Vue propre", settings.cleanViewer ? "Oui" : "Non"],
@@ -156,7 +157,7 @@
     }
 
     if (elements.configStatus) {
-      elements.configStatus.textContent = settings ? "Synchronisé" : "Par défaut";
+      elements.configStatus.textContent = settings ? "Ok" : "Par défaut";
     }
 
     if (elements.configObsLink) {

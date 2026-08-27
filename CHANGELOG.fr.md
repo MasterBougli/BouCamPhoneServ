@@ -6,6 +6,16 @@
 
 Ce journal garde la version la plus récente en haut pour retrouver rapidement les changements les plus importants.
 
+## 0.1.21 - 2026-08-27
+
+- réduction d’environ 50 % des espacements internes des cartes sans réduire les zones tactiles des commandes
+- transformation de la navigation de configuration en onglets latéraux actifs
+- remplacement de l’état « Synchronisé » par `Ok`
+- ajout des profils de bitrate bas, équilibré et élevé pour le 720p et le 1080p, avec conservation du 1440p haute qualité
+- ajout des profils audio configurables à 32, 48 et 64 kbps
+- application des plafonds de bitrate sélectionnés aux émetteurs WebRTC audio et vidéo quand le navigateur le permet
+- mise à jour de la version du projet à `0.1.21`
+
 ## 0.1.20 - 2026-08-27
 
 - refonte de l’en-tête de configuration pour reprendre la présentation compacte du tableau de bord

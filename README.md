@@ -2,7 +2,7 @@
 
 [EN](README.md) | [FR](README.fr.md) | [ES](README.es.md)
 
-![Version](https://img.shields.io/badge/version-0.1.20-blue)
+![Version](https://img.shields.io/badge/version-0.1.21-blue)
 ![License](https://img.shields.io/badge/license-AGPL--3.0--only-green)
 ![Docs](https://img.shields.io/badge/docs-EN%2FFR%2FES-orange)
 ![Wiki](https://img.shields.io/badge/wiki-ready-purple)
@@ -27,6 +27,7 @@ The project is designed for:
 - multi-viewer signaling so the mosaic and OBS can watch the same phone simultaneously
 - a Windows notification-area icon with dashboard, mosaic, configuration, and safe shutdown actions
 - a graphical configuration page for shared server settings
+- configurable 720p, 1080p, and 1440p video bitrate profiles plus 32/48/64 kbps audio profiles
 - a Windows launcher and `npm run config` shortcut for the configuration page
 - a sectioned configuration layout for network, camera, audio, startup, and shortcuts
 - a studio-style sidebar with quick navigation and shortcut cards
@@ -92,7 +93,7 @@ On Windows, the server also appears in the notification area near the clock. Dou
 
 ## Version
 
-Current project version: `0.1.20`
+Current project version: `0.1.21`
 
 - Release notes: [changelog.md](changelog.md)
 

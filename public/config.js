@@ -11,6 +11,7 @@
     defaultLabelInput: document.getElementById("defaultLabelInput"),
     preferredFacingModeInput: document.getElementById("preferredFacingModeInput"),
     videoPresetInput: document.getElementById("videoPresetInput"),
+    audioBitrateInput: document.getElementById("audioBitrateInput"),
     autoStartInput: document.getElementById("autoStartInput"),
     startMutedInput: document.getElementById("startMutedInput"),
     cleanViewerInput: document.getElementById("cleanViewerInput"),
@@ -47,9 +48,8 @@
     return {
       defaultLabel: elements.defaultLabelInput.value.trim() || "Phone",
       preferredFacingMode: elements.preferredFacingModeInput.value === "user" ? "user" : "environment",
-      videoPreset: ["720p", "1080p", "1440p"].includes(elements.videoPresetInput.value)
-        ? elements.videoPresetInput.value
-        : "1080p",
+      videoPreset: elements.videoPresetInput.value,
+      audioBitrateKbps: Number(elements.audioBitrateInput.value),
       autoStart: elements.autoStartInput.checked,
       startMuted: elements.startMutedInput.checked,
       cleanViewer: elements.cleanViewerInput.checked,
@@ -61,9 +61,23 @@
     const safe = settings || {};
     elements.defaultLabelInput.value = safe.defaultLabel || "Phone";
     elements.preferredFacingModeInput.value = safe.preferredFacingMode === "user" ? "user" : "environment";
-    elements.videoPresetInput.value = ["720p", "1080p", "1440p"].includes(safe.videoPreset)
-      ? safe.videoPreset
-      : "1080p";
+    const legacyVideoPresets = { "720p": "720p-low", "1080p": "1080p-balanced", "1440p": "1440p-high" };
+    const supportedVideoPresets = [
+      "720p-low",
+      "720p-balanced",
+      "720p-high",
+      "1080p-low",
+      "1080p-balanced",
+      "1080p-high",
+      "1440p-high",
+    ];
+    const normalizedVideoPreset = legacyVideoPresets[safe.videoPreset] || safe.videoPreset;
+    elements.videoPresetInput.value = supportedVideoPresets.includes(normalizedVideoPreset)
+      ? normalizedVideoPreset
+      : "1080p-balanced";
+    elements.audioBitrateInput.value = [32, 48, 64].includes(Number(safe.audioBitrateKbps))
+      ? String(safe.audioBitrateKbps)
+      : "48";
     elements.autoStartInput.checked = Boolean(safe.autoStart);
     elements.startMutedInput.checked = Boolean(safe.startMuted);
     elements.cleanViewerInput.checked = safe.cleanViewer === undefined ? true : Boolean(safe.cleanViewer);
@@ -87,6 +101,7 @@
       ["Nom par défaut", current.defaultLabel],
       ["Caméra", BouCamPhoneServ.describeFacingMode(current.preferredFacingMode)],
       ["Qualité", BouCamPhoneServ.describeVideoPreset(current.videoPreset)],
+      ["Audio", `${current.audioBitrateKbps} kbps`],
       ["Auto-démarrage", current.autoStart ? "Activé" : "Désactivé"],
       ["Micro au départ", current.startMuted ? "Muet" : "Ouvert"],
       ["Vue OBS", current.cleanViewer ? "Épurée" : "Complète"],
@@ -217,7 +232,7 @@
     state.settings = bootstrap.settings || {};
     fillForm(state.settings);
     state.dirty = false;
-    setStatus("Synchronisé", "good");
+    setStatus("Ok", "good");
     renderSummary();
     renderLinks();
     elements.configHint.textContent = "Les réglages sont déjà actifs sur le serveur. Utilise les raccourcis ci-contre pour ouvrir ou lancer la configuration.";
@@ -247,6 +262,40 @@
     setStatus("Modifié", "warn");
     renderSummary();
     elements.configHint.textContent = "Des changements sont en attente d’enregistrement.";
+  }
+
+  // Active visuellement l'onglet correspondant à la section affichée.
+  function activateSectionTab(sectionId) {
+    for (const tab of document.querySelectorAll(".rail-nav-item")) {
+      const active = tab.getAttribute("href") === `#${sectionId}`;
+      tab.classList.toggle("active", active);
+      if (active) {
+        tab.setAttribute("aria-current", "location");
+      } else {
+        tab.removeAttribute("aria-current");
+      }
+    }
+  }
+
+  // Suit les sections visibles pour transformer le menu latéral en onglets actifs.
+  function setupSectionTabs() {
+    const sections = [...document.querySelectorAll(".config-section, #shortcuts-section")];
+    if (!("IntersectionObserver" in window)) {
+      activateSectionTab("network-section");
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) {
+        activateSectionTab(visible.target.id);
+      }
+    }, { rootMargin: "-20% 0px -60% 0px", threshold: [0.05, 0.25, 0.5] });
+    for (const section of sections) {
+      observer.observe(section);
+    }
+    activateSectionTab("network-section");
   }
 
   // Lance la page de configuration et branche les événements.
@@ -282,6 +331,7 @@
       elements.defaultLabelInput,
       elements.preferredFacingModeInput,
       elements.videoPresetInput,
+      elements.audioBitrateInput,
       elements.autoStartInput,
       elements.startMutedInput,
       elements.cleanViewerInput,
@@ -289,6 +339,7 @@
       input.addEventListener("input", markDirty);
       input.addEventListener("change", markDirty);
     }
+    setupSectionTabs();
 
     try {
       await loadSettings();

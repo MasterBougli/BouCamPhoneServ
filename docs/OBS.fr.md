@@ -21,6 +21,10 @@ Chaque téléphone doit devenir une source séparée dans OBS.
 - renomme les sources dans OBS
 - utilise les états du dashboard pour vérifier si le flux est bien vivant
 
+## Qualité et bitrate
+
+Les profils vidéo associent une résolution cible à un plafond de bitrate WebRTC : le 720p utilise 1, 2,5 ou 4 Mbps ; le 1080p utilise 2,5, 5 ou 8 Mbps ; et le 1440p haute qualité utilise 12 Mbps. L’audio peut cibler 32 kbps (basse), 48 kbps (normale) ou 64 kbps (haute). Ce sont des plafonds : WebRTC peut réduire le débit réel si le réseau ou le téléphone ne le supporte pas. La résolution, le nombre d’images par seconde, le codec, la lumière et le capteur influencent aussi le rendu final.
+
 ## Si une source ne s’affiche pas
 
 - vérifie que le téléphone est bien connecté

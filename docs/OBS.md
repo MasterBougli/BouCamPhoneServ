@@ -21,6 +21,10 @@ Each phone should become a separate source in OBS.
 - rename the sources in OBS
 - use the dashboard status to confirm the stream is still alive
 
+## Quality and Bitrate
+
+Video profiles combine a target resolution with a WebRTC bitrate ceiling: 720p uses 1, 2.5, or 4 Mbps; 1080p uses 2.5, 5, or 8 Mbps; and 1440p high quality uses 12 Mbps. Audio can target 32 kbps (low), 48 kbps (normal), or 64 kbps (high). These are ceilings: WebRTC may lower the actual bitrate when the network or phone cannot sustain it. Resolution, frame rate, codec, lighting, and sensor quality also affect the final image.
+
 ## If a Source Does Not Appear
 
 - check that the phone is still connected

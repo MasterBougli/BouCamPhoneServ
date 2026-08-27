@@ -6,6 +6,16 @@
 
 Este historial mantiene la versión más reciente arriba para encontrar rápidamente los cambios más importantes.
 
+## 0.1.21 - 2026-08-27
+
+- reducción de aproximadamente el 50 % del espacio interior de las tarjetas sin reducir las zonas táctiles
+- transformación de la navegación de configuración en pestañas laterales activas
+- sustitución del estado « Sincronizado » por `Ok`
+- incorporación de perfiles de bitrate bajo, equilibrado y alto para 720p y 1080p, conservando 1440p de alta calidad
+- incorporación de perfiles de audio configurables a 32, 48 y 64 kbps
+- aplicación de los límites de bitrate elegidos a los emisores WebRTC de audio y vídeo cuando el navegador lo permite
+- actualización de la versión del proyecto a `0.1.21`
+
 ## 0.1.20 - 2026-08-27
 
 - rediseño del encabezado de configuración para seguir la presentación compacta del panel

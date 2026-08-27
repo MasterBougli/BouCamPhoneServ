@@ -67,7 +67,8 @@
     sessionIdValue.textContent = state.session?.id || "—";
     sessionStateValue.textContent = state.session?.state || "En attente";
     cameraValue.textContent = BouCamPhoneServ.describeFacingMode(state.facingMode);
-    audioValue.textContent = state.audioEnabled ? "Activé" : "Coupé";
+    const audioBitrate = state.bootstrap?.settings?.audioBitrateKbps || 48;
+    audioValue.textContent = `${state.audioEnabled ? "Activé" : "Coupé"} · ${audioBitrate} kbps`;
     qualityValue.textContent = BouCamPhoneServ.describeVideoPreset(state.bootstrap?.settings?.videoPreset || "1080p");
     previewTitle.textContent = state.session?.label || "Aperçu local";
     previewSubtitle.textContent = state.active
@@ -202,6 +203,31 @@
     return stream;
   }
 
+  // Applique le plafond de débit configuré à un émetteur WebRTC compatible.
+  async function applySenderBitrate(sender) {
+    if (!sender?.track || typeof sender.getParameters !== "function" || typeof sender.setParameters !== "function") {
+      return;
+    }
+    const bitrates = BouCamPhoneServ.getSenderBitrates(state.bootstrap?.settings || {});
+    const parameters = sender.getParameters();
+    if (!parameters.encodings?.length) {
+      return;
+    }
+    parameters.encodings[0].maxBitrate = bitrates[sender.track.kind];
+    try {
+      await sender.setParameters(parameters);
+    } catch (error) {
+      console.warn(`Bitrate ${sender.track.kind} non appliqué par ce navigateur`, error);
+    }
+  }
+
+  // Applique les plafonds vidéo et audio à tous les émetteurs d'une connexion.
+  async function applyPeerBitrates(pc) {
+    for (const sender of pc.getSenders()) {
+      await applySenderBitrate(sender);
+    }
+  }
+
   // Crée la connexion WebRTC qui relie le téléphone au viewer.
   async function createPeerConnection(viewerId) {
     if (!viewerId || !state.stream) {
@@ -216,6 +242,7 @@
     for (const track of state.stream.getTracks()) {
       pc.addTrack(track, state.stream);
     }
+    await applyPeerBitrates(pc);
 
     // Transmet chaque candidat ICE généré au serveur.
     pc.onicecandidate = (event) => {
@@ -395,6 +422,7 @@
       if (audioSender && newAudioTrack) {
         await audioSender.replaceTrack(newAudioTrack);
       }
+      await applyPeerBitrates(pc);
     }
 
     if (newAudioTrack) {
