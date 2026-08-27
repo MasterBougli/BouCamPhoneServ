@@ -1,6 +1,6 @@
 {
   "name": "boucamphoneserv",
-  "version": "0.1.22",
+  "version": "0.1.23",
   "private": true,
   "description": "Local WebRTC camera bridge for OBS and other tools without installing anything on phones.",
   "license": "AGPL-3.0-only",

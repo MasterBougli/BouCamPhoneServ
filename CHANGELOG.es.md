@@ -6,6 +6,15 @@
 
 Este historial mantiene la versión más reciente arriba para encontrar rápidamente los cambios más importantes.
 
+## 0.1.23 - 2026-08-27
+
+- reconstrucción de la configuración del teléfono en cuatro pestañas accesibles: Sesión, Identidad, Vídeo y Audio
+- agrupación del nombre y los ajustes multimedia locales detrás de una única acción de guardado
+- incorporación de una cámara frontal o trasera preferida para cada teléfono
+- mantenimiento de una vuelta independiente a los valores del servidor en cada selector multimedia
+- incorporación de navegación por teclado y pestañas compactas en dos columnas para pantallas estrechas
+- actualización de la versión del proyecto a `0.1.23`
+
 ## 0.1.22 - 2026-08-27
 
 - transformación de cada sección de configuración en un panel de pestaña accesible real

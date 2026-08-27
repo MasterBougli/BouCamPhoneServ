@@ -242,16 +242,20 @@ select.input option { color: var(--text); background: #111217; }
 .preview-overlay { position: absolute; z-index: 2; inset: auto 12px 12px; display: flex; align-items: center; justify-content: space-between; gap: 7px; padding: 7px 8px; border: 1px solid rgba(255,255,255,.18); border-radius: var(--radius-md); background: rgba(7,7,9,.84); box-shadow: 0 16px 36px rgba(0,0,0,.35); backdrop-filter: blur(16px); }
 .preview-overlay strong { font-family: "Bahnschrift", "Arial Narrow", sans-serif; }
 .preview-overlay .muted { margin-top: 3px; font-size: 13px; }
-.phone-quality-settings { overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-md); background: rgba(255,255,255,.018); }
-.phone-quality-settings > summary { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 54px; padding: 7px 9px; cursor: pointer; list-style: none; }
-.phone-quality-settings > summary::-webkit-details-marker { display: none; }
-.phone-quality-settings > summary > span:first-child { display: grid; min-width: 0; gap: 2px; }
-.phone-quality-settings > summary strong { font: 600 15px "Bahnschrift", "Arial Narrow", sans-serif; }
-.phone-quality-settings > summary small { color: var(--muted); overflow-wrap: anywhere; }
-.phone-quality-settings[open] > summary { border-bottom: 1px solid var(--line); background: rgba(255,49,88,.06); }
-.phone-quality-settings[open] .disclosure-action::before { content: "Masquer"; }
-.phone-quality-body { display: grid; gap: 8px; padding: 9px; }
+.phone-config-shell { display: grid; gap: 8px; }
+.phone-config-tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; padding: 4px; border: 1px solid var(--line); border-radius: var(--radius-md); background: #08090c; }
+.phone-config-tab { min-width: 0; min-height: 42px; padding: 7px 6px; border: 1px solid transparent; border-radius: calc(var(--radius-md) - 5px); color: var(--muted); background: transparent; font: 600 13px "Bahnschrift", "Arial Narrow", sans-serif; cursor: pointer; transition: color .18s ease, border-color .18s ease, background .18s ease; }
+.phone-config-tab:hover { color: var(--text); background: rgba(255,255,255,.035); }
+.phone-config-tab.active { border-color: rgba(255,49,88,.42); color: #fff; background: linear-gradient(135deg, rgba(255,49,88,.24), rgba(255,49,88,.07)); box-shadow: inset 3px 0 0 var(--accent); }
+.phone-config-tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.phone-config-panel { display: grid; min-height: 270px; align-content: start; gap: 10px; padding: 10px; border: 1px solid var(--line); border-radius: var(--radius-md); background: linear-gradient(145deg, rgba(255,255,255,.025), transparent 58%); }
+.phone-setting-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.phone-setting-heading > div { display: grid; gap: 3px; }
+.phone-setting-heading strong { font: 600 17px "Bahnschrift", "Arial Narrow", sans-serif; }
+.phone-setting-value { max-width: 48%; color: #ff91a6; font: 600 11px/1.35 "Cascadia Mono", Consolas, monospace; text-align: right; overflow-wrap: anywhere; }
 .phone-quality-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.phone-config-savebar { display: grid; gap: 6px; padding: 8px; border: 1px solid var(--line-strong); border-radius: var(--radius-md); background: rgba(255,49,88,.045); }
+.phone-config-savebar .small, .phone-session-hint { margin: 0; }
 
 .source-stage { position: relative; min-height: 100dvh; overflow: hidden; background: #000; }
 .source-stage video { display: block; width: 100vw; height: 100dvh; object-fit: contain; background: #000; }
@@ -417,6 +421,10 @@ select.input option { color: var(--text); background: #111217; }
   .rail-nav { grid-template-columns: 1fr; }
   .page-config .rail-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .page-config .summary-stats, .config-summary-grid { grid-template-columns: 1fr; }
+  .phone-config-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .phone-config-panel { min-height: 0; }
+  .phone-setting-heading { flex-direction: column; }
+  .phone-setting-value { max-width: none; text-align: left; }
   .camera-frame { min-height: 440px; }
   .preview-overlay { inset: auto 10px 10px; }
   .switch-row { min-height: 0; }

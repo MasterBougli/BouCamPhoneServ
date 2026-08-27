@@ -19,7 +19,7 @@
 
 ## Qualité par téléphone
 
-Ouvre **Qualité de diffusion** sur la page téléphone pour remplacer le profil vidéo, les FPS ou le bitrate audio du serveur uniquement sur ce téléphone. Chaque sélecteur peut rester sur **Réglage du serveur**, et les choix locaux sont mémorisés dans le navigateur du téléphone. Appliquer la qualité pendant un direct recrée brièvement les pistes média, mais conserve la même session et la même URL OBS.
+Utilise les onglets **Session**, **Identité**, **Vidéo** et **Audio** de la page téléphone pour définir son nom local, sa caméra frontale ou arrière préférée, son profil vidéo, ses FPS et son bitrate audio. Chaque sélecteur média peut rester sur **Réglage du serveur**, puis le bouton **Enregistrer les réglages** mémorise tous les choix dans le navigateur du téléphone. Appliquer les choix vidéo pendant un direct recrée brièvement les pistes média, mais conserve la même session et la même URL OBS.
 
 ## Mosaïque de caméras
 

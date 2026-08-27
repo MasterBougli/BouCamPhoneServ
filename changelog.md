@@ -6,6 +6,15 @@
 
 This log keeps the newest release at the top so the most relevant changes are easy to find.
 
+## 0.1.23 - 2026-08-27
+
+- rebuilt the phone configuration as four accessible Session, Identity, Video, and Audio tabs
+- grouped the phone name and local media choices behind one persistent save action
+- added a per-phone preferred front or rear camera override
+- kept server defaults available independently for every local media selector
+- added keyboard navigation and compact two-column tabs for narrow mobile screens
+- updated the project version to `0.1.23`
+
 ## 0.1.22 - 2026-08-27
 
 - converted every configuration section into a real accessible tab panel

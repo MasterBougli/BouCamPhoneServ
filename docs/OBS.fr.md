@@ -23,7 +23,7 @@ Chaque téléphone doit devenir une source séparée dans OBS.
 
 ## Qualité et bitrate
 
-Les profils vidéo associent une résolution cible à un plafond de bitrate WebRTC : le 720p utilise 1, 2,5 ou 4 Mbps ; le 1080p utilise 2,5, 5 ou 8 Mbps ; et le 1440p haute qualité utilise 12 Mbps. La fluidité peut cibler 15, 24, 30 ou 60 FPS. L’audio peut cibler 32 kbps (basse), 48 kbps (normale) ou 64 kbps (haute). Ce sont des plafonds : WebRTC peut réduire le débit réel si le réseau ou le téléphone ne le supporte pas. Chaque téléphone peut hériter des valeurs du serveur ou mémoriser ses propres choix. La résolution, les FPS, le codec, la lumière et le capteur influencent aussi le rendu final.
+Les profils vidéo associent une résolution cible à un plafond de bitrate WebRTC : le 720p utilise 1, 2,5 ou 4 Mbps ; le 1080p utilise 2,5, 5 ou 8 Mbps ; et le 1440p haute qualité utilise 12 Mbps. La fluidité peut cibler 15, 24, 30 ou 60 FPS. L’audio peut cibler 32 kbps (basse), 48 kbps (normale) ou 64 kbps (haute). Ce sont des plafonds : WebRTC peut réduire le débit réel si le réseau ou le téléphone ne le supporte pas. La page téléphone possède des onglets Identité, Vidéo et Audio pour son nom, sa caméra préférée et ses choix locaux ; chaque sélecteur média peut toujours hériter de la valeur du serveur. La résolution, les FPS, le codec, la lumière et le capteur influencent aussi le rendu final.
 
 ## Si une source ne s’affiche pas
 

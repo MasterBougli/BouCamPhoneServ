@@ -9,7 +9,6 @@
   const muteButton = document.getElementById("muteButton");
   const stopButton = document.getElementById("stopButton");
   const copyLinkButton = document.getElementById("copyLinkButton");
-  const saveLabelButton = document.getElementById("saveLabelButton");
   const labelInput = document.getElementById("labelInput");
   const localVideo = document.getElementById("localVideo");
   const statusChip = document.getElementById("statusChip");
@@ -23,6 +22,7 @@
   const previewSubtitle = document.getElementById("previewSubtitle");
   const networkChip = document.getElementById("networkChip");
   const permissionChip = document.getElementById("permissionChip");
+  const phoneFacingModeInput = document.getElementById("phoneFacingModeInput");
   const phoneVideoPresetInput = document.getElementById("phoneVideoPresetInput");
   const phoneFrameRateInput = document.getElementById("phoneFrameRateInput");
   const phoneAudioBitrateInput = document.getElementById("phoneAudioBitrateInput");
@@ -55,6 +55,9 @@
         return {};
       }
       const safe = {};
+      if (["environment", "user"].includes(value.preferredFacingMode)) {
+        safe.preferredFacingMode = value.preferredFacingMode;
+      }
       if (["720p-low", "720p-balanced", "720p-high", "1080p-low", "1080p-balanced", "1080p-high", "1440p-high"].includes(value.videoPreset)) {
         safe.videoPreset = value.videoPreset;
       }
@@ -82,16 +85,54 @@
   function syncPhoneQualityControls() {
     const serverSettings = state.bootstrap?.settings || {};
     const effective = getEffectiveMediaSettings();
+    phoneFacingModeInput.value = state.mediaOverrides.preferredFacingMode || "";
     phoneVideoPresetInput.value = state.mediaOverrides.videoPreset || "";
     phoneFrameRateInput.value = state.mediaOverrides.videoFrameRate ? String(state.mediaOverrides.videoFrameRate) : "";
     phoneAudioBitrateInput.value = state.mediaOverrides.audioBitrateKbps ? String(state.mediaOverrides.audioBitrateKbps) : "";
+    phoneFacingModeInput.options[0].textContent = `Serveur · ${BouCamPhoneServ.describeFacingMode(serverSettings.preferredFacingMode)}`;
     phoneVideoPresetInput.options[0].textContent = `Serveur · ${BouCamPhoneServ.describeVideoPreset(serverSettings.videoPreset)}`;
     phoneFrameRateInput.options[0].textContent = `Serveur · ${serverSettings.videoFrameRate || 30} FPS`;
     phoneAudioBitrateInput.options[0].textContent = `Serveur · ${serverSettings.audioBitrateKbps || 48} kbps`;
     const localCount = Object.keys(state.mediaOverrides).length;
     phoneQualitySummary.textContent = localCount
-      ? `${BouCamPhoneServ.describeVideoPreset(effective.videoPreset)} · ${effective.videoFrameRate || 30} FPS · ${effective.audioBitrateKbps || 48} kbps`
+      ? `${BouCamPhoneServ.describeFacingMode(effective.preferredFacingMode)} · ${BouCamPhoneServ.describeVideoPreset(effective.videoPreset)} · ${effective.videoFrameRate || 30} FPS · ${effective.audioBitrateKbps || 48} kbps`
       : "Réglages du serveur";
+  }
+
+  // Affiche le panneau demandé et maintient les attributs accessibles des onglets.
+  function activatePhoneConfigTab(panelId) {
+    const tabs = [...document.querySelectorAll(".phone-config-tab")];
+    const panels = [...document.querySelectorAll(".phone-config-panel")];
+    for (const tab of tabs) {
+      const active = tab.getAttribute("aria-controls") === panelId;
+      tab.classList.toggle("active", active);
+      tab.setAttribute("aria-selected", String(active));
+      tab.tabIndex = active ? 0 : -1;
+    }
+    for (const panel of panels) {
+      panel.hidden = panel.id !== panelId;
+    }
+  }
+
+  // Branche les clics et le clavier sur les onglets de configuration du téléphone.
+  function setupPhoneConfigTabs() {
+    const tabs = [...document.querySelectorAll(".phone-config-tab")];
+    for (const [index, tab] of tabs.entries()) {
+      tab.addEventListener("click", () => activatePhoneConfigTab(tab.getAttribute("aria-controls")));
+      tab.addEventListener("keydown", (event) => {
+        if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"].includes(event.key)) {
+          return;
+        }
+        event.preventDefault();
+        const nextIndex = event.key === "Home"
+          ? 0
+          : event.key === "End"
+            ? tabs.length - 1
+            : (index + (["ArrowRight", "ArrowDown"].includes(event.key) ? 1 : -1) + tabs.length) % tabs.length;
+        tabs[nextIndex].focus();
+        activatePhoneConfigTab(tabs[nextIndex].getAttribute("aria-controls"));
+      });
+    }
   }
 
   // Met à jour le badge d'état principal.
@@ -505,9 +546,12 @@
     await replaceMediaStream(nextFacing);
   }
 
-  // Enregistre et applique les choix de qualité propres à ce téléphone.
+  // Enregistre le nom et applique tous les réglages propres à ce téléphone.
   async function applyPhoneQuality() {
     const overrides = {};
+    if (phoneFacingModeInput.value) {
+      overrides.preferredFacingMode = phoneFacingModeInput.value;
+    }
     if (phoneVideoPresetInput.value) {
       overrides.videoPreset = phoneVideoPresetInput.value;
     }
@@ -521,12 +565,16 @@
     localStorage.setItem(mediaOverridesKey, JSON.stringify(overrides));
     applyPhoneQualityButton.disabled = true;
     phoneQualityHint.textContent = state.stream
-      ? "Application de la qualité et reconnexion rapide de la caméra..."
-      : "Qualité locale enregistrée. Elle sera utilisée au prochain démarrage.";
+      ? "Application des réglages et reconnexion rapide de la caméra..."
+      : "Enregistrement des réglages de ce téléphone...";
     try {
+      await saveLabel();
+      const effective = getEffectiveMediaSettings();
+      const nextFacing = effective.preferredFacingMode === "user" ? "user" : "environment";
       if (state.stream) {
-        await replaceMediaStream(state.facingMode);
+        await replaceMediaStream(nextFacing);
       } else {
+        state.facingMode = nextFacing;
         for (const pc of state.peers.values()) {
           await applyPeerBitrates(pc);
         }
@@ -535,8 +583,8 @@
       syncPhoneQualityControls();
       updateStaticFields();
       phoneQualityHint.textContent = Object.keys(overrides).length
-        ? "Les choix locaux remplacent les valeurs du serveur pour ce téléphone."
-        : "Les réglages du serveur sont de nouveau utilisés.";
+        ? "Nom et réglages enregistrés sur ce téléphone."
+        : "Nom enregistré. Les réglages du serveur sont de nouveau utilisés.";
     } finally {
       applyPhoneQualityButton.disabled = false;
     }
@@ -587,6 +635,7 @@
 
   // Prépare la page téléphone et branche les actions utilisateur.
   async function boot() {
+    setupPhoneConfigTabs();
     if (!("mediaDevices" in navigator) || !navigator.mediaDevices.getUserMedia) {
       setStatus("Incompatible", "danger");
       setPermission("Non supporté", "danger");
@@ -599,6 +648,7 @@
     setStatus("Prêt", "warn");
     state.bootstrap = await BouCamPhoneServ.fetchJson("/api/bootstrap");
     labelInput.value = localStorage.getItem(labelKey) || state.bootstrap?.settings?.defaultLabel || BouCamPhoneServ.deviceName();
+    state.facingMode = getEffectiveMediaSettings().preferredFacingMode === "user" ? "user" : "environment";
     syncPhoneQualityControls();
 
     try {
@@ -633,11 +683,7 @@
         copyLinkButton.textContent = "Copier le lien";
       }, 1200);
     });
-    // Enregistre le libellé quand l'utilisateur valide.
-    saveLabelButton.addEventListener("click", () => saveLabel().catch(console.error));
-    // Sauvegarde le libellé dès qu'il change.
-    labelInput.addEventListener("change", () => saveLabel().catch(console.error));
-    // Applique les réglages vidéo et audio propres à ce téléphone.
+    // Enregistre le nom puis applique les réglages propres à ce téléphone.
     applyPhoneQualityButton.addEventListener("click", () => applyPhoneQuality().catch((error) => {
       console.error(error);
       phoneQualityHint.textContent = error.message || "Impossible d’appliquer cette qualité.";

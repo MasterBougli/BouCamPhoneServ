@@ -36,27 +36,87 @@
           <div class="panel-inner">
             <div class="panel-header">
               <div>
-                <h2 class="panel-title">Session</h2>
-                <p class="panel-subtitle">Chaque téléphone garde son propre identifiant local.</p>
+                <h2 class="panel-title">Configuration du téléphone</h2>
+                <p class="panel-subtitle">Ces choix restent mémorisés uniquement sur cet appareil.</p>
               </div>
               <span class="chip warn" id="statusChip">Prêt</span>
             </div>
 
-            <div class="stack">
-              <label class="field" for="labelInput">
-                <span class="label">Nom du téléphone</span>
-                <input class="input" id="labelInput" type="text" placeholder="Phone" />
-              </label>
+            <div class="phone-config-shell">
+              <div class="phone-config-tabs" role="tablist" aria-label="Configuration du téléphone">
+                <button class="phone-config-tab active" id="phone-tab-session" type="button" role="tab" aria-controls="phone-panel-session" aria-selected="true">Session</button>
+                <button class="phone-config-tab" id="phone-tab-identity" type="button" role="tab" aria-controls="phone-panel-identity" aria-selected="false" tabindex="-1">Identité</button>
+                <button class="phone-config-tab" id="phone-tab-video" type="button" role="tab" aria-controls="phone-panel-video" aria-selected="false" tabindex="-1">Vidéo</button>
+                <button class="phone-config-tab" id="phone-tab-audio" type="button" role="tab" aria-controls="phone-panel-audio" aria-selected="false" tabindex="-1">Audio</button>
+              </div>
 
-              <details class="phone-quality-settings">
-                <summary>
-                  <span>
-                    <strong>Qualité de diffusion</strong>
-                    <small id="phoneQualitySummary">Réglages du serveur</small>
-                  </span>
-                  <span class="disclosure-action" aria-hidden="true"></span>
-                </summary>
-                <div class="phone-quality-body">
+              <section class="phone-config-panel" id="phone-panel-session" role="tabpanel" aria-labelledby="phone-tab-session">
+                <div class="phone-setting-heading">
+                  <div>
+                    <span class="label">Session locale</span>
+                    <strong>Connexion au studio</strong>
+                  </div>
+                  <span class="phone-setting-value" id="phoneQualitySummary">Réglages du serveur</span>
+                </div>
+
+                <div class="stats">
+                  <div class="key-value">
+                    <span class="key">ID</span>
+                    <span class="value" id="sessionIdValue">—</span>
+                  </div>
+                  <div class="key-value">
+                    <span class="key">État</span>
+                    <span class="value" id="sessionStateValue">En attente</span>
+                  </div>
+                  <div class="key-value">
+                    <span class="key">Caméra</span>
+                    <span class="value" id="cameraValue">Caméra arrière</span>
+                  </div>
+                  <div class="key-value">
+                    <span class="key">Audio</span>
+                    <span class="value" id="audioValue">Activé</span>
+                  </div>
+                  <div class="key-value">
+                    <span class="key">Qualité</span>
+                    <span class="value" id="qualityValue">1080p équilibré · 30 FPS</span>
+                  </div>
+                </div>
+
+                <button class="button-secondary" id="copyLinkButton" type="button">Copier le lien de cette caméra</button>
+              </section>
+
+              <section class="phone-config-panel" id="phone-panel-identity" role="tabpanel" aria-labelledby="phone-tab-identity" hidden>
+                <div class="phone-setting-heading">
+                  <div>
+                    <span class="label">Identité</span>
+                    <strong>Nom affiché sur le PC</strong>
+                  </div>
+                </div>
+                <label class="field" for="labelInput">
+                  <span class="label">Nom du téléphone</span>
+                  <input class="input" id="labelInput" type="text" maxlength="64" placeholder="Phone" />
+                  <span class="field-help">Par exemple : Caméra scène, Téléphone gauche ou Interview.</span>
+                </label>
+              </section>
+
+              <section class="phone-config-panel" id="phone-panel-video" role="tabpanel" aria-labelledby="phone-tab-video" hidden>
+                <div class="phone-setting-heading">
+                  <div>
+                    <span class="label">Vidéo</span>
+                    <strong>Caméra, définition et fluidité</strong>
+                  </div>
+                </div>
+
+                <label class="field">
+                  <span class="label">Caméra préférée</span>
+                  <select class="input" id="phoneFacingModeInput">
+                    <option value="">Réglage du serveur</option>
+                    <option value="environment">Caméra arrière</option>
+                    <option value="user">Caméra frontale</option>
+                  </select>
+                </label>
+
+                <div class="phone-quality-grid">
                   <label class="field">
                     <span class="label">Qualité vidéo</span>
                     <select class="input" id="phoneVideoPresetInput">
@@ -71,67 +131,47 @@
                     </select>
                   </label>
 
-                  <div class="phone-quality-grid">
-                    <label class="field">
-                      <span class="label">Fluidité</span>
-                      <select class="input" id="phoneFrameRateInput">
-                        <option value="">Réglage du serveur</option>
-                        <option value="15">15 FPS</option>
-                        <option value="24">24 FPS</option>
-                        <option value="30">30 FPS</option>
-                        <option value="60">60 FPS</option>
-                      </select>
-                    </label>
+                  <label class="field">
+                    <span class="label">Fluidité</span>
+                    <select class="input" id="phoneFrameRateInput">
+                      <option value="">Réglage du serveur</option>
+                      <option value="15">15 FPS · économie</option>
+                      <option value="24">24 FPS · cinéma</option>
+                      <option value="30">30 FPS · recommandé</option>
+                      <option value="60">60 FPS · très fluide</option>
+                    </select>
+                  </label>
+                </div>
+                <p class="small muted">Une qualité plus élevée utilise davantage le Wi-Fi et la batterie.</p>
+              </section>
 
-                    <label class="field">
-                      <span class="label">Qualité audio</span>
-                      <select class="input" id="phoneAudioBitrateInput">
-                        <option value="">Réglage du serveur</option>
-                        <option value="32">Basse · 32 kbps</option>
-                        <option value="48">Normale · 48 kbps</option>
-                        <option value="64">Haute · 64 kbps</option>
-                      </select>
-                    </label>
+              <section class="phone-config-panel" id="phone-panel-audio" role="tabpanel" aria-labelledby="phone-tab-audio" hidden>
+                <div class="phone-setting-heading">
+                  <div>
+                    <span class="label">Audio</span>
+                    <strong>Débit du microphone</strong>
                   </div>
+                </div>
+                <label class="field">
+                  <span class="label">Qualité audio</span>
+                  <select class="input" id="phoneAudioBitrateInput">
+                    <option value="">Réglage du serveur</option>
+                    <option value="32">Basse qualité · 32 kbps</option>
+                    <option value="48">Qualité normale · 48 kbps</option>
+                    <option value="64">Haute qualité · 64 kbps</option>
+                  </select>
+                  <span class="field-help">48 kbps est le meilleur équilibre pour la voix. Le bouton du haut permet de couper le micro pendant la diffusion.</span>
+                </label>
+              </section>
 
-                  <button class="button" id="applyPhoneQualityButton" type="button">Appliquer la qualité</button>
-                  <p class="small muted" id="phoneQualityHint">
-                    Les valeurs du serveur sont utilisées tant qu’aucun choix local n’est défini.
-                  </p>
-                </div>
-              </details>
-
-              <div class="stats">
-                <div class="key-value">
-                  <span class="key">ID</span>
-                  <span class="value" id="sessionIdValue">—</span>
-                </div>
-                <div class="key-value">
-                  <span class="key">État</span>
-                  <span class="value" id="sessionStateValue">En attente</span>
-                </div>
-                <div class="key-value">
-                  <span class="key">Caméra</span>
-                  <span class="value" id="cameraValue">environment</span>
-                </div>
-                <div class="key-value">
-                  <span class="key">Audio</span>
-                  <span class="value" id="audioValue">Activé</span>
-                </div>
-                <div class="key-value">
-                  <span class="key">Qualité</span>
-                  <span class="value" id="qualityValue">1080p</span>
-                </div>
+              <div class="phone-config-savebar">
+                <button class="button" id="applyPhoneQualityButton" type="button">Enregistrer les réglages</button>
+                <p class="small muted" id="phoneQualityHint">
+                  Les valeurs du serveur sont utilisées tant qu’aucun choix local n’est défini.
+                </p>
               </div>
 
-              <div class="divider"></div>
-
-              <div class="card-actions">
-                <button class="button-secondary" id="copyLinkButton" type="button">Copier le lien</button>
-                <button class="button-secondary" id="saveLabelButton" type="button">Enregistrer le nom</button>
-              </div>
-
-              <p class="small muted" id="hintText">
+              <p class="small muted phone-session-hint" id="hintText">
                 Appuie sur “Démarrer la caméra” pour demander l’accès vidéo et micro.
               </p>
             </div>

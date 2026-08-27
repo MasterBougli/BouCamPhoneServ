@@ -19,7 +19,7 @@
 
 ## Calidad por teléfono
 
-Abre **Calidad de emisión** en la página del teléfono para sustituir el perfil de vídeo, los FPS o el bitrate de audio del servidor solo en ese teléfono. Cada selector puede permanecer en **Ajuste del servidor**, y las opciones locales se guardan en el navegador del teléfono. Aplicar la calidad durante una emisión recrea brevemente las pistas multimedia, pero conserva la misma sesión y URL de OBS.
+Utiliza las pestañas **Sesión**, **Identidad**, **Vídeo** y **Audio** de la página del teléfono para definir su nombre local, la cámara frontal o trasera preferida, el perfil de vídeo, los FPS y el bitrate de audio. Cada selector multimedia puede permanecer en **Ajuste del servidor**, y el botón **Guardar ajustes** memoriza todas las opciones en el navegador del teléfono. Aplicar los ajustes de vídeo durante una emisión recrea brevemente las pistas multimedia, pero conserva la misma sesión y URL de OBS.
 
 ## Mosaico de cámaras
 

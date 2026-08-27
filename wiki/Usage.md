@@ -19,7 +19,7 @@
 
 ## Per-Phone Quality
 
-Open **Streaming quality** on the phone page to override the server's video profile, frame rate, or audio bitrate for that phone only. Each selector can remain on **Server setting**, and local choices are stored in that phone's browser. Applying quality during a live stream briefly recreates the media tracks but keeps the same session and OBS URL.
+Use the **Session**, **Identity**, **Video**, and **Audio** tabs on the phone page to set its local name, preferred front or rear camera, video profile, frame rate, and audio bitrate. Each media selector can remain on **Server setting**, and one **Save settings** button stores all local choices in that phone's browser. Applying video choices during a live stream briefly recreates the media tracks but keeps the same session and OBS URL.
 
 ## Camera Mosaic
 

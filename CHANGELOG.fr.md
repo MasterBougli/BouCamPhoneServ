@@ -6,6 +6,15 @@
 
 Ce journal garde la version la plus récente en haut pour retrouver rapidement les changements les plus importants.
 
+## 0.1.23 - 2026-08-27
+
+- reconstruction de la configuration téléphone en quatre onglets accessibles : Session, Identité, Vidéo et Audio
+- regroupement du nom et des choix média locaux derrière une action d’enregistrement unique
+- ajout d’un choix local de caméra frontale ou arrière par téléphone
+- maintien d’un retour indépendant aux valeurs du serveur pour chaque sélecteur média
+- ajout de la navigation clavier et d’onglets compacts sur deux colonnes pour les petits écrans
+- mise à jour de la version du projet à `0.1.23`
+
 ## 0.1.22 - 2026-08-27
 
 - transformation de chaque section de configuration en véritable panneau d’onglet accessible

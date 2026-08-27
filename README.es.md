@@ -2,7 +2,7 @@
 
 [EN](README.md) | [FR](README.fr.md) | [ES](README.es.md)
 
-![Version](https://img.shields.io/badge/version-0.1.22-blue)
+![Version](https://img.shields.io/badge/version-0.1.23-blue)
 ![License](https://img.shields.io/badge/license-AGPL--3.0--only-green)
 ![Docs](https://img.shields.io/badge/docs-EN%2FFR%2FES-orange)
 ![Wiki](https://img.shields.io/badge/wiki-ready-purple)
@@ -28,7 +28,7 @@ El proyecto está pensado para:
 - un icono de Windows junto al reloj con accesos al panel, mosaico, configuración y apagado seguro
 - una página de configuración gráfica para los ajustes compartidos del servidor
 - perfiles de vídeo 720p, 1080p y 1440p con bitrate configurado, además de perfiles de audio a 32/48/64 kbps
-- prioridades de vídeo, FPS y audio por teléfono con opción de volver a los valores del servidor
+- configuración por pestañas en el teléfono para el nombre local, la cámara preferida, el perfil de vídeo, los FPS y el bitrate de audio
 - una consola de configuración completamente organizada en pestañas, incluido el resumen y los accesos directos
 - un lanzador de Windows y el atajo `npm run config` para abrir la configuración
 - un diseño por secciones para red, cámara, audio, arranque y accesos directos
@@ -96,7 +96,7 @@ En Windows, el servidor también aparece en el área de notificación junto al r
 
 ## Versión
 
-Versión actual del proyecto: `0.1.22`
+Versión actual del proyecto: `0.1.23`
 
 - Notas de la versión: [changelog.md](changelog.md)
 
