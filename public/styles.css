@@ -26,6 +26,7 @@
 *,
 *::before,
 *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
 
 html {
   min-height: 100%;
@@ -241,6 +242,16 @@ select.input option { color: var(--text); background: #111217; }
 .preview-overlay { position: absolute; z-index: 2; inset: auto 12px 12px; display: flex; align-items: center; justify-content: space-between; gap: 7px; padding: 7px 8px; border: 1px solid rgba(255,255,255,.18); border-radius: var(--radius-md); background: rgba(7,7,9,.84); box-shadow: 0 16px 36px rgba(0,0,0,.35); backdrop-filter: blur(16px); }
 .preview-overlay strong { font-family: "Bahnschrift", "Arial Narrow", sans-serif; }
 .preview-overlay .muted { margin-top: 3px; font-size: 13px; }
+.phone-quality-settings { overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-md); background: rgba(255,255,255,.018); }
+.phone-quality-settings > summary { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 54px; padding: 7px 9px; cursor: pointer; list-style: none; }
+.phone-quality-settings > summary::-webkit-details-marker { display: none; }
+.phone-quality-settings > summary > span:first-child { display: grid; min-width: 0; gap: 2px; }
+.phone-quality-settings > summary strong { font: 600 15px "Bahnschrift", "Arial Narrow", sans-serif; }
+.phone-quality-settings > summary small { color: var(--muted); overflow-wrap: anywhere; }
+.phone-quality-settings[open] > summary { border-bottom: 1px solid var(--line); background: rgba(255,49,88,.06); }
+.phone-quality-settings[open] .disclosure-action::before { content: "Masquer"; }
+.phone-quality-body { display: grid; gap: 8px; padding: 9px; }
+.phone-quality-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
 
 .source-stage { position: relative; min-height: 100dvh; overflow: hidden; background: #000; }
 .source-stage video { display: block; width: 100vw; height: 100dvh; object-fit: contain; background: #000; }
@@ -253,7 +264,7 @@ select.input option { color: var(--text); background: #111217; }
 .config-layout { display: grid; grid-template-columns: minmax(280px, 350px) minmax(0, 1fr); gap: 16px; margin-top: 16px; align-items: start; }
 .config-sidebar { min-width: 0; align-self: start; }
 .config-rail { position: sticky; top: 16px; }
-.config-rail-inner, .config-main, .settings-grid, .rail-top, .rail-stack, .rail-summary-copy, .switch-copy, .config-section, .config-section-body, .config-footer, .config-link-list, .config-link-text { display: grid; }
+.config-rail-inner, .config-main, .settings-grid, .rail-top, .rail-stack, .rail-summary-copy, .switch-copy, .config-section, .config-section-body, .config-footer, .config-savebar, .config-link-list, .config-link-text { display: grid; }
 .config-rail-inner, .config-main, .settings-grid, .config-section-body, .config-footer, .config-link-list { gap: 7px; }
 .rail-stack { gap: 8px; }
 .rail-top { gap: 6px; }
@@ -294,6 +305,10 @@ select.input option { color: var(--text); background: #111217; }
 .config-link-text span { overflow-wrap: anywhere; word-break: break-word; }
 .config-command { color: #ff91a6 !important; font: 11px "Cascadia Mono", Consolas, monospace !important; }
 .config-badge-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.config-savebar { position: sticky; z-index: 4; bottom: 8px; gap: 6px; padding: 8px; border: 1px solid var(--line-strong); border-radius: var(--radius-md); background: rgba(15,16,21,.94); box-shadow: 0 -12px 32px rgba(0,0,0,.3); backdrop-filter: blur(14px); }
+.config-savebar .small { margin: 0; }
+.config-summary-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.config-shortcut-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
 .studio-header { display: flex; align-items: flex-end; justify-content: space-between; gap: 28px; padding: 24px 4px 20px; }
 .studio-title { margin: 10px 0 0; font: 650 clamp(2.25rem, 5vw, 4.8rem)/0.9 "Bahnschrift", "Arial Narrow", sans-serif; letter-spacing: -0.055em; }
@@ -354,9 +369,11 @@ select.input option { color: var(--text); background: #111217; }
 
 @media (max-width: 1180px) {
   .page-config .config-layout { grid-template-columns: 1fr; }
-  .page-config .config-main { order: -1; }
+  .page-config .config-sidebar { order: -1; }
   .page-config .config-rail { position: relative; top: auto; }
-  .page-config .rail-nav { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .page-config .rail-top, .page-config .rail-summary-card, .page-config .rail-stack { display: none; }
+  .page-config .config-rail-inner { padding: 5px; }
+  .page-config .rail-nav { grid-template-columns: repeat(6, minmax(0, 1fr)); }
   .page-config .rail-nav-item { align-items: flex-start; flex-direction: column; }
   .page-config .summary-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
@@ -372,7 +389,7 @@ select.input option { color: var(--text); background: #111217; }
   .grid.cols-2, .grid.cols-3, .config-layout { grid-template-columns: 1fr; }
   .grid.cols-3 > :first-child { grid-column: auto; }
   .config-rail { position: relative; top: auto; }
-  .config-main { order: -1; }
+  .page-config .config-main { order: initial; }
   .studio-header { align-items: flex-start; flex-direction: column; padding-inline: 4px; }
   .overview-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .overview-strip > .chip { grid-column: 1 / -1; width: fit-content; }
@@ -382,6 +399,8 @@ select.input option { color: var(--text); background: #111217; }
   .rail-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .page-config .rail-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .page-config .summary-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .config-shortcut-grid { grid-template-columns: 1fr; }
+  .phone-quality-grid { grid-template-columns: 1fr; }
   .camera-frame { min-height: min(68dvh, 620px); }
 }
 
@@ -396,7 +415,8 @@ select.input option { color: var(--text); background: #111217; }
   .qr-feature, .session-qr-row { grid-template-columns: 1fr; }
   .qr-image-large, .qr-image-small { width: min(100%, 220px); justify-self: center; }
   .rail-nav { grid-template-columns: 1fr; }
-  .page-config .rail-nav, .page-config .summary-stats { grid-template-columns: 1fr; }
+  .page-config .rail-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .page-config .summary-stats, .config-summary-grid { grid-template-columns: 1fr; }
   .camera-frame { min-height: 440px; }
   .preview-overlay { inset: auto 10px 10px; }
   .switch-row { min-height: 0; }

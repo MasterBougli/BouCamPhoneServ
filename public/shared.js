@@ -158,6 +158,9 @@ window.BouCamPhoneServ = (() => {
   function buildCaptureConstraints(settings = {}) {
     const facingMode = settings.preferredFacingMode === "user" ? "user" : "environment";
     const profile = getVideoProfile(settings.videoPreset);
+    const frameRate = [15, 24, 30, 60].includes(Number(settings.videoFrameRate))
+      ? Number(settings.videoFrameRate)
+      : 30;
 
     return {
       audio: {
@@ -169,7 +172,7 @@ window.BouCamPhoneServ = (() => {
         facingMode: { ideal: facingMode },
         width: { ideal: profile.width },
         height: { ideal: profile.height },
-        frameRate: { ideal: 30, max: 30 },
+        frameRate: { ideal: frameRate, max: frameRate },
       },
     };
   }

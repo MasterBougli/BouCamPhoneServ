@@ -17,6 +17,10 @@
 - couper le micro
 - arrêter un téléphone sans toucher aux autres
 
+## Qualité par téléphone
+
+Ouvre **Qualité de diffusion** sur la page téléphone pour remplacer le profil vidéo, les FPS ou le bitrate audio du serveur uniquement sur ce téléphone. Chaque sélecteur peut rester sur **Réglage du serveur**, et les choix locaux sont mémorisés dans le navigateur du téléphone. Appliquer la qualité pendant un direct recrée brièvement les pistes média, mais conserve la même session et la même URL OBS.
+
 ## Mosaïque de caméras
 
 Ouvre `http://localhost:8080/mosaic` pour surveiller tous les téléphones actifs dans une grille responsive. Chaque tuile démarre sans son pour respecter les règles de lecture automatique des navigateurs ; utilise **Activer le son** uniquement sur les caméras que tu veux entendre. L’ouverture de la mosaïque ne remplace pas une vue OBS.

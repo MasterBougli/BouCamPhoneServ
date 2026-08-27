@@ -139,6 +139,7 @@
       ["Nom par défaut", settings.defaultLabel || "Phone"],
       ["Caméra", BouCamPhoneServ.describeFacingMode(settings.preferredFacingMode || "environment")],
       ["Qualité", BouCamPhoneServ.describeVideoPreset(settings.videoPreset || "1080p")],
+      ["Fluidité", `${settings.videoFrameRate || 30} FPS`],
       ["Audio", `${settings.audioBitrateKbps || 48} kbps`],
       ["Auto-démarrage", settings.autoStart ? "Activé" : "Désactivé"],
       ["Micro au départ", settings.startMuted ? "Muet" : "Ouvert"],
@@ -210,8 +211,8 @@
             ? "Erreur"
             : "En attente";
       const viewUrl = getObsUrl(session.id);
-      const microphoneLabel = session.hasAudio ? "Activé" : "Coupé";
-      const cameraLabel = session.facingMode || "environment";
+      const microphoneLabel = `${session.hasAudio ? "Activé" : "Coupé"} · ${session.audioBitrateKbps || 48} kbps`;
+      const cameraLabel = `${BouCamPhoneServ.describeVideoPreset(session.videoPreset)} · ${session.videoFrameRate || 30} FPS`;
       const phoneTone = session.publisherOnline ? "good" : "danger";
       const viewerTone = session.viewerOnline ? "good" : "warn";
 

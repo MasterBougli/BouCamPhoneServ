@@ -2,6 +2,7 @@
   "defaultLabel": "Phone",
   "preferredFacingMode": "environment",
   "videoPreset": "1080p-balanced",
+  "videoFrameRate": 30,
   "audioBitrateKbps": 48,
   "startMuted": false,
   "autoStart": false,

@@ -23,7 +23,7 @@ Each phone should become a separate source in OBS.
 
 ## Quality and Bitrate
 
-Video profiles combine a target resolution with a WebRTC bitrate ceiling: 720p uses 1, 2.5, or 4 Mbps; 1080p uses 2.5, 5, or 8 Mbps; and 1440p high quality uses 12 Mbps. Audio can target 32 kbps (low), 48 kbps (normal), or 64 kbps (high). These are ceilings: WebRTC may lower the actual bitrate when the network or phone cannot sustain it. Resolution, frame rate, codec, lighting, and sensor quality also affect the final image.
+Video profiles combine a target resolution with a WebRTC bitrate ceiling: 720p uses 1, 2.5, or 4 Mbps; 1080p uses 2.5, 5, or 8 Mbps; and 1440p high quality uses 12 Mbps. Frame rate can target 15, 24, 30, or 60 FPS. Audio can target 32 kbps (low), 48 kbps (normal), or 64 kbps (high). These are ceilings: WebRTC may lower the actual bitrate when the network or phone cannot sustain it. Each phone can inherit the server values or store local overrides. Resolution, frame rate, codec, lighting, and sensor quality also affect the final image.
 
 ## If a Source Does Not Appear
 

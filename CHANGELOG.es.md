@@ -6,6 +6,17 @@
 
 Este historial mantiene la versión más reciente arriba para encontrar rápidamente los cambios más importantes.
 
+## 0.1.22 - 2026-08-27
+
+- transformación de cada sección de configuración en un panel de pestaña accesible real
+- traslado del resumen activo y de los accesos directos de estudio a pestañas dedicadas
+- mantenimiento de los controles de guardado independientemente de la pestaña seleccionada
+- incorporación de opciones globales de 15, 24, 30 y 60 FPS
+- incorporación de prioridades persistentes por teléfono para vídeo, FPS y bitrate de audio
+- reaplicación de las restricciones multimedia y límites WebRTC locales sin sustituir la sesión del teléfono
+- visualización en el panel de los ajustes multimedia efectivos de cada teléfono
+- actualización de la versión del proyecto a `0.1.22`
+
 ## 0.1.21 - 2026-08-27
 
 - reducción de aproximadamente el 50 % del espacio interior de las tarjetas sin reducir las zonas táctiles

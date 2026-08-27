@@ -17,6 +17,10 @@
 - silenciar el micrófono
 - detener un teléfono sin afectar a los demás
 
+## Calidad por teléfono
+
+Abre **Calidad de emisión** en la página del teléfono para sustituir el perfil de vídeo, los FPS o el bitrate de audio del servidor solo en ese teléfono. Cada selector puede permanecer en **Ajuste del servidor**, y las opciones locales se guardan en el navegador del teléfono. Aplicar la calidad durante una emisión recrea brevemente las pistas multimedia, pero conserva la misma sesión y URL de OBS.
+
 ## Mosaico de cámaras
 
 Abre `http://localhost:8080/mosaic` para supervisar todos los teléfonos activos en una cuadrícula adaptable. Cada tarjeta empieza sin sonido para respetar las reglas de reproducción automática del navegador; usa **Activar sonido** solo en las cámaras que quieras escuchar. Abrir el mosaico no sustituye una vista de OBS.

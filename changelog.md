@@ -6,6 +6,17 @@
 
 This log keeps the newest release at the top so the most relevant changes are easy to find.
 
+## 0.1.22 - 2026-08-27
+
+- converted every configuration section into a real accessible tab panel
+- moved Active summary and Studio shortcuts from sidebar cards into dedicated configuration tabs
+- kept the save controls visible independently of the selected tab
+- added global 15, 24, 30, and 60 FPS choices
+- added persistent per-phone overrides for video profile, frame rate, and audio bitrate
+- reapplied local media constraints and WebRTC bitrate ceilings without replacing the phone session
+- exposed each phone's effective media settings on the dashboard
+- updated the project version to `0.1.22`
+
 ## 0.1.21 - 2026-08-27
 
 - reduced internal card spacing by about 50 percent while preserving control touch targets

@@ -23,11 +23,21 @@ const DEFAULT_SETTINGS = {
   defaultLabel: "Phone",
   preferredFacingMode: "environment",
   videoPreset: "1080p-balanced",
+  videoFrameRate: 30,
   audioBitrateKbps: 48,
   startMuted: false,
   autoStart: false,
   cleanViewer: true,
 };
+const VIDEO_PRESETS = [
+  "720p-low",
+  "720p-balanced",
+  "720p-high",
+  "1080p-low",
+  "1080p-balanced",
+  "1080p-high",
+  "1440p-high",
+];
 
 const sessions = new Map();
 let settings = loadSettings();
@@ -80,23 +90,21 @@ function normalizeSettings(input) {
     "1440p": "1440p-high",
   };
   const requestedVideoPreset = legacyVideoPresets[source.videoPreset] || source.videoPreset;
-  const videoPreset = [
-    "720p-low",
-    "720p-balanced",
-    "720p-high",
-    "1080p-low",
-    "1080p-balanced",
-    "1080p-high",
-    "1440p-high",
-  ].includes(requestedVideoPreset) ? requestedVideoPreset : DEFAULT_SETTINGS.videoPreset;
+  const videoPreset = VIDEO_PRESETS.includes(requestedVideoPreset)
+    ? requestedVideoPreset
+    : DEFAULT_SETTINGS.videoPreset;
   const audioBitrateKbps = [32, 48, 64].includes(Number(source.audioBitrateKbps))
     ? Number(source.audioBitrateKbps)
     : DEFAULT_SETTINGS.audioBitrateKbps;
+  const videoFrameRate = [15, 24, 30, 60].includes(Number(source.videoFrameRate))
+    ? Number(source.videoFrameRate)
+    : DEFAULT_SETTINGS.videoFrameRate;
 
   return {
     defaultLabel,
     preferredFacingMode,
     videoPreset,
+    videoFrameRate,
     audioBitrateKbps,
     startMuted: Boolean(source.startMuted),
     autoStart: Boolean(source.autoStart),
@@ -208,6 +216,9 @@ function makeSession(label = settings.defaultLabel || "Phone") {
     facingMode: "environment",
     hasAudio: true,
     hasVideo: true,
+    videoPreset: settings.videoPreset,
+    videoFrameRate: settings.videoFrameRate,
+    audioBitrateKbps: settings.audioBitrateKbps,
     publisherSeenAt: 0,
     viewerSeenAt: 0,
     publisherState: "idle",
@@ -259,6 +270,9 @@ function toPublicSession(session) {
     facingMode: session.facingMode,
     hasAudio: session.hasAudio,
     hasVideo: session.hasVideo,
+    videoPreset: session.videoPreset,
+    videoFrameRate: session.videoFrameRate,
+    audioBitrateKbps: session.audioBitrateKbps,
     publisherOnline,
     viewerOnline,
     viewerCount,
@@ -313,6 +327,15 @@ function routeMessage(session, from, kind, payload, viewerId = null) {
     }
     if (typeof payload.hasVideo === "boolean") {
       session.hasVideo = payload.hasVideo;
+    }
+    if (VIDEO_PRESETS.includes(payload.videoPreset)) {
+      session.videoPreset = payload.videoPreset;
+    }
+    if ([15, 24, 30, 60].includes(Number(payload.videoFrameRate))) {
+      session.videoFrameRate = Number(payload.videoFrameRate);
+    }
+    if ([32, 48, 64].includes(Number(payload.audioBitrateKbps))) {
+      session.audioBitrateKbps = Number(payload.audioBitrateKbps);
     }
   }
 
@@ -568,6 +591,15 @@ function handleRequest(req, res) {
             }
             if (typeof body?.hasVideo === "boolean") {
               session.hasVideo = body.hasVideo;
+            }
+            if (VIDEO_PRESETS.includes(body?.videoPreset)) {
+              session.videoPreset = body.videoPreset;
+            }
+            if ([15, 24, 30, 60].includes(Number(body?.videoFrameRate))) {
+              session.videoFrameRate = Number(body.videoFrameRate);
+            }
+            if ([32, 48, 64].includes(Number(body?.audioBitrateKbps))) {
+              session.audioBitrateKbps = Number(body.audioBitrateKbps);
             }
           } else {
             session.viewerSeenAt = now;

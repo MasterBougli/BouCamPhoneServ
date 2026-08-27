@@ -6,6 +6,17 @@
 
 Ce journal garde la version la plus récente en haut pour retrouver rapidement les changements les plus importants.
 
+## 0.1.22 - 2026-08-27
+
+- transformation de chaque section de configuration en véritable panneau d’onglet accessible
+- déplacement du résumé actif et des raccourcis studio dans des onglets dédiés de la configuration
+- maintien des commandes d’enregistrement indépendamment de l’onglet sélectionné
+- ajout des choix globaux à 15, 24, 30 et 60 FPS
+- ajout de priorités persistantes par téléphone pour le profil vidéo, les FPS et le bitrate audio
+- réapplication des contraintes média et plafonds WebRTC locaux sans remplacer la session du téléphone
+- affichage des réglages média effectifs de chaque téléphone sur le tableau de bord
+- mise à jour de la version du projet à `0.1.22`
+
 ## 0.1.21 - 2026-08-27
 
 - réduction d’environ 50 % des espacements internes des cartes sans réduire les zones tactiles des commandes

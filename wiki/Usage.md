@@ -17,6 +17,10 @@
 - mute the microphone
 - stop one phone without affecting the others
 
+## Per-Phone Quality
+
+Open **Streaming quality** on the phone page to override the server's video profile, frame rate, or audio bitrate for that phone only. Each selector can remain on **Server setting**, and local choices are stored in that phone's browser. Applying quality during a live stream briefly recreates the media tracks but keeps the same session and OBS URL.
+
 ## Camera Mosaic
 
 Open `http://localhost:8080/mosaic` to monitor every active phone in one responsive grid. Each tile starts muted to satisfy browser autoplay rules; use **Enable audio** only on the cameras you need to hear. Opening the mosaic does not replace an OBS viewer.

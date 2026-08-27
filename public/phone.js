@@ -2,6 +2,7 @@
 (() => {
   const storageKey = "camfromphone.sessionId";
   const labelKey = "camfromphone.label";
+  const mediaOverridesKey = "camfromphone.mediaOverrides";
 
   const startButton = document.getElementById("startButton");
   const switchButton = document.getElementById("switchButton");
@@ -22,6 +23,12 @@
   const previewSubtitle = document.getElementById("previewSubtitle");
   const networkChip = document.getElementById("networkChip");
   const permissionChip = document.getElementById("permissionChip");
+  const phoneVideoPresetInput = document.getElementById("phoneVideoPresetInput");
+  const phoneFrameRateInput = document.getElementById("phoneFrameRateInput");
+  const phoneAudioBitrateInput = document.getElementById("phoneAudioBitrateInput");
+  const applyPhoneQualityButton = document.getElementById("applyPhoneQualityButton");
+  const phoneQualitySummary = document.getElementById("phoneQualitySummary");
+  const phoneQualityHint = document.getElementById("phoneQualityHint");
 
   const state = {
     bootstrap: null,
@@ -36,8 +43,56 @@
     audioEnabled: true,
     active: false,
     connecting: false,
+    mediaOverrides: loadStoredMediaOverrides(),
     deviceType: BouCamPhoneServ.deviceName(),
   };
+
+  // Charge les préférences média locales mémorisées sur ce téléphone.
+  function loadStoredMediaOverrides() {
+    try {
+      const value = JSON.parse(localStorage.getItem(mediaOverridesKey) || "{}");
+      if (!value || typeof value !== "object") {
+        return {};
+      }
+      const safe = {};
+      if (["720p-low", "720p-balanced", "720p-high", "1080p-low", "1080p-balanced", "1080p-high", "1440p-high"].includes(value.videoPreset)) {
+        safe.videoPreset = value.videoPreset;
+      }
+      if ([15, 24, 30, 60].includes(Number(value.videoFrameRate))) {
+        safe.videoFrameRate = Number(value.videoFrameRate);
+      }
+      if ([32, 48, 64].includes(Number(value.audioBitrateKbps))) {
+        safe.audioBitrateKbps = Number(value.audioBitrateKbps);
+      }
+      return safe;
+    } catch {
+      return {};
+    }
+  }
+
+  // Fusionne les valeurs globales du serveur avec les choix propres au téléphone.
+  function getEffectiveMediaSettings() {
+    return {
+      ...(state.bootstrap?.settings || {}),
+      ...state.mediaOverrides,
+    };
+  }
+
+  // Synchronise les sélecteurs locaux et leur résumé avec les valeurs effectives.
+  function syncPhoneQualityControls() {
+    const serverSettings = state.bootstrap?.settings || {};
+    const effective = getEffectiveMediaSettings();
+    phoneVideoPresetInput.value = state.mediaOverrides.videoPreset || "";
+    phoneFrameRateInput.value = state.mediaOverrides.videoFrameRate ? String(state.mediaOverrides.videoFrameRate) : "";
+    phoneAudioBitrateInput.value = state.mediaOverrides.audioBitrateKbps ? String(state.mediaOverrides.audioBitrateKbps) : "";
+    phoneVideoPresetInput.options[0].textContent = `Serveur · ${BouCamPhoneServ.describeVideoPreset(serverSettings.videoPreset)}`;
+    phoneFrameRateInput.options[0].textContent = `Serveur · ${serverSettings.videoFrameRate || 30} FPS`;
+    phoneAudioBitrateInput.options[0].textContent = `Serveur · ${serverSettings.audioBitrateKbps || 48} kbps`;
+    const localCount = Object.keys(state.mediaOverrides).length;
+    phoneQualitySummary.textContent = localCount
+      ? `${BouCamPhoneServ.describeVideoPreset(effective.videoPreset)} · ${effective.videoFrameRate || 30} FPS · ${effective.audioBitrateKbps || 48} kbps`
+      : "Réglages du serveur";
+  }
 
   // Met à jour le badge d'état principal.
   function setStatus(text, tone = "warn") {
@@ -67,9 +122,10 @@
     sessionIdValue.textContent = state.session?.id || "—";
     sessionStateValue.textContent = state.session?.state || "En attente";
     cameraValue.textContent = BouCamPhoneServ.describeFacingMode(state.facingMode);
-    const audioBitrate = state.bootstrap?.settings?.audioBitrateKbps || 48;
+    const mediaSettings = getEffectiveMediaSettings();
+    const audioBitrate = mediaSettings.audioBitrateKbps || 48;
     audioValue.textContent = `${state.audioEnabled ? "Activé" : "Coupé"} · ${audioBitrate} kbps`;
-    qualityValue.textContent = BouCamPhoneServ.describeVideoPreset(state.bootstrap?.settings?.videoPreset || "1080p");
+    qualityValue.textContent = `${BouCamPhoneServ.describeVideoPreset(mediaSettings.videoPreset)} · ${mediaSettings.videoFrameRate || 30} FPS`;
     previewTitle.textContent = state.session?.label || "Aperçu local";
     previewSubtitle.textContent = state.active
       ? "Le téléphone envoie la vidéo vers le PC en direct."
@@ -115,6 +171,7 @@
     if (!state.session) {
       return;
     }
+    const mediaSettings = getEffectiveMediaSettings();
     await BouCamPhoneServ.fetchJson(`/api/sessions/${state.session.id}/state`, {
       method: "POST",
       body: JSON.stringify({
@@ -125,6 +182,9 @@
         deviceType: state.deviceType,
         hasAudio: state.audioEnabled,
         hasVideo: Boolean(state.stream),
+        videoPreset: mediaSettings.videoPreset,
+        videoFrameRate: mediaSettings.videoFrameRate || 30,
+        audioBitrateKbps: mediaSettings.audioBitrateKbps || 48,
         ...extra,
       }),
     });
@@ -184,7 +244,7 @@
 
   // Demande l'accès à la caméra et au micro avec les bons réglages.
   async function acquireMedia() {
-    const settings = state.bootstrap?.settings || {};
+    const settings = getEffectiveMediaSettings();
     const constraints = BouCamPhoneServ.buildCaptureConstraints(settings);
     constraints.video.facingMode = { ideal: state.facingMode };
 
@@ -208,7 +268,7 @@
     if (!sender?.track || typeof sender.getParameters !== "function" || typeof sender.setParameters !== "function") {
       return;
     }
-    const bitrates = BouCamPhoneServ.getSenderBitrates(state.bootstrap?.settings || {});
+    const bitrates = BouCamPhoneServ.getSenderBitrates(getEffectiveMediaSettings());
     const parameters = sender.getParameters();
     if (!parameters.encodings?.length) {
       return;
@@ -392,18 +452,11 @@
     }
   }
 
-  // Bascule entre caméra arrière et caméra frontale.
-  async function switchCamera() {
-    if (!state.stream) {
-      state.facingMode = state.facingMode === "environment" ? "user" : "environment";
-      cameraValue.textContent = BouCamPhoneServ.describeFacingMode(state.facingMode);
-      return;
-    }
-
-    const nextFacing = state.facingMode === "environment" ? "user" : "environment";
+  // Recrée le flux local avec la caméra et les réglages média effectifs.
+  async function replaceMediaStream(nextFacing) {
     state.facingMode = nextFacing;
 
-    const settings = state.bootstrap?.settings || {};
+    const settings = getEffectiveMediaSettings();
     const constraints = BouCamPhoneServ.buildCaptureConstraints(settings);
     constraints.video.facingMode = { ideal: nextFacing };
     const nextStream = await navigator.mediaDevices.getUserMedia(constraints);
@@ -439,6 +492,54 @@
     localVideo.srcObject = nextStream;
     updateStaticFields();
     await sendState({ facingMode: state.facingMode });
+  }
+
+  // Bascule entre caméra arrière et caméra frontale.
+  async function switchCamera() {
+    const nextFacing = state.facingMode === "environment" ? "user" : "environment";
+    if (!state.stream) {
+      state.facingMode = nextFacing;
+      cameraValue.textContent = BouCamPhoneServ.describeFacingMode(state.facingMode);
+      return;
+    }
+    await replaceMediaStream(nextFacing);
+  }
+
+  // Enregistre et applique les choix de qualité propres à ce téléphone.
+  async function applyPhoneQuality() {
+    const overrides = {};
+    if (phoneVideoPresetInput.value) {
+      overrides.videoPreset = phoneVideoPresetInput.value;
+    }
+    if (phoneFrameRateInput.value) {
+      overrides.videoFrameRate = Number(phoneFrameRateInput.value);
+    }
+    if (phoneAudioBitrateInput.value) {
+      overrides.audioBitrateKbps = Number(phoneAudioBitrateInput.value);
+    }
+    state.mediaOverrides = overrides;
+    localStorage.setItem(mediaOverridesKey, JSON.stringify(overrides));
+    applyPhoneQualityButton.disabled = true;
+    phoneQualityHint.textContent = state.stream
+      ? "Application de la qualité et reconnexion rapide de la caméra..."
+      : "Qualité locale enregistrée. Elle sera utilisée au prochain démarrage.";
+    try {
+      if (state.stream) {
+        await replaceMediaStream(state.facingMode);
+      } else {
+        for (const pc of state.peers.values()) {
+          await applyPeerBitrates(pc);
+        }
+        await sendState();
+      }
+      syncPhoneQualityControls();
+      updateStaticFields();
+      phoneQualityHint.textContent = Object.keys(overrides).length
+        ? "Les choix locaux remplacent les valeurs du serveur pour ce téléphone."
+        : "Les réglages du serveur sont de nouveau utilisés.";
+    } finally {
+      applyPhoneQualityButton.disabled = false;
+    }
   }
 
   // Active ou coupe le micro sans recréer la session.
@@ -498,6 +599,7 @@
     setStatus("Prêt", "warn");
     state.bootstrap = await BouCamPhoneServ.fetchJson("/api/bootstrap");
     labelInput.value = localStorage.getItem(labelKey) || state.bootstrap?.settings?.defaultLabel || BouCamPhoneServ.deviceName();
+    syncPhoneQualityControls();
 
     try {
       await ensureSession();
@@ -535,6 +637,12 @@
     saveLabelButton.addEventListener("click", () => saveLabel().catch(console.error));
     // Sauvegarde le libellé dès qu'il change.
     labelInput.addEventListener("change", () => saveLabel().catch(console.error));
+    // Applique les réglages vidéo et audio propres à ce téléphone.
+    applyPhoneQualityButton.addEventListener("click", () => applyPhoneQuality().catch((error) => {
+      console.error(error);
+      phoneQualityHint.textContent = error.message || "Impossible d’appliquer cette qualité.";
+      applyPhoneQualityButton.disabled = false;
+    }));
 
     // Interroge la signalisation régulièrement pour rester réactif.
     state.pollTimer = setInterval(() => {

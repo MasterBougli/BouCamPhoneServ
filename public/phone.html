@@ -48,6 +48,59 @@
                 <input class="input" id="labelInput" type="text" placeholder="Phone" />
               </label>
 
+              <details class="phone-quality-settings">
+                <summary>
+                  <span>
+                    <strong>Qualité de diffusion</strong>
+                    <small id="phoneQualitySummary">Réglages du serveur</small>
+                  </span>
+                  <span class="disclosure-action" aria-hidden="true"></span>
+                </summary>
+                <div class="phone-quality-body">
+                  <label class="field">
+                    <span class="label">Qualité vidéo</span>
+                    <select class="input" id="phoneVideoPresetInput">
+                      <option value="">Réglage du serveur</option>
+                      <option value="720p-low">720p basse qualité · 1 Mbps</option>
+                      <option value="720p-balanced">720p équilibré · 2,5 Mbps</option>
+                      <option value="720p-high">720p haute qualité · 4 Mbps</option>
+                      <option value="1080p-low">1080p basse qualité · 2,5 Mbps</option>
+                      <option value="1080p-balanced">1080p équilibré · 5 Mbps</option>
+                      <option value="1080p-high">1080p haute qualité · 8 Mbps</option>
+                      <option value="1440p-high">1440p haute qualité · 12 Mbps</option>
+                    </select>
+                  </label>
+
+                  <div class="phone-quality-grid">
+                    <label class="field">
+                      <span class="label">Fluidité</span>
+                      <select class="input" id="phoneFrameRateInput">
+                        <option value="">Réglage du serveur</option>
+                        <option value="15">15 FPS</option>
+                        <option value="24">24 FPS</option>
+                        <option value="30">30 FPS</option>
+                        <option value="60">60 FPS</option>
+                      </select>
+                    </label>
+
+                    <label class="field">
+                      <span class="label">Qualité audio</span>
+                      <select class="input" id="phoneAudioBitrateInput">
+                        <option value="">Réglage du serveur</option>
+                        <option value="32">Basse · 32 kbps</option>
+                        <option value="48">Normale · 48 kbps</option>
+                        <option value="64">Haute · 64 kbps</option>
+                      </select>
+                    </label>
+                  </div>
+
+                  <button class="button" id="applyPhoneQualityButton" type="button">Appliquer la qualité</button>
+                  <p class="small muted" id="phoneQualityHint">
+                    Les valeurs du serveur sont utilisées tant qu’aucun choix local n’est défini.
+                  </p>
+                </div>
+              </details>
+
               <div class="stats">
                 <div class="key-value">
                   <span class="key">ID</span>

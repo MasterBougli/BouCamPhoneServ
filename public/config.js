@@ -11,6 +11,7 @@
     defaultLabelInput: document.getElementById("defaultLabelInput"),
     preferredFacingModeInput: document.getElementById("preferredFacingModeInput"),
     videoPresetInput: document.getElementById("videoPresetInput"),
+    videoFrameRateInput: document.getElementById("videoFrameRateInput"),
     audioBitrateInput: document.getElementById("audioBitrateInput"),
     autoStartInput: document.getElementById("autoStartInput"),
     startMutedInput: document.getElementById("startMutedInput"),
@@ -49,6 +50,7 @@
       defaultLabel: elements.defaultLabelInput.value.trim() || "Phone",
       preferredFacingMode: elements.preferredFacingModeInput.value === "user" ? "user" : "environment",
       videoPreset: elements.videoPresetInput.value,
+      videoFrameRate: Number(elements.videoFrameRateInput.value),
       audioBitrateKbps: Number(elements.audioBitrateInput.value),
       autoStart: elements.autoStartInput.checked,
       startMuted: elements.startMutedInput.checked,
@@ -78,6 +80,9 @@
     elements.audioBitrateInput.value = [32, 48, 64].includes(Number(safe.audioBitrateKbps))
       ? String(safe.audioBitrateKbps)
       : "48";
+    elements.videoFrameRateInput.value = [15, 24, 30, 60].includes(Number(safe.videoFrameRate))
+      ? String(safe.videoFrameRate)
+      : "30";
     elements.autoStartInput.checked = Boolean(safe.autoStart);
     elements.startMutedInput.checked = Boolean(safe.startMuted);
     elements.cleanViewerInput.checked = safe.cleanViewer === undefined ? true : Boolean(safe.cleanViewer);
@@ -101,6 +106,7 @@
       ["Nom par défaut", current.defaultLabel],
       ["Caméra", BouCamPhoneServ.describeFacingMode(current.preferredFacingMode)],
       ["Qualité", BouCamPhoneServ.describeVideoPreset(current.videoPreset)],
+      ["Fluidité", `${current.videoFrameRate} FPS`],
       ["Audio", `${current.audioBitrateKbps} kbps`],
       ["Auto-démarrage", current.autoStart ? "Activé" : "Désactivé"],
       ["Micro au départ", current.startMuted ? "Muet" : "Ouvert"],
@@ -264,38 +270,57 @@
     elements.configHint.textContent = "Des changements sont en attente d’enregistrement.";
   }
 
-  // Active visuellement l'onglet correspondant à la section affichée.
-  function activateSectionTab(sectionId) {
-    for (const tab of document.querySelectorAll(".rail-nav-item")) {
+  // Affiche uniquement le panneau associé à l'onglet sélectionné.
+  function activateSectionTab(sectionId, updateHash = false) {
+    const tabs = [...document.querySelectorAll(".rail-nav-item")];
+    const panels = [...document.querySelectorAll('[role="tabpanel"]')];
+    for (const tab of tabs) {
       const active = tab.getAttribute("href") === `#${sectionId}`;
       tab.classList.toggle("active", active);
+      tab.setAttribute("aria-selected", String(active));
+      tab.tabIndex = active ? 0 : -1;
       if (active) {
-        tab.setAttribute("aria-current", "location");
+        tab.setAttribute("aria-current", "page");
       } else {
         tab.removeAttribute("aria-current");
       }
     }
+    for (const panel of panels) {
+      panel.hidden = panel.id !== sectionId;
+    }
+    if (updateHash) {
+      history.replaceState(null, "", `#${sectionId}`);
+    }
   }
 
-  // Suit les sections visibles pour transformer le menu latéral en onglets actifs.
+  // Branche les clics et le clavier sur les vrais onglets de configuration.
   function setupSectionTabs() {
-    const sections = [...document.querySelectorAll(".config-section, #shortcuts-section")];
-    if (!("IntersectionObserver" in window)) {
-      activateSectionTab("network-section");
-      return;
+    const tabs = [...document.querySelectorAll(".rail-nav-item")];
+    const requestedSection = window.location.hash.slice(1);
+    const initialSection = document.getElementById(requestedSection)?.matches('[role="tabpanel"]')
+      ? requestedSection
+      : "network-section";
+    for (const [index, tab] of tabs.entries()) {
+      tab.addEventListener("click", (event) => {
+        event.preventDefault();
+        activateSectionTab(tab.getAttribute("href").slice(1), true);
+        document.querySelector(".config-main")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+      tab.addEventListener("keydown", (event) => {
+        if (!["ArrowDown", "ArrowUp", "ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) {
+          return;
+        }
+        event.preventDefault();
+        const nextIndex = event.key === "Home"
+          ? 0
+          : event.key === "End"
+            ? tabs.length - 1
+            : (index + (["ArrowDown", "ArrowRight"].includes(event.key) ? 1 : -1) + tabs.length) % tabs.length;
+        tabs[nextIndex].focus();
+        activateSectionTab(tabs[nextIndex].getAttribute("href").slice(1), true);
+      });
     }
-    const observer = new IntersectionObserver((entries) => {
-      const visible = entries
-        .filter((entry) => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (visible) {
-        activateSectionTab(visible.target.id);
-      }
-    }, { rootMargin: "-20% 0px -60% 0px", threshold: [0.05, 0.25, 0.5] });
-    for (const section of sections) {
-      observer.observe(section);
-    }
-    activateSectionTab("network-section");
+    activateSectionTab(initialSection);
   }
 
   // Lance la page de configuration et branche les événements.
@@ -331,6 +356,7 @@
       elements.defaultLabelInput,
       elements.preferredFacingModeInput,
       elements.videoPresetInput,
+      elements.videoFrameRateInput,
       elements.audioBitrateInput,
       elements.autoStartInput,
       elements.startMutedInput,

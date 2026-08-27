@@ -53,70 +53,50 @@
                 </div>
               </div>
 
-              <nav class="rail-nav" aria-label="Navigation de la configuration">
-                <a class="rail-nav-item" href="#network-section">
+              <nav class="rail-nav" aria-label="Navigation de la configuration" role="tablist" aria-orientation="vertical">
+                <a class="rail-nav-item" id="tab-network" href="#network-section" role="tab" aria-controls="network-section">
                   <span class="rail-nav-icon">01</span>
                   <span>
                     <strong>Réseau</strong>
                     <small>Nom et identité</small>
                   </span>
                 </a>
-                <a class="rail-nav-item" href="#camera-section">
+                <a class="rail-nav-item" id="tab-camera" href="#camera-section" role="tab" aria-controls="camera-section">
                   <span class="rail-nav-icon">02</span>
                   <span>
                     <strong>Caméra</strong>
                     <small>Orientation et qualité</small>
                   </span>
                 </a>
-                <a class="rail-nav-item" href="#audio-section">
+                <a class="rail-nav-item" id="tab-audio" href="#audio-section" role="tab" aria-controls="audio-section">
                   <span class="rail-nav-icon">03</span>
                   <span>
                     <strong>Audio</strong>
                     <small>Micro au démarrage</small>
                   </span>
                 </a>
-                <a class="rail-nav-item" href="#startup-section">
+                <a class="rail-nav-item" id="tab-startup" href="#startup-section" role="tab" aria-controls="startup-section">
                   <span class="rail-nav-icon">04</span>
                   <span>
                     <strong>Démarrage</strong>
                     <small>Comportement à l’ouverture</small>
                   </span>
                 </a>
-                <a class="rail-nav-item" href="#shortcuts-section">
+                <a class="rail-nav-item" id="tab-summary" href="#summary-section" role="tab" aria-controls="summary-section">
                   <span class="rail-nav-icon">05</span>
                   <span>
-                    <strong>Raccourcis</strong>
+                    <strong>Résumé actif</strong>
+                    <small>Valeurs chargées</small>
+                  </span>
+                </a>
+                <a class="rail-nav-item" id="tab-shortcuts" href="#shortcuts-section" role="tab" aria-controls="shortcuts-section">
+                  <span class="rail-nav-icon">06</span>
+                  <span>
+                    <strong>Raccourcis studio</strong>
                     <small>Ouvrir et lancer</small>
                   </span>
                 </a>
               </nav>
-
-              <div class="rail-stack">
-                <div class="rail-box">
-                  <div class="panel-header compact">
-                    <div>
-                      <h3 class="panel-title">Résumé actif</h3>
-                      <p class="panel-subtitle">
-                        Vérifie en un coup d’œil les réglages réellement chargés par le serveur.
-                      </p>
-                    </div>
-                    <span class="chip warn" id="summaryState">En attente</span>
-                  </div>
-                  <div class="stats summary-stats" id="settingsSummary"></div>
-                </div>
-
-                <div class="rail-box">
-                  <div class="panel-header compact">
-                    <div>
-                      <h3 class="panel-title">Raccourcis studio</h3>
-                      <p class="panel-subtitle">
-                        Liens rapides pour ouvrir, télécharger ou lancer la configuration.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="config-link-list" id="linksList"></div>
-                </div>
-              </div>
             </div>
           </article>
         </aside>
@@ -136,7 +116,7 @@
               </div>
 
               <form class="settings-grid" id="settingsForm">
-              <section class="config-section" id="network-section">
+              <section class="config-section" id="network-section" role="tabpanel" aria-labelledby="tab-network">
                 <div class="config-section-header">
                   <div>
                     <h3 class="config-section-title">Réseau et identité</h3>
@@ -159,7 +139,7 @@
                 </div>
               </section>
 
-              <section class="config-section" id="camera-section">
+              <section class="config-section" id="camera-section" role="tabpanel" aria-labelledby="tab-camera" hidden>
                 <div class="config-section-header">
                   <div>
                     <h3 class="config-section-title">Caméra</h3>
@@ -193,10 +173,23 @@
                       Un preset plus léger consomme moins de bande passante sur le réseau local.
                     </span>
                   </label>
+
+                  <label class="field">
+                    <span class="label">Images par seconde</span>
+                    <select class="input" id="videoFrameRateInput">
+                      <option value="15">15 FPS · économie réseau</option>
+                      <option value="24">24 FPS · rendu cinéma</option>
+                      <option value="30">30 FPS · recommandé</option>
+                      <option value="60">60 FPS · mouvement fluide</option>
+                    </select>
+                    <span class="field-help">
+                      Le 60 FPS demande davantage de lumière, de puissance et de bande passante.
+                    </span>
+                  </label>
                 </div>
               </section>
 
-              <section class="config-section" id="audio-section">
+              <section class="config-section" id="audio-section" role="tabpanel" aria-labelledby="tab-audio" hidden>
                 <div class="config-section-header">
                   <div>
                     <h3 class="config-section-title">Audio</h3>
@@ -234,7 +227,7 @@
                 </div>
               </section>
 
-              <section class="config-section" id="startup-section">
+              <section class="config-section" id="startup-section" role="tabpanel" aria-labelledby="tab-startup" hidden>
                 <div class="config-section-header">
                   <div>
                     <h3 class="config-section-title">Démarrage</h3>
@@ -274,7 +267,33 @@
                 </div>
               </section>
 
-              <div class="config-footer" id="shortcuts-section">
+              <section class="config-section" id="summary-section" role="tabpanel" aria-labelledby="tab-summary" hidden>
+                <div class="config-section-header">
+                  <div>
+                    <h3 class="config-section-title">Résumé actif</h3>
+                    <p class="config-section-subtitle">
+                      Vérifie les valeurs qui seront utilisées par défaut sur les téléphones.
+                    </p>
+                  </div>
+                  <span class="chip warn" id="summaryState">En attente</span>
+                </div>
+                <div class="stats config-summary-grid" id="settingsSummary"></div>
+              </section>
+
+              <section class="config-section" id="shortcuts-section" role="tabpanel" aria-labelledby="tab-shortcuts" hidden>
+                <div class="config-section-header">
+                  <div>
+                    <h3 class="config-section-title">Raccourcis studio</h3>
+                    <p class="config-section-subtitle">
+                      Ouvre les pages locales ou copie leurs adresses sans quitter la configuration.
+                    </p>
+                  </div>
+                  <span class="chip">Outils</span>
+                </div>
+                <div class="config-link-list config-shortcut-grid" id="linksList"></div>
+              </section>
+
+              <div class="config-savebar">
                 <div class="card-actions">
                   <button class="button" id="saveButton" type="submit">Appliquer maintenant</button>
                   <button class="button-secondary" id="resetButton" type="button">Recharger les valeurs</button>
