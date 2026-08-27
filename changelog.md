@@ -6,6 +6,16 @@
 
 This log keeps the newest release at the top so the most relevant changes are easy to find.
 
+## 0.1.19 - 2026-08-27
+
+- moved live sessions and server status ahead of onboarding cards on the dashboard
+- added progressive disclosure for phone setup, certificate help, and configuration details
+- added a responsive live camera mosaic at `/mosaic`
+- added multi-viewer WebRTC signaling so OBS and the mosaic can receive the same phone concurrently
+- added a Windows notification-area icon with quick links and a confirmed server shutdown action
+- moved the configuration form before its navigation rail on mobile
+- updated the project version to `0.1.19`
+
 ## 0.1.18 - 2026-08-27
 
 - clarified throughout the documentation that installing the local `.cer`/`.crt` certificate is optional

@@ -4,7 +4,7 @@ const https = require("https");
 const os = require("os");
 const path = require("path");
 const { randomUUID } = require("crypto");
-const { spawnSync } = require("child_process");
+const { spawn, spawnSync } = require("child_process");
 const QRCode = require("qrcode");
 
 const ROOT = __dirname;
@@ -165,6 +165,8 @@ function getUrls(req) {
     dashboardLoopback: `http://127.0.0.1:${HTTP_PORT}`,
     configLocal: `http://localhost:${HTTP_PORT}/config`,
     configLoopback: `http://127.0.0.1:${HTTP_PORT}/config`,
+    mosaicLocal: `http://localhost:${HTTP_PORT}/mosaic`,
+    mosaicLoopback: `http://127.0.0.1:${HTTP_PORT}/mosaic`,
     configLauncher: `http://localhost:${HTTP_PORT}/downloads/open-config.cmd`,
     certDownload: `http://localhost:${HTTP_PORT}/downloads/local.cer`,
     phoneUrls: lanAddresses.map((ip) => `https://${ip}:${HTTPS_PORT}/phone`),
@@ -191,6 +193,7 @@ function makeSession(label = settings.defaultLabel || "Phone") {
     viewerSeenAt: 0,
     publisherState: "idle",
     viewerState: "idle",
+    viewers: new Map(),
     queues: {
       publisher: [],
       viewer: [],
@@ -220,7 +223,13 @@ function getSessionOrThrow(id) {
 function toPublicSession(session) {
   const now = Date.now();
   const publisherOnline = now - session.publisherSeenAt < HEARTBEAT_TTL_MS;
-  const viewerOnline = now - session.viewerSeenAt < HEARTBEAT_TTL_MS;
+  for (const [viewerId, viewer] of session.viewers) {
+    if (now - viewer.seenAt >= HEARTBEAT_TTL_MS) {
+      session.viewers.delete(viewerId);
+    }
+  }
+  const viewerCount = session.viewers.size;
+  const viewerOnline = viewerCount > 0 || now - session.viewerSeenAt < HEARTBEAT_TTL_MS;
   return {
     id: session.id,
     label: session.label,
@@ -233,6 +242,7 @@ function toPublicSession(session) {
     hasVideo: session.hasVideo,
     publisherOnline,
     viewerOnline,
+    viewerCount,
     publisherSeenAt: session.publisherSeenAt || null,
     viewerSeenAt: session.viewerSeenAt || null,
     queueDepth: {
@@ -250,7 +260,7 @@ function trimQueue(queue) {
 }
 
 // Route un message vers le bon rôle et met à jour l'horodatage associé.
-function routeMessage(session, from, kind, payload) {
+function routeMessage(session, from, kind, payload, viewerId = null) {
   const target = from === "publisher" ? "viewer" : "publisher";
   const now = Date.now();
   const message = {
@@ -258,6 +268,7 @@ function routeMessage(session, from, kind, payload) {
     from,
     kind,
     payload,
+    viewerId,
     at: now,
   };
 
@@ -541,6 +552,14 @@ function handleRequest(req, res) {
             }
           } else {
             session.viewerSeenAt = now;
+            const viewerId = typeof body?.viewerId === "string" ? body.viewerId.slice(0, 96) : null;
+            if (viewerId) {
+              if (body?.status === "left") {
+                session.viewers.delete(viewerId);
+              } else {
+                session.viewers.set(viewerId, { seenAt: now, status: body?.status || "waiting" });
+              }
+            }
             if (typeof body?.status === "string") {
               session.viewerState = body.status;
             }
@@ -564,7 +583,12 @@ function handleRequest(req, res) {
             }
             const kind = typeof item.kind === "string" ? item.kind : "message";
             const payload = Object.prototype.hasOwnProperty.call(item, "payload") ? item.payload : item;
-            accepted.push(routeMessage(session, from, kind, payload));
+            const viewerId = typeof item.viewerId === "string"
+              ? item.viewerId.slice(0, 96)
+              : typeof body?.viewerId === "string"
+                ? body.viewerId.slice(0, 96)
+                : null;
+            accepted.push(routeMessage(session, from, kind, payload, viewerId));
           }
           session.updatedAt = Date.now();
           sendJson(res, 200, { accepted });
@@ -576,7 +600,10 @@ function handleRequest(req, res) {
     if (action === "messages" && req.method === "GET") {
       const role = url.searchParams.get("role") === "publisher" ? "publisher" : "viewer";
       const after = Number(url.searchParams.get("after") || 0);
-      const items = session.queues[role].filter((message) => message.seq > after);
+      const viewerId = url.searchParams.get("viewerId");
+      const items = session.queues[role].filter((message) =>
+        message.seq > after && (role !== "viewer" || !viewerId || !message.viewerId || message.viewerId === viewerId)
+      );
       sendJson(res, 200, {
         items,
         latestSeq: items.length ? items[items.length - 1].seq : after,
@@ -599,6 +626,11 @@ function handleRequest(req, res) {
 
   if (pathname === "/config") {
     servePublicFile(res, "config.html");
+    return;
+  }
+
+  if (pathname === "/mosaic") {
+    servePublicFile(res, "mosaic.html");
     return;
   }
 
@@ -646,6 +678,11 @@ function handleRequest(req, res) {
     return;
   }
 
+  if (pathname === "/mosaic.js") {
+    servePublicFile(res, "mosaic.js");
+    return;
+  }
+
   if (pathname.startsWith("/public/")) {
     servePublicFile(res, pathname.slice("/public/".length));
     return;
@@ -662,6 +699,30 @@ function handleError(res, error) {
     console.error(error);
   }
   sendJson(res, statusCode, { error: message });
+}
+
+// Lance l'icône de notification Windows qui donne accès aux raccourcis du serveur.
+function startWindowsTray(urls) {
+  if (process.platform !== "win32" || process.env.BOUCAM_DISABLE_TRAY === "1") {
+    return;
+  }
+
+  const script = path.join(ROOT, "scripts", "server-tray.ps1");
+  const child = spawn("powershell.exe", [
+    "-NoProfile",
+    "-ExecutionPolicy", "Bypass",
+    "-WindowStyle", "Hidden",
+    "-File", script,
+    "-ServerPid", String(process.pid),
+    "-DashboardUrl", urls.dashboardLocal,
+    "-MosaicUrl", urls.mosaicLocal,
+    "-ConfigUrl", urls.configLocal,
+  ], {
+    detached: false,
+    stdio: "ignore",
+    windowsHide: true,
+  });
+  child.unref();
 }
 
 // Démarre les serveurs HTTP et HTTPS utilisés par l'application.
@@ -684,6 +745,7 @@ function startServers() {
 
   httpServer.listen(HTTP_PORT, HOST, () => {
     console.log(`HTTP server ready on http://localhost:${HTTP_PORT}`);
+    startWindowsTray(getUrls({ headers: { host: `localhost:${HTTP_PORT}` } }));
   });
 
   const urls = getUrls({ headers: { host: `localhost:${HTTP_PORT}` } });
@@ -692,6 +754,8 @@ function startServers() {
   console.log(`  ${urls.dashboardLocal}`);
   console.log("Open the configuration page on this PC:");
   console.log(`  ${urls.configLocal}`);
+  console.log("Open the camera mosaic on this PC:");
+  console.log(`  ${urls.mosaicLocal}`);
   console.log("");
   console.log("Open the phone page on each mobile device:");
   for (const url of urls.phoneUrls) {

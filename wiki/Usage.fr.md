@@ -17,6 +17,14 @@
 - couper le micro
 - arrêter un téléphone sans toucher aux autres
 
+## Mosaïque de caméras
+
+Ouvre `http://localhost:8080/mosaic` pour surveiller tous les téléphones actifs dans une grille responsive. Chaque tuile démarre sans son pour respecter les règles de lecture automatique des navigateurs ; utilise **Activer le son** uniquement sur les caméras que tu veux entendre. L’ouverture de la mosaïque ne remplace pas une vue OBS.
+
+## Icône de notification Windows
+
+Pendant que le serveur fonctionne sous Windows, son icône est visible dans la zone de notification près de l’horloge. Double-clique pour ouvrir le tableau de bord, ou fais un clic droit pour accéder au tableau de bord, à la mosaïque, à la configuration et à l’arrêt confirmé du serveur.
+
 ## Liens utiles
 
 - [Tutoriel complet](Tutorial.fr.md)

@@ -6,6 +6,16 @@
 
 Ce journal garde la version la plus récente en haut pour retrouver rapidement les changements les plus importants.
 
+## 0.1.19 - 2026-08-27
+
+- placement des sessions et de l’état du serveur avant les cartes d’aide sur le tableau de bord
+- affichage progressif de la connexion téléphone, de l’aide au certificat et de la configuration
+- ajout d’une mosaïque vidéo responsive sur `/mosaic`
+- ajout d’une signalisation WebRTC multi-viewer pour recevoir le même téléphone dans OBS et la mosaïque simultanément
+- ajout d’une icône Windows dans la zone de notification avec raccourcis et arrêt confirmé du serveur
+- placement du formulaire de configuration avant sa barre de navigation sur mobile
+- mise à jour de la version du projet à `0.1.19`
+
 ## 0.1.18 - 2026-08-27
 
 - précision dans toute la documentation que l’installation du certificat local `.cer`/`.crt` est facultative

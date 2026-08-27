@@ -25,6 +25,7 @@
     configSummary: document.getElementById("configSummary"),
     configStatus: document.getElementById("configStatus"),
     configObsLink: document.getElementById("configObsLink"),
+    phoneAccessDetails: document.getElementById("phoneAccessDetails"),
   };
 
   // Génère l'URL d'un QR code pour le texte fourni.
@@ -117,7 +118,7 @@
   function renderSummary() {
     const total = state.sessions.length;
     const activePhones = state.sessions.filter((session) => session.publisherOnline).length;
-    const connectedViewers = state.sessions.filter((session) => session.viewerOnline).length;
+    const connectedViewers = state.sessions.reduce((sum, session) => sum + (session.viewerCount || (session.viewerOnline ? 1 : 0)), 0);
     const lanCount = state.bootstrap?.urls?.lanAddresses?.length || 0;
 
     elements.phoneCountValue.textContent = `${total}`;
@@ -125,6 +126,10 @@
     elements.viewerCountValue.textContent = `${connectedViewers}`;
     elements.networkCountValue.textContent = `${lanCount || 1} LAN`;
     elements.sessionCount.textContent = `${total} appareil${total > 1 ? "s" : ""}`;
+    elements.copyAllObsButton.disabled = total === 0;
+    elements.configObsLink.classList.toggle("is-disabled", total === 0);
+    elements.configObsLink.setAttribute("aria-disabled", total === 0 ? "true" : "false");
+    elements.phoneAccessDetails.open = total === 0;
   }
 
   // Affiche les réglages graphiques actifs du serveur.
@@ -171,11 +176,19 @@
         <div class="session-top">
           <div>
             <h3 class="session-title">Aucun téléphone pour le moment</h3>
-            <p class="session-id">Ouvre le lien téléphone sur un mobile pour faire apparaître sa carte.</p>
+            <p class="session-id">Connecte un mobile pour faire apparaître sa carte et son lien OBS.</p>
           </div>
+        </div>
+        <div class="card-actions">
+          <button class="button" data-action="show-setup" type="button">Afficher le QR code</button>
+          <a class="button-secondary" href="/mosaic">Ouvrir la mosaïque</a>
         </div>
       `;
       elements.sessionList.appendChild(empty);
+      empty.querySelector('[data-action="show-setup"]').addEventListener("click", () => {
+        elements.phoneAccessDetails.open = true;
+        elements.phoneAccessDetails.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
       return;
     }
 
@@ -355,6 +368,11 @@
     elements.copyPhoneLinkButton.dataset.defaultLabel = elements.copyPhoneLinkButton.textContent;
     elements.copyAllObsButton.dataset.defaultLabel = elements.copyAllObsButton.textContent;
     elements.copyCertUrlButton.dataset.defaultLabel = elements.copyCertUrlButton.textContent;
+    elements.configObsLink.addEventListener("click", (event) => {
+      if (!state.sessions.length) {
+        event.preventDefault();
+      }
+    });
 
     // Copie le lien téléphone principal.
     elements.copyPhoneLinkButton.addEventListener("click", async () => {

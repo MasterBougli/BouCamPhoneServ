@@ -26,7 +26,8 @@
   const state = {
     bootstrap: null,
     session: null,
-    pc: null,
+    peers: new Map(),
+    waitingViewers: new Set(),
     stream: null,
     pollTimer: null,
     heartbeatTimer: null,
@@ -129,7 +130,7 @@
   }
 
   // Envoie un signal WebRTC au service de signalisation.
-  async function sendSignal(kind, payload) {
+  async function sendSignal(kind, payload, viewerId = null) {
     if (!state.session) {
       return;
     }
@@ -141,6 +142,7 @@
           {
             kind,
             payload,
+            viewerId,
           },
         ],
       }),
@@ -148,15 +150,24 @@
   }
 
   // Ferme proprement la connexion WebRTC en cours.
-  function closePeerConnection() {
-    if (state.pc) {
-      state.pc.onicecandidate = null;
-      state.pc.onconnectionstatechange = null;
-      state.pc.oniceconnectionstatechange = null;
-      state.pc.ontrack = null;
-      state.pc.close();
-      state.pc = null;
+  function closePeerConnection(viewerId) {
+    const pc = state.peers.get(viewerId);
+    if (!pc) {
+      return;
     }
+    pc.onicecandidate = null;
+    pc.onconnectionstatechange = null;
+    pc.oniceconnectionstatechange = null;
+    pc.close();
+    state.peers.delete(viewerId);
+  }
+
+  // Ferme toutes les connexions WebRTC ouvertes vers les viewers.
+  function closeAllPeerConnections() {
+    for (const viewerId of [...state.peers.keys()]) {
+      closePeerConnection(viewerId);
+    }
+    state.waitingViewers.clear();
   }
 
   // Arrête les pistes média et libère l'aperçu local.
@@ -192,12 +203,15 @@
   }
 
   // Crée la connexion WebRTC qui relie le téléphone au viewer.
-  async function createPeerConnection() {
-    closePeerConnection();
+  async function createPeerConnection(viewerId) {
+    if (!viewerId || !state.stream) {
+      return;
+    }
+    closePeerConnection(viewerId);
     const pc = new RTCPeerConnection({
       iceServers: [],
     });
-    state.pc = pc;
+    state.peers.set(viewerId, pc);
 
     for (const track of state.stream.getTracks()) {
       pc.addTrack(track, state.stream);
@@ -206,7 +220,7 @@
     // Transmet chaque candidat ICE généré au serveur.
     pc.onicecandidate = (event) => {
       if (event.candidate) {
-        sendSignal("ice", event.candidate.toJSON ? event.candidate.toJSON() : event.candidate).catch(console.error);
+        sendSignal("ice", event.candidate.toJSON ? event.candidate.toJSON() : event.candidate, viewerId).catch(console.error);
       }
     };
 
@@ -219,8 +233,8 @@
         setStatus("Connexion", "warn");
         setNetwork("Connexion", "warn");
       } else if (pc.connectionState === "failed" || pc.connectionState === "disconnected") {
-        setStatus("Déconnecté", "danger");
-        setNetwork("Déconnecté", "danger");
+        closePeerConnection(viewerId);
+        setNetwork(state.peers.size ? "Connecté" : "En attente", state.peers.size ? "good" : "warn");
       }
     };
 
@@ -233,7 +247,7 @@
 
     const offer = await pc.createOffer();
     await pc.setLocalDescription(offer);
-    await sendSignal("offer", pc.localDescription);
+    await sendSignal("offer", pc.localDescription, viewerId);
   }
 
   // Récupère et traite les messages de signalisation en attente.
@@ -248,12 +262,25 @@
       );
       for (const message of response.items || []) {
         state.lastSeq = Math.max(state.lastSeq, message.seq);
-        if (message.kind === "answer" && state.pc) {
-          await state.pc.setRemoteDescription(message.payload);
+        const viewerId = message.viewerId;
+        const pc = viewerId ? state.peers.get(viewerId) : null;
+        if (message.kind === "viewer-ready" && viewerId) {
+          if (state.stream) {
+            await createPeerConnection(viewerId);
+          } else {
+            state.waitingViewers.add(viewerId);
+          }
         }
-        if (message.kind === "ice" && state.pc) {
+        if (message.kind === "viewer-left" && viewerId) {
+          closePeerConnection(viewerId);
+          state.waitingViewers.delete(viewerId);
+        }
+        if (message.kind === "answer" && pc) {
+          await pc.setRemoteDescription(message.payload);
+        }
+        if (message.kind === "ice" && pc) {
           try {
-            await state.pc.addIceCandidate(message.payload);
+            await pc.addIceCandidate(message.payload);
           } catch (error) {
             console.warn("ICE candidate rejected", error);
           }
@@ -262,7 +289,7 @@
           await handleCommand(message.payload || {});
         }
       }
-      setNetwork(state.active ? "Connecté" : "En attente", state.active ? "good" : "warn");
+      setNetwork(state.peers.size ? "Connecté" : "En attente", state.peers.size ? "good" : "warn");
     } catch (error) {
       console.error(error);
       setNetwork("Erreur de signalement", "danger");
@@ -315,13 +342,16 @@
       if (!state.stream) {
         await acquireMedia();
       }
-      await createPeerConnection();
       state.active = true;
       setStatus("En direct", "good");
       setPermission("Autorisé", "good");
       setNetwork("Connecté", "good");
       setHint("La source est maintenant prête pour OBS.");
       await sendState({ status: "streaming" });
+      for (const viewerId of state.waitingViewers) {
+        await createPeerConnection(viewerId);
+      }
+      state.waitingViewers.clear();
     } catch (error) {
       console.error(error);
       state.active = false;
@@ -356,14 +386,15 @@
     const oldAudioTrack = state.stream.getAudioTracks()[0];
     const newAudioTrack = nextStream.getAudioTracks()[0];
 
-    const videoSender = state.pc?.getSenders().find((sender) => sender.track && sender.track.kind === "video");
-    const audioSender = state.pc?.getSenders().find((sender) => sender.track && sender.track.kind === "audio");
-
-    if (videoSender && newVideoTrack) {
-      await videoSender.replaceTrack(newVideoTrack);
-    }
-    if (audioSender && newAudioTrack) {
-      await audioSender.replaceTrack(newAudioTrack);
+    for (const pc of state.peers.values()) {
+      const videoSender = pc.getSenders().find((sender) => sender.track && sender.track.kind === "video");
+      const audioSender = pc.getSenders().find((sender) => sender.track && sender.track.kind === "audio");
+      if (videoSender && newVideoTrack) {
+        await videoSender.replaceTrack(newVideoTrack);
+      }
+      if (audioSender && newAudioTrack) {
+        await audioSender.replaceTrack(newAudioTrack);
+      }
     }
 
     if (newAudioTrack) {
@@ -403,7 +434,7 @@
   async function stopSession() {
     state.active = false;
     state.connecting = false;
-    closePeerConnection();
+    closeAllPeerConnections();
     stopStreamTracks();
     setStatus("Arrêté", "warn");
     setPermission("Permis", "warn");

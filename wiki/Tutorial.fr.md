@@ -105,13 +105,17 @@ Tu peux aussi :
 - couper le micro
 - arrêter un téléphone sans toucher aux autres
 
-## 8. Fermer proprement
+## 8. Surveiller la mosaïque de caméras
+
+Ouvre `http://localhost:8080/mosaic` depuis le tableau de bord. Les téléphones actifs apparaissent automatiquement et chaque tuile démarre sans son. Tu peux activer le son d’une tuile ou ouvrir sa vue OBS propre sans déconnecter les autres viewers.
+
+## 9. Fermer proprement
 
 Quand tu as fini :
 
 1. arrête les sources dans OBS si nécessaire
 2. ferme les pages téléphone
-3. arrête le serveur local
+3. arrête le serveur local avec `Ctrl+C`, ou utilise **Arrêter le serveur** depuis l’icône Windows près de l’horloge
 
 ## Astuce pratique
 

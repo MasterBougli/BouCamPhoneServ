@@ -104,13 +104,17 @@ También puedes:
 - silenciar el micrófono
 - detener un teléfono sin afectar a los demás
 
-## 8. Cierra correctamente
+## 8. Supervisa el mosaico de cámaras
+
+Abre `http://localhost:8080/mosaic` desde el panel. Los teléfonos activos aparecen automáticamente y cada tarjeta empieza sin sonido. Puedes activar el sonido de una tarjeta o abrir su vista limpia de OBS sin desconectar a los demás viewers.
+
+## 9. Cierra correctamente
 
 Cuando termines:
 
 1. detén las fuentes en OBS si hace falta
 2. cierra las páginas del teléfono
-3. detén el servidor local
+3. detén el servidor local con `Ctrl+C`, o usa **Detener el servidor** desde el icono de Windows junto al reloj
 
 ## Consejo práctico
 

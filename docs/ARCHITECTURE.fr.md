@@ -19,10 +19,12 @@ flowchart LR
   Phone["Téléphone dans le navigateur"]
   Server["Serveur local"]
   Dashboard["Tableau de bord"]
+  Mosaic["Mosaïque de caméras"]
   OBS["OBS Browser Source"]
 
   Phone -->|"caméra + micro + signalisation"| Server
   Dashboard -->|"contrôle local"| Server
+  Mosaic -->|"un viewer isolé par caméra"| Server
   OBS -->|"affichage séparé"| Server
 ```
 
@@ -40,7 +42,9 @@ flowchart LR
 - sert les pages HTML
 - gère les sessions
 - transmet les messages entre téléphone et vue OBS
-- fournit le certificat local
+- route chaque offre WebRTC et candidat ICE avec un `viewerId` unique, ce qui permet à OBS et à la mosaïque de regarder simultanément
+- fournit le certificat local facultatif
+- lance l’icône de notification Windows et lui permet d’arrêter proprement le processus serveur
 
 ### Tableau de bord
 
@@ -53,6 +57,12 @@ flowchart LR
 
 - récupère la vidéo de la session choisie
 - affiche chaque téléphone comme une source indépendante
+
+### Mosaïque de caméras
+
+- crée un viewer WebRTC isolé pour chaque téléphone actif
+- démarre chaque tuile sans son pour garantir la lecture automatique du navigateur
+- reconnecte les tuiles indépendamment sans interrompre OBS
 
 ## Pourquoi ce choix
 

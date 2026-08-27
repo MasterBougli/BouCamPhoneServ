@@ -2,7 +2,7 @@
 
 [EN](README.md) | [FR](README.fr.md) | [ES](README.es.md)
 
-![Version](https://img.shields.io/badge/version-0.1.18-blue)
+![Version](https://img.shields.io/badge/version-0.1.19-blue)
 ![License](https://img.shields.io/badge/license-AGPL--3.0--only-green)
 ![Docs](https://img.shields.io/badge/docs-EN%2FFR%2FES-orange)
 ![Wiki](https://img.shields.io/badge/wiki-ready-purple)
@@ -23,6 +23,9 @@ El proyecto está pensado para:
 
 - una página de teléfono que se abre en el navegador
 - un panel local para el PC
+- un mosaico de vídeo disponible en `http://localhost:8080/mosaic`
+- señalización multi-viewer para ver un teléfono en el mosaico y OBS al mismo tiempo
+- un icono de Windows junto al reloj con accesos al panel, mosaico, configuración y apagado seguro
 - una página de configuración gráfica para los ajustes compartidos del servidor
 - un lanzador de Windows y el atajo `npm run config` para abrir la configuración
 - un diseño por secciones para red, cámara, audio, arranque y accesos directos
@@ -52,6 +55,9 @@ Después:
 4. abre la página del teléfono desde el enlace o el código QR
 5. permite el acceso a la cámara y al micrófono
 6. añade la fuente OBS en `View` con la URL mostrada para cada sesión
+7. abre `http://localhost:8080/mosaic` para supervisar juntas todas las cámaras activas
+
+En Windows, el servidor también aparece en el área de notificación junto al reloj. Haz doble clic en el icono para abrir el panel, o clic derecho para abrir el mosaico, la configuración o detener el servidor.
 
 ## Documentación
 
@@ -74,6 +80,9 @@ Después:
 - [public/dashboard.js](public/dashboard.js)
 - [public/config.html](public/config.html)
 - [public/config.js](public/config.js)
+- [public/mosaic.html](public/mosaic.html)
+- [public/mosaic.js](public/mosaic.js)
+- [scripts/server-tray.ps1](scripts/server-tray.ps1)
 - [open-config.cmd](open-config.cmd)
 - [scripts/open-config.ps1](scripts/open-config.ps1)
 - [public/phone.html](public/phone.html)
@@ -84,7 +93,7 @@ Después:
 
 ## Versión
 
-Versión actual del proyecto: `0.1.18`
+Versión actual del proyecto: `0.1.19`
 
 - Notas de la versión: [changelog.md](changelog.md)
 

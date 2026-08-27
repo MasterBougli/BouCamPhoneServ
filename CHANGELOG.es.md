@@ -6,6 +6,16 @@
 
 Este historial mantiene la versión más reciente arriba para encontrar rápidamente los cambios más importantes.
 
+## 0.1.19 - 2026-08-27
+
+- se colocaron las sesiones y el estado del servidor antes de las tarjetas de ayuda del panel
+- se añadió visualización progresiva para la conexión del teléfono, la ayuda del certificado y la configuración
+- se añadió un mosaico de vídeo adaptable en `/mosaic`
+- se añadió señalización WebRTC multi-viewer para recibir el mismo teléfono en OBS y el mosaico simultáneamente
+- se añadió un icono de Windows en el área de notificación con accesos rápidos y apagado confirmado del servidor
+- se colocó el formulario de configuración antes de su barra de navegación en móviles
+- se actualizó la versión del proyecto a `0.1.19`
+
 ## 0.1.18 - 2026-08-27
 
 - aclaración en toda la documentación de que la instalación del certificado local `.cer`/`.crt` es opcional

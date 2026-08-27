@@ -13,6 +13,7 @@
     pc: null,
     lastSeq: 0,
     active: false,
+    viewerId: `view-${crypto.randomUUID()}`,
   };
   let cleanMode = new URLSearchParams(window.location.search).get("clean") === "1";
 
@@ -63,6 +64,7 @@
           {
             kind,
             payload,
+            viewerId: state.viewerId,
           },
         ],
       }),
@@ -79,6 +81,7 @@
       body: JSON.stringify({
         role: "viewer",
         status,
+        viewerId: state.viewerId,
       }),
     });
   }
@@ -153,7 +156,7 @@
 
     try {
       const response = await BouCamPhoneServ.fetchJson(
-        `/api/sessions/${state.sessionId}/messages?role=viewer&after=${state.lastSeq}`
+        `/api/sessions/${state.sessionId}/messages?role=viewer&viewerId=${encodeURIComponent(state.viewerId)}&after=${state.lastSeq}`
       );
       for (const message of response.items || []) {
         state.lastSeq = Math.max(state.lastSeq, message.seq);
@@ -207,6 +210,7 @@
       showPlaceholder(true);
       setOverlay(state.session.label || `Session ${state.sessionId}`, "warn");
       await sendState("waiting");
+      await sendMessage("viewer-ready", { mode: "single" });
     } catch (error) {
       console.error(error);
       setOverlay("Session introuvable", "danger");
@@ -223,10 +227,24 @@
       heartbeatLoop().catch(console.error);
     }, 5000);
 
-    await createPeerConnection();
     await pollLoop();
     await heartbeatLoop();
   }
+
+  // Signale le départ du viewer afin de libérer rapidement sa connexion côté téléphone.
+  function notifyViewerLeft() {
+    if (!state.sessionId) {
+      return;
+    }
+    const body = JSON.stringify({
+      from: "viewer",
+      viewerId: state.viewerId,
+      messages: [{ kind: "viewer-left", payload: {}, viewerId: state.viewerId }],
+    });
+    navigator.sendBeacon(`/api/sessions/${state.sessionId}/messages`, new Blob([body], { type: "application/json" }));
+  }
+
+  window.addEventListener("pagehide", notifyViewerLeft);
 
   boot().catch((error) => {
     console.error(error);

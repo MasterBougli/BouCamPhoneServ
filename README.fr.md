@@ -2,7 +2,7 @@
 
 [EN](README.md) | [FR](README.fr.md) | [ES](README.es.md)
 
-![Version](https://img.shields.io/badge/version-0.1.18-blue)
+![Version](https://img.shields.io/badge/version-0.1.19-blue)
 ![License](https://img.shields.io/badge/license-AGPL--3.0--only-green)
 ![Docs](https://img.shields.io/badge/docs-EN%2FFR%2FES-orange)
 ![Wiki](https://img.shields.io/badge/wiki-ready-purple)
@@ -23,6 +23,9 @@ Le projet est pensé pour :
 
 - une page téléphone à ouvrir dans le navigateur
 - un tableau de bord local pour le PC
+- une mosaïque vidéo disponible sur `http://localhost:8080/mosaic`
+- une signalisation multi-viewer pour regarder un téléphone dans la mosaïque et OBS en même temps
+- une icône Windows près de l’horloge avec accès au tableau de bord, à la mosaïque, à la configuration et à l’arrêt sécurisé
 - une page de configuration graphique pour les réglages partagés du serveur
 - un lanceur Windows et une commande `npm run config` pour ouvrir la configuration
 - une mise en page en sections pour le réseau, la caméra, l’audio, le démarrage et les raccourcis
@@ -52,6 +55,9 @@ Ensuite :
 4. ouvre la page téléphone depuis le lien ou le QR code
 5. autorise la caméra et le micro
 6. ajoute la source OBS dans `View` avec l’URL affichée pour chaque session
+7. ouvre `http://localhost:8080/mosaic` pour surveiller toutes les caméras actives ensemble
+
+Sous Windows, le serveur apparaît aussi dans la zone de notification près de l’horloge. Double-clique sur son icône pour ouvrir le tableau de bord, ou fais un clic droit pour ouvrir la mosaïque, la configuration ou arrêter le serveur.
 
 ## Documentation
 
@@ -74,6 +80,9 @@ Ensuite :
 - [public/dashboard.js](public/dashboard.js)
 - [public/config.html](public/config.html)
 - [public/config.js](public/config.js)
+- [public/mosaic.html](public/mosaic.html)
+- [public/mosaic.js](public/mosaic.js)
+- [scripts/server-tray.ps1](scripts/server-tray.ps1)
 - [open-config.cmd](open-config.cmd)
 - [scripts/open-config.ps1](scripts/open-config.ps1)
 - [public/phone.html](public/phone.html)
@@ -84,7 +93,7 @@ Ensuite :
 
 ## Version
 
-Version actuelle du projet : `0.1.18`
+Version actuelle du projet : `0.1.19`
 
 - Notes de version : [changelog.md](changelog.md)
 

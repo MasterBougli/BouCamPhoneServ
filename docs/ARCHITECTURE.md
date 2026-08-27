@@ -19,10 +19,12 @@ flowchart LR
   Phone["Phone in the browser"]
   Server["Local server"]
   Dashboard["Dashboard"]
+  Mosaic["Camera mosaic"]
   OBS["OBS Browser Source"]
 
   Phone -->|"camera + microphone + signaling"| Server
   Dashboard -->|"local control"| Server
+  Mosaic -->|"one isolated viewer per camera"| Server
   OBS -->|"separate display"| Server
 ```
 
@@ -40,7 +42,9 @@ flowchart LR
 - serves the HTML pages
 - manages sessions
 - forwards messages between the phone and the OBS view
-- provides the local certificate
+- routes each WebRTC offer and ICE candidate with a unique `viewerId`, allowing OBS and the mosaic to watch concurrently
+- provides the optional local certificate
+- starts the Windows notification icon and lets it stop the server process safely
 
 ### Dashboard
 
@@ -53,6 +57,12 @@ flowchart LR
 
 - pulls video from the selected session
 - shows each phone as an independent source
+
+### Camera Mosaic
+
+- creates one isolated WebRTC viewer for every active phone
+- starts every tile muted for reliable browser autoplay
+- reconnects tiles independently without interrupting OBS
 
 ## Why This Approach
 

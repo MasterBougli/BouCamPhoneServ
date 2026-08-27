@@ -104,13 +104,17 @@ You can also:
 - mute the microphone
 - stop one phone without affecting the others
 
-## 8. Close cleanly
+## 8. Monitor the camera mosaic
+
+Open `http://localhost:8080/mosaic` from the dashboard. Active phones appear automatically and each tile starts muted. You can enable one tile's audio or open its clean OBS view without disconnecting any other viewer.
+
+## 9. Close cleanly
 
 When you are finished:
 
 1. stop the sources in OBS if needed
 2. close the phone pages
-3. stop the local server
+3. stop the local server with `Ctrl+C`, or use **Stop server** from the Windows notification icon near the clock
 
 ## Practical Tip
 

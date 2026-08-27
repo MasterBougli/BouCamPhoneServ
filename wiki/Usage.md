@@ -17,6 +17,14 @@
 - mute the microphone
 - stop one phone without affecting the others
 
+## Camera Mosaic
+
+Open `http://localhost:8080/mosaic` to monitor every active phone in one responsive grid. Each tile starts muted to satisfy browser autoplay rules; use **Enable audio** only on the cameras you need to hear. Opening the mosaic does not replace an OBS viewer.
+
+## Windows Notification Icon
+
+While the server runs on Windows, its icon is available in the notification area near the clock. Double-click it for the dashboard, or right-click for the dashboard, mosaic, configuration, and confirmed server shutdown.
+
 ## Helpful Links
 
 - [Full tutorial](Tutorial.md)

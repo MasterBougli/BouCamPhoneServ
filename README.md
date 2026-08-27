@@ -2,7 +2,7 @@
 
 [EN](README.md) | [FR](README.fr.md) | [ES](README.es.md)
 
-![Version](https://img.shields.io/badge/version-0.1.18-blue)
+![Version](https://img.shields.io/badge/version-0.1.19-blue)
 ![License](https://img.shields.io/badge/license-AGPL--3.0--only-green)
 ![Docs](https://img.shields.io/badge/docs-EN%2FFR%2FES-orange)
 ![Wiki](https://img.shields.io/badge/wiki-ready-purple)
@@ -23,6 +23,9 @@ The project is designed for:
 
 - a phone page opened in the browser
 - a local dashboard for the PC
+- a live camera mosaic available at `http://localhost:8080/mosaic`
+- multi-viewer signaling so the mosaic and OBS can watch the same phone simultaneously
+- a Windows notification-area icon with dashboard, mosaic, configuration, and safe shutdown actions
 - a graphical configuration page for shared server settings
 - a Windows launcher and `npm run config` shortcut for the configuration page
 - a sectioned configuration layout for network, camera, audio, startup, and shortcuts
@@ -52,6 +55,9 @@ After that:
 4. open the phone page from the link or QR code
 5. allow camera and microphone access
 6. add the OBS source in `View` with the URL shown for each session
+7. open `http://localhost:8080/mosaic` to monitor every active camera together
+
+On Windows, the server also appears in the notification area near the clock. Double-click its icon to open the dashboard, or right-click it to open the mosaic, configuration, or stop the server.
 
 ## Documentation
 
@@ -73,6 +79,9 @@ After that:
 - [public/dashboard.js](public/dashboard.js)
 - [public/config.html](public/config.html)
 - [public/config.js](public/config.js)
+- [public/mosaic.html](public/mosaic.html)
+- [public/mosaic.js](public/mosaic.js)
+- [scripts/server-tray.ps1](scripts/server-tray.ps1)
 - [open-config.cmd](open-config.cmd)
 - [scripts/open-config.ps1](scripts/open-config.ps1)
 - [public/phone.html](public/phone.html)
@@ -83,7 +92,7 @@ After that:
 
 ## Version
 
-Current project version: `0.1.18`
+Current project version: `0.1.19`
 
 - Release notes: [changelog.md](changelog.md)
 

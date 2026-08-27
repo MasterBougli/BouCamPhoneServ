@@ -17,6 +17,14 @@
 - silenciar el micrófono
 - detener un teléfono sin afectar a los demás
 
+## Mosaico de cámaras
+
+Abre `http://localhost:8080/mosaic` para supervisar todos los teléfonos activos en una cuadrícula adaptable. Cada tarjeta empieza sin sonido para respetar las reglas de reproducción automática del navegador; usa **Activar sonido** solo en las cámaras que quieras escuchar. Abrir el mosaico no sustituye una vista de OBS.
+
+## Icono de notificación de Windows
+
+Mientras el servidor funciona en Windows, su icono aparece en el área de notificación junto al reloj. Haz doble clic para abrir el panel, o clic derecho para acceder al panel, al mosaico, a la configuración y al apagado confirmado del servidor.
+
 ## Enlaces útiles
 
 - [Tutorial completo](Tutorial.es.md)

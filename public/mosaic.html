@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#050506" />
+    <title>BouCamPhoneServ - Mosaïque</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/shared.js" defer></script>
+    <script src="/mosaic.js" defer></script>
+  </head>
+  <body class="page-mosaic">
+    <a class="skip-link" href="#main-content">Aller au contenu</a>
+    <main class="shell mosaic-shell" id="main-content">
+      <header class="studio-header">
+        <div>
+          <span class="eyebrow">Multiview local</span>
+          <h1 class="studio-title">Mosaïque caméras</h1>
+          <p class="studio-subtitle">Surveille tous les téléphones en direct sans perturber leurs sources OBS.</p>
+        </div>
+        <div class="hero-actions">
+          <a class="button" href="/dashboard">Tableau de bord</a>
+          <a class="button-secondary" href="/phone" target="_blank" rel="noreferrer">Ajouter un téléphone</a>
+          <button class="button-secondary" id="refreshMosaicButton" type="button">Actualiser</button>
+        </div>
+      </header>
+
+      <section class="mosaic-toolbar" aria-label="État de la mosaïque">
+        <div class="mosaic-status">
+          <span class="chip good" id="mosaicServerState">Serveur en ligne</span>
+          <strong id="mosaicCount">0 caméra</strong>
+          <span class="muted small" id="mosaicHint">En attente d’un téléphone</span>
+        </div>
+        <label class="density-control">
+          <span class="label">Disposition</span>
+          <select class="input input-compact" id="densitySelect">
+            <option value="auto">Automatique</option>
+            <option value="2">2 colonnes</option>
+            <option value="3">3 colonnes</option>
+            <option value="4">4 colonnes</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="mosaic-grid" id="mosaicGrid" aria-live="polite"></section>
+      <section class="mosaic-empty" id="mosaicEmpty">
+        <span class="eyebrow eyebrow-compact">Aucun signal</span>
+        <h2>La régie attend ses caméras</h2>
+        <p>Ouvre la page téléphone sur un mobile et démarre la diffusion. Sa vidéo apparaîtra ici automatiquement.</p>
+        <a class="button" href="/phone" target="_blank" rel="noreferrer">Ouvrir la page téléphone</a>
+      </section>
+    </main>
+  </body>
+</html>

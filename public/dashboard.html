@@ -12,160 +12,96 @@
   <body class="page-dashboard">
     <a class="skip-link" href="#main-content">Aller au contenu</a>
     <main class="shell" id="main-content">
-      <section class="hero">
-        <div class="hero-grid">
+      <header class="studio-header">
+        <div>
           <span class="eyebrow">Régie WebRTC locale</span>
-          <div>
-            <h1 class="title">BouCamPhoneServ</h1>
-            <p class="subtitle">
-              Une base locale, propre et rapide pour transformer plusieurs téléphones en sources OBS
-              séparées, sans rien installer sur les mobiles.
-            </p>
-          </div>
-          <div class="hero-actions">
-            <a class="button" href="/phone" target="_blank" rel="noreferrer">Ouvrir la page téléphone</a>
-            <a class="button-secondary" href="/config">Configuration</a>
-            <button class="button-secondary" id="refreshButton" type="button">Actualiser</button>
-          </div>
+          <h1 class="studio-title">BouCamPhoneServ</h1>
+          <p class="studio-subtitle">Tes téléphones deviennent des caméras OBS séparées, sans application mobile.</p>
         </div>
+        <div class="hero-actions">
+          <a class="button" href="/mosaic">Ouvrir la mosaïque</a>
+          <a class="button-secondary" href="/phone" target="_blank" rel="noreferrer">Ajouter un téléphone</a>
+          <a class="button-secondary" href="/config">Configuration</a>
+          <button class="button-ghost" id="refreshButton" type="button">Actualiser</button>
+        </div>
+      </header>
+
+      <section class="overview-strip" aria-label="Résumé du serveur">
+        <span class="chip good" id="serverState">Serveur en ligne</span>
+        <div class="overview-stat"><span>Téléphones</span><strong id="phoneCountValue">0</strong></div>
+        <div class="overview-stat"><span>En direct</span><strong id="activeCountValue">0</strong></div>
+        <div class="overview-stat"><span>Vues actives</span><strong id="viewerCountValue">0</strong></div>
+        <div class="overview-stat"><span>Réseau</span><strong id="networkCountValue">1 LAN</strong></div>
       </section>
 
-      <section class="grid cols-3">
-        <article class="panel">
-          <div class="panel-inner">
-            <div class="panel-header">
-              <div>
-                <h2 class="panel-title">Ouvrir sur un téléphone</h2>
-                <p class="panel-subtitle">
-                  Scanne ce QR code pour ouvrir la page téléphone sécurisée sur le réseau local.
-                </p>
-              </div>
-              <span class="chip good" id="serverState">En ligne</span>
-            </div>
-            <div class="stack">
-              <div class="qr-feature">
-                <img id="phoneQrImage" class="qr-image qr-image-large" alt="QR code téléphone" />
-                <div class="stack">
-                  <div class="key-value">
-                    <span class="key">Lien principal</span>
-                    <span class="value" id="phoneLinkText">Aucun lien disponible</span>
-                  </div>
-                  <div class="card-actions">
-                    <button class="button" id="copyPhoneLinkButton" type="button">Copier le lien</button>
-                    <a class="button-secondary" id="openPhoneLinkButton" href="/phone" target="_blank" rel="noreferrer">Ouvrir</a>
-                  </div>
-                </div>
-              </div>
-              <div class="stack" id="phoneLinksList"></div>
-            </div>
-          </div>
-        </article>
-
-        <article class="panel">
-          <div class="panel-inner">
-            <div class="panel-header">
-              <div>
-                <h2 class="panel-title">Certificat local</h2>
-                <p class="panel-subtitle">Télécharge le certificat public à installer une seule fois sur les téléphones.</p>
-              </div>
-            </div>
-            <div class="stack">
-              <div class="session-card">
-                <div class="session-top">
-                  <div>
-                    <h3 class="session-title">Fichier .cer</h3>
-                    <p class="session-id">Sans la clé privée, uniquement le certificat public.</p>
-                  </div>
-                  <span class="chip warn">À approuver une fois</span>
-                </div>
-                <div class="card-actions">
-                  <a class="button" href="/downloads/local.cer">Télécharger le certificat</a>
-                  <button class="button-secondary" id="copyCertUrlButton" type="button">Copier le lien</button>
-                </div>
-                <p class="small muted">
-                  C’est ce qui permet à la caméra et au micro de fonctionner dans le navigateur.
-                </p>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="panel">
-          <div class="panel-inner">
-            <div class="panel-header">
-              <div>
-                <h2 class="panel-title">Actions globales</h2>
-                <p class="panel-subtitle">
-                  Vue d’ensemble des téléphones connectés et des liens OBS disponibles.
-                </p>
-              </div>
-            </div>
-            <div class="stack">
-              <div class="stats">
-                <div class="key-value">
-                  <span class="key">Téléphones</span>
-                  <span class="value" id="phoneCountValue">0</span>
-                </div>
-                <div class="key-value">
-                  <span class="key">Actifs</span>
-                  <span class="value" id="activeCountValue">0</span>
-                </div>
-                <div class="key-value">
-                  <span class="key">OBS connectés</span>
-                  <span class="value" id="viewerCountValue">0</span>
-                </div>
-                <div class="key-value">
-                  <span class="key">Réseau</span>
-                  <span class="value" id="networkCountValue">1 LAN</span>
-                </div>
-              </div>
-              <div class="card-actions">
-                <button class="button" id="copyAllObsButton" type="button">Copier tous les liens OBS</button>
-                <button class="button-secondary" id="refreshButtonSecondary" type="button">Actualiser</button>
-              </div>
-              <p class="small muted">
-                Chaque téléphone garde sa propre carte, sa propre source OBS et ses propres commandes.
-              </p>
-            </div>
-          </div>
-        </article>
-      </section>
-
-      <section class="panel">
+      <section class="panel dashboard-sessions">
         <div class="panel-inner">
           <div class="panel-header">
             <div>
               <h2 class="panel-title">Téléphones connectés</h2>
-              <p class="panel-subtitle">
-                Chaque carte correspond à une source séparée. Ouvre le lien OBS pour utiliser le
-                flux dans une scène.
-              </p>
+              <p class="panel-subtitle">Contrôle les caméras et récupère leurs liens OBS depuis une seule vue.</p>
             </div>
-            <span class="chip" id="sessionCount">0 appareil</span>
+            <div class="toolbar">
+              <span class="chip" id="sessionCount">0 appareil</span>
+              <button class="button-secondary" id="copyAllObsButton" type="button">Copier les liens OBS</button>
+              <button class="button-ghost" id="refreshButtonSecondary" type="button">Actualiser</button>
+            </div>
           </div>
           <div id="sessionList" class="session-list"></div>
         </div>
       </section>
 
-      <section class="panel">
-        <div class="panel-inner">
-          <div class="panel-header">
-            <div>
-              <h2 class="panel-title">Configuration graphique</h2>
-              <p class="panel-subtitle">
-                Les réglages partagés pilotent la page téléphone, la vue OBS et le comportement
-                par défaut du serveur.
-              </p>
+      <details class="panel disclosure-panel" id="phoneAccessDetails">
+        <summary>
+          <span><strong>Connecter un nouveau téléphone</strong><small>QR code, liens réseau et aide HTTPS</small></span>
+          <span class="disclosure-action" aria-hidden="true"></span>
+        </summary>
+        <div class="panel-inner setup-grid">
+          <section class="setup-primary">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Ouvrir sur un téléphone</h2>
+                <p class="panel-subtitle">Scanne ce QR code depuis un téléphone connecté au même réseau local.</p>
+              </div>
             </div>
-            <span class="chip good" id="configStatus">Synchronisé</span>
-          </div>
+            <div class="qr-feature">
+              <img id="phoneQrImage" class="qr-image qr-image-large" alt="QR code téléphone" />
+              <div class="stack">
+                <div class="key-value"><span class="key">Lien principal</span><span class="value" id="phoneLinkText">Aucun lien disponible</span></div>
+                <div class="card-actions">
+                  <button class="button" id="copyPhoneLinkButton" type="button">Copier le lien</button>
+                  <a class="button-secondary" id="openPhoneLinkButton" href="/phone" target="_blank" rel="noreferrer">Ouvrir</a>
+                </div>
+              </div>
+            </div>
+            <div class="stack compact-addresses" id="phoneLinksList"></div>
+          </section>
+
+          <aside class="setup-secondary">
+            <span class="eyebrow eyebrow-compact">Optionnel</span>
+            <h2 class="panel-title">Certificat local</h2>
+            <p class="panel-subtitle">Le fichier <strong>.cer</strong> n’est pas obligatoire. Il sert uniquement à faire reconnaître le HTTPS local et à éviter l’avertissement « non sécurisé ».</p>
+            <div class="card-actions">
+              <a class="button-secondary" href="/downloads/local.cer">Télécharger le .cer</a>
+              <button class="button-ghost" id="copyCertUrlButton" type="button">Copier son lien</button>
+            </div>
+          </aside>
+        </div>
+      </details>
+
+      <details class="panel disclosure-panel config-disclosure">
+        <summary>
+          <span><strong>Configuration active</strong><small>Caméra, qualité, micro et comportement de la vue OBS</small></span>
+          <span class="chip good" id="configStatus">Synchronisé</span>
+        </summary>
+        <div class="panel-inner">
           <div class="stats" id="configSummary"></div>
           <div class="card-actions">
             <a class="button" href="/config">Ouvrir la configuration</a>
             <a class="button-secondary" id="configObsLink" href="/view?clean=1" target="_blank" rel="noreferrer">Tester la vue OBS</a>
           </div>
         </div>
-      </section>
+      </details>
     </main>
   </body>
 </html>
