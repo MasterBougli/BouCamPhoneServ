@@ -5,7 +5,7 @@
 ## Phone Flow
 
 1. open the dashboard on the PC
-2. download and trust the local certificate on the phone
+2. optionally install the local `.cer`/`.crt` certificate, or manually accept the HTTPS warning when supported
 3. open the phone page by QR code or link
 4. allow camera and microphone access
 5. add the OBS browser source for the session

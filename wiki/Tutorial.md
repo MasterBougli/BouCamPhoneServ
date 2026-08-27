@@ -36,9 +36,12 @@ You will see:
 - connected phone statistics
 - the list of OBS sources per phone
 
-## 3. Install the local certificate
+## 3. Optionally install the local certificate
 
-For camera and microphone access to work in the phone browser, the local certificate must be trusted once.
+HTTPS is required for camera and microphone access, but installing the local
+certificate is optional. You may manually accept the browser warning when the
+device allows it. Installing the `.cer` file (also called `.crt` on some
+platforms) only avoids the recurring untrusted/non-secure HTTPS warning.
 
 In the dashboard:
 
@@ -47,7 +50,8 @@ In the dashboard:
 3. install it as a trusted certificate
 4. return to the browser
 
-This is not an app installation. It is only a browser security trust step.
+This is not an app installation and you may skip it. It is only a browser
+security trust step that removes the warning.
 
 ## 4. Open the phone page
 

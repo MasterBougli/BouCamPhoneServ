@@ -2,7 +2,7 @@
 
 [EN](README.md) | [FR](README.fr.md) | [ES](README.es.md)
 
-![Version](https://img.shields.io/badge/version-0.1.17-blue)
+![Version](https://img.shields.io/badge/version-0.1.18-blue)
 ![License](https://img.shields.io/badge/license-AGPL--3.0--only-green)
 ![Docs](https://img.shields.io/badge/docs-EN%2FFR%2FES-orange)
 ![Wiki](https://img.shields.io/badge/wiki-ready-purple)
@@ -30,7 +30,7 @@ El proyecto está pensado para:
 - un código QR para acceder rápido a la página del teléfono
 - enlaces OBS separados para cada dispositivo
 - controles simples para renombrar, silenciar, cambiar la cámara y detener una fuente
-- un certificado local generado al iniciar por primera vez
+- un certificado local opcional generado al iniciar por primera vez para evitar el aviso HTTPS no reconocido del navegador
 
 ## Inicio rápido
 
@@ -48,7 +48,7 @@ Después:
 
 1. abre `http://localhost:8080` en el PC
 2. abre la página de configuración si quieres ajustar los valores por defecto, o ejecuta `npm run config` / `open-config.cmd`
-3. descarga el certificado público desde el panel
+3. instala opcionalmente el certificado público `.cer`/`.crt` para evitar el aviso de seguridad HTTPS, o acepta manualmente el aviso si tu navegador lo permite
 4. abre la página del teléfono desde el enlace o el código QR
 5. permite el acceso a la cámara y al micrófono
 6. añade la fuente OBS en `View` con la URL mostrada para cada sesión
@@ -84,7 +84,7 @@ Después:
 
 ## Versión
 
-Versión actual del proyecto: `0.1.17`
+Versión actual del proyecto: `0.1.18`
 
 - Notas de la versión: [changelog.md](changelog.md)
 

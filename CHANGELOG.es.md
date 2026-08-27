@@ -6,6 +6,13 @@
 
 Este historial mantiene la versión más reciente arriba para encontrar rápidamente los cambios más importantes.
 
+## 0.1.18 - 2026-08-27
+
+- aclaración en toda la documentación de que la instalación del certificado local `.cer`/`.crt` es opcional
+- explicación de que HTTPS sigue siendo obligatorio, mientras que el certificado solo evita el aviso recurrente no reconocido/no seguro del navegador
+- documentación de la aceptación manual del aviso HTTPS cuando el navegador y el dispositivo lo permitan
+- actualización de la versión del proyecto a `0.1.18`
+
 ## 0.1.17 - 2026-08-27
 
 - rediseño completo de todas las interfaces con un sistema visual de control OLED generado con UI UX Pro Max

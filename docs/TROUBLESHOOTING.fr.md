@@ -7,7 +7,7 @@ Page wiki: [Accueil](../wiki/Home.fr.md)
 ## La caméra ne démarre pas
 
 - vérifie que le téléphone a bien donné l’autorisation
-- vérifie que le certificat local a bien été installé
+- accepte l’avertissement HTTPS, ou installe éventuellement le certificat local `.cer`/`.crt` pour l’éviter
 - recharge la page téléphone
 
 ## Le téléphone n’apparaît pas sur le dashboard
@@ -31,7 +31,7 @@ Page wiki: [Accueil](../wiki/Home.fr.md)
 ## La page téléphone ne s’ouvre pas
 
 - vérifie que tu utilises bien l’adresse HTTPS du PC
-- vérifie que le certificat a été installé
+- accepte l’avertissement du navigateur, ou installe éventuellement le certificat `.cer`/`.crt` pour l’éviter
 - vérifie que le PC et le téléphone sont sur le même Wi-Fi
 
 ## Le QR code n’ouvre pas la bonne page

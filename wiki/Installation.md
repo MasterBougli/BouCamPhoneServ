@@ -17,8 +17,11 @@ npm start
 
 ## Local Certificate
 
-The dashboard provides a public certificate download. Install it once on the
-phone so the browser can access the camera and microphone securely.
+The dashboard provides an optional public `.cer` certificate download (also
+called `.crt` on some platforms). HTTPS is required for camera and microphone
+access, but installing the certificate is not: you may accept the browser
+warning manually when supported. Installation only avoids the recurring
+untrusted/non-secure HTTPS warning.
 
 ## What to Open
 

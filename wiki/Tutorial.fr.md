@@ -36,9 +36,13 @@ Tu verras :
 - les statistiques des téléphones connectés
 - la liste des sources OBS par téléphone
 
-## 3. Installer le certificat local
+## 3. Installer éventuellement le certificat local
 
-Pour que la caméra et le micro fonctionnent dans le navigateur du téléphone, il faut faire confiance au certificat local une seule fois.
+HTTPS est obligatoire pour la caméra et le micro, mais l’installation du
+certificat local est facultative. Tu peux accepter manuellement l’avertissement
+du navigateur lorsque l’appareil le permet. Installer le fichier `.cer`
+(également appelé `.crt` sur certaines plateformes) sert uniquement à éviter
+l’avertissement HTTPS non reconnu/non sécurisé récurrent.
 
 Dans le tableau de bord :
 
@@ -47,7 +51,8 @@ Dans le tableau de bord :
 3. installe-le comme certificat de confiance
 4. reviens dans le navigateur
 
-Cette étape n’est pas une installation d’application. C’est juste une validation de sécurité du navigateur.
+Cette étape n’est pas une installation d’application et tu peux l’ignorer.
+C’est uniquement une validation de confiance qui supprime l’avertissement du navigateur.
 
 ## 4. Ouvrir la page téléphone
 

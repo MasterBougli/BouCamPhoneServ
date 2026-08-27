@@ -7,7 +7,7 @@ Wiki home: [Home](../wiki/Home.md)
 ## The Camera Does Not Start
 
 - check that the phone granted permission
-- check that the local certificate was installed
+- accept the HTTPS warning, or optionally install the local `.cer`/`.crt` certificate to avoid it
 - reload the phone page
 
 ## The Phone Does Not Appear on the Dashboard
@@ -31,7 +31,7 @@ Wiki home: [Home](../wiki/Home.md)
 ## The Phone Page Does Not Open
 
 - make sure you are using the PC HTTPS address
-- verify that the certificate was installed
+- accept the browser warning, or optionally install the `.cer`/`.crt` certificate to avoid it
 - make sure the PC and the phone are on the same Wi-Fi
 
 ## The QR Code Opens the Wrong Page

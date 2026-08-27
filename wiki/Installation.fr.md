@@ -17,9 +17,11 @@ npm start
 
 ## Certificat local
 
-Le tableau de bord fournit un téléchargement du certificat public. Installe-le
-une seule fois sur le téléphone pour que le navigateur puisse accéder à la
-caméra et au micro en toute sécurité.
+Le tableau de bord fournit le certificat public `.cer` facultatif (également
+appelé `.crt` sur certaines plateformes). HTTPS est obligatoire pour la caméra
+et le micro, mais l’installation du certificat ne l’est pas : tu peux accepter
+manuellement l’avertissement du navigateur lorsque c’est possible. Son
+installation sert uniquement à éviter l’avertissement HTTPS non reconnu/non sécurisé récurrent.
 
 ## Ce qu’il faut ouvrir
 

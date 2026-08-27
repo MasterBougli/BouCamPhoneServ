@@ -5,7 +5,7 @@
 ## Flujo del teléfono
 
 1. abre el panel en el PC
-2. descarga y confía en el certificado local en el teléfono
+2. instala opcionalmente el certificado local `.cer`/`.crt`, o acepta manualmente el aviso HTTPS cuando sea posible
 3. abre la página del teléfono con el código QR o el enlace
 4. permite el acceso a la cámara y al micrófono
 5. añade la fuente de navegador de OBS para la sesión

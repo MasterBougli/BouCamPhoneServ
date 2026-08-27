@@ -26,7 +26,7 @@ Cada teléfono debe convertirse en una fuente separada dentro de OBS.
 - comprueba que el teléfono sigue conectado
 - comprueba que el micrófono o la cámara no se hayan silenciado
 - recarga la fuente del navegador en OBS
-- verifica que el certificado se instaló en el teléfono
+- si HTTPS está bloqueado, acepta el aviso del navegador o instala opcionalmente el certificado `.cer`/`.crt` para eliminarlo
 
 ## Consejo
 

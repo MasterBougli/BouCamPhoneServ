@@ -17,9 +17,11 @@ npm start
 
 ## Certificado local
 
-El panel ofrece una descarga del certificado público. Instálalo una sola vez
-en el teléfono para que el navegador pueda acceder a la cámara y al micrófono
-de forma segura.
+El panel ofrece el certificado público `.cer` opcional (también llamado `.crt`
+en algunas plataformas). HTTPS es obligatorio para la cámara y el micrófono,
+pero instalar el certificado no lo es: puedes aceptar manualmente el aviso del
+navegador cuando sea posible. Su instalación solo evita el aviso HTTPS no
+reconocido/no seguro recurrente.
 
 ## Qué abrir
 

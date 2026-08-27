@@ -26,7 +26,7 @@ Chaque téléphone doit devenir une source séparée dans OBS.
 - vérifie que le téléphone est bien connecté
 - vérifie que le micro ou la caméra n’a pas été coupé
 - recharge la source navigateur dans OBS
-- vérifie que le certificat a bien été installé sur le téléphone
+- si HTTPS est bloqué, accepte l’avertissement du navigateur ou installe éventuellement le certificat `.cer`/`.crt` pour le supprimer
 
 ## Conseil
 

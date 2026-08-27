@@ -5,7 +5,7 @@
 ## Parcours téléphone
 
 1. ouvre le tableau de bord sur le PC
-2. télécharge et fais confiance au certificat local sur le téléphone
+2. installe éventuellement le certificat local `.cer`/`.crt`, ou accepte manuellement l’avertissement HTTPS lorsque c’est possible
 3. ouvre la page téléphone avec le QR code ou le lien
 4. autorise la caméra et le micro
 5. ajoute la source navigateur OBS pour la session

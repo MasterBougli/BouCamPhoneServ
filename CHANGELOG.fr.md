@@ -6,6 +6,13 @@
 
 Ce journal garde la version la plus récente en haut pour retrouver rapidement les changements les plus importants.
 
+## 0.1.18 - 2026-08-27
+
+- précision dans toute la documentation que l’installation du certificat local `.cer`/`.crt` est facultative
+- explication que HTTPS reste obligatoire, tandis que le certificat sert uniquement à éviter l’avertissement récurrent non reconnu/non sécurisé du navigateur
+- documentation de l’acceptation manuelle de l’avertissement HTTPS lorsque le navigateur et l’appareil le permettent
+- mise à jour de la version du projet à `0.1.18`
+
 ## 0.1.17 - 2026-08-27
 
 - refonte complète de toutes les interfaces avec un design system de régie OLED généré avec UI UX Pro Max

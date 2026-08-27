@@ -26,7 +26,7 @@ Each phone should become a separate source in OBS.
 - check that the phone is still connected
 - check that the microphone or camera has not been muted
 - reload the browser source in OBS
-- verify that the certificate was installed on the phone
+- if HTTPS is blocked, accept the browser warning or optionally install the `.cer`/`.crt` certificate to remove it
 
 ## Tip
 

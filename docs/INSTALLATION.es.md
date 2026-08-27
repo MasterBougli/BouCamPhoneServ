@@ -30,12 +30,18 @@ BouCamPhoneServ sirve la página del teléfono por HTTPS porque los navegadores 
 
 En el primer arranque, se genera automáticamente un certificado local en `certs/`.
 
-El certificado público que debes instalar en los teléfonos está disponible desde:
+La instalación de este certificado público es opcional. HTTPS sigue siendo
+obligatorio para acceder a la cámara y al micrófono, pero puedes continuar
+aceptando manualmente el aviso del navegador cuando el dispositivo lo permita.
+Instalar el archivo `.cer` (también llamado `.crt` en algunas plataformas)
+solo evita el aviso HTTPS no reconocido/no seguro recurrente.
+
+El certificado público opcional está disponible desde:
 
 - el panel
 - o `http://localhost:8080/downloads/local.cer`
 
-## Instálalo en el teléfono
+## Instalación opcional en el teléfono
 
 1. abre el enlace del certificado
 2. descarga el archivo

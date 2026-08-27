@@ -7,7 +7,7 @@ Wiki principal: [Inicio](../wiki/Home.es.md)
 ## La cámara no arranca
 
 - comprueba que el teléfono haya dado permiso
-- comprueba que el certificado local esté instalado
+- acepta el aviso HTTPS, o instala opcionalmente el certificado local `.cer`/`.crt` para evitarlo
 - recarga la página del teléfono
 
 ## El teléfono no aparece en el panel
@@ -31,7 +31,7 @@ Wiki principal: [Inicio](../wiki/Home.es.md)
 ## La página del teléfono no se abre
 
 - asegúrate de estar usando la dirección HTTPS del PC
-- verifica que el certificado se haya instalado
+- acepta el aviso del navegador, o instala opcionalmente el certificado `.cer`/`.crt` para evitarlo
 - asegúrate de que el PC y el teléfono estén en el mismo Wi-Fi
 
 ## El código QR abre la página equivocada

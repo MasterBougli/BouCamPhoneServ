@@ -6,6 +6,13 @@
 
 This log keeps the newest release at the top so the most relevant changes are easy to find.
 
+## 0.1.18 - 2026-08-27
+
+- clarified throughout the documentation that installing the local `.cer`/`.crt` certificate is optional
+- explained that HTTPS remains required, while the certificate only avoids the recurring untrusted/non-secure browser warning
+- documented manual acceptance of the HTTPS warning when supported by the browser and device
+- updated the project version to `0.1.18`
+
 ## 0.1.17 - 2026-08-27
 
 - rebuilt every interface around an OLED broadcast-control design system generated with UI UX Pro Max

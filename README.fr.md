@@ -2,7 +2,7 @@
 
 [EN](README.md) | [FR](README.fr.md) | [ES](README.es.md)
 
-![Version](https://img.shields.io/badge/version-0.1.17-blue)
+![Version](https://img.shields.io/badge/version-0.1.18-blue)
 ![License](https://img.shields.io/badge/license-AGPL--3.0--only-green)
 ![Docs](https://img.shields.io/badge/docs-EN%2FFR%2FES-orange)
 ![Wiki](https://img.shields.io/badge/wiki-ready-purple)
@@ -30,7 +30,7 @@ Le projet est pensé pour :
 - un QR code pour accéder rapidement à la page téléphone
 - des liens OBS séparés pour chaque appareil
 - des commandes simples pour renommer, couper le micro, changer la caméra et arrêter une source
-- un certificat local généré au premier lancement
+- un certificat local facultatif généré au premier lancement pour éviter l’avertissement HTTPS non reconnu du navigateur
 
 ## Démarrage rapide
 
@@ -48,7 +48,7 @@ Ensuite :
 
 1. ouvre `http://localhost:8080` sur le PC
 2. ouvre la page de configuration si tu veux ajuster les valeurs par défaut, ou lance `npm run config` / `open-config.cmd`
-3. télécharge le certificat public depuis le tableau de bord
+3. installe éventuellement le certificat public `.cer`/`.crt` pour éviter l’avertissement de sécurité HTTPS, ou accepte manuellement l’avertissement si ton navigateur le permet
 4. ouvre la page téléphone depuis le lien ou le QR code
 5. autorise la caméra et le micro
 6. ajoute la source OBS dans `View` avec l’URL affichée pour chaque session
@@ -84,7 +84,7 @@ Ensuite :
 
 ## Version
 
-Version actuelle du projet : `0.1.17`
+Version actuelle du projet : `0.1.18`
 
 - Notes de version : [changelog.md](changelog.md)
 
