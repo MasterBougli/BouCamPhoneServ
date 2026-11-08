@@ -101,7 +101,7 @@ Current project version: `0.1.23`
 
 ## Support the Project
 
-Donate: [https://streamlabs.com/bouglitv](https://streamlabs.com/bouglitv)
+**Soutenir Bougli** · [Faire un don PayPal via Streamlabs](https://streamlabs.com/bouglitv) · [Soutenir sur Patreon](https://www.patreon.com/cw/Bougli)
 
 ## License
 
